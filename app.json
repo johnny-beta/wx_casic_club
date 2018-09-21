@@ -1,8 +1,10 @@
 {
   "pages": [
     "pages/index/index",
-
     "pages/index/detail/index",
+    "pages/interface/interface",
+    "pages/interface/article/index",
+    "pages/interface/article/detail/index",    
     "pages/account/account",
     "pages/account/feedback/feedback",
     "pages/account/release/release"
@@ -10,7 +12,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#3891f8",
-    "navigationBarTitleText": "DEMO",
+    "navigationBarTitleText": "二院沟通CLUB",
     "navigationBarTextStyle": "#fff"
   },
   "tabBar": {
@@ -20,28 +22,28 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/interface/interface",
         "iconPath": "image/icon_API.png",
         "selectedIconPath": "image/icon_API_HL.png",
-        "text": "常用接口"
+        "text": "板块"
       },
       {
         "pagePath": "pages/index/index",
         "iconPath": "image/list.png",
         "selectedIconPath": "image/list1.png",
-        "text": "日记管理"
+        "text": "热门"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/interface/article/index",
         "iconPath": "image/icon_component.png",
         "selectedIconPath": "image/icon_component_HL.png",
-        "text": "活动专题"
+        "text": "活动"
       },
       {
         "pagePath": "pages/account/account",
         "iconPath": "image/wechat.png",
         "selectedIconPath": "image/wechatHL.png",
-        "text": "我"
+        "text": "我的"
       }
     ]
   }

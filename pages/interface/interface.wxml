@@ -1,7 +1,7 @@
 <import src="../../style/footer.wxml" />
 <view class="page">
   <view class="page__hd i-header">
-    <view class="i-header-h1 h50">测试文字·1111</view>
+    <view class="i-header-h1 h50">二院沟通CLUB</view>
     <view class="i-header-h1">测试文字ssssssssssssssssssss</view>
   </view>
 
@@ -18,14 +18,10 @@
           <view class="weui-grid__label">{{item.name}}</view>
         </navigator>
       </block>
-       <button class="weui-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取用户头像</button>
+
     </view>
   </view>
    <view class="page__ft" style='margin-top:20px;'>
-      <view class="page__bd page__bd_spacing">
-        <view class="weui-footer ">
-          <view class="weui-footer__text">Copyright © 2013-2016 www.bmob.cn</view>
-        </view>
-      </view>
+      <template is="foot"  />
     </view>
 </view>

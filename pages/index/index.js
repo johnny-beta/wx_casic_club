@@ -293,6 +293,7 @@ function getList(t, k) {
   query.limit(that.data.limit);
 
   var mainQuery = Bmob.Query.or(query, query1);
+  mainQuery= query
   mainQuery.find({
     success: function(results) {
       // 循环处理查询到的数据
