@@ -188,10 +188,13 @@ Page({
   },
   inputTyping: function(e) {
     //搜索数据
+    
     getList(this, e.detail.value);
+    /*
     this.setData({
       inputVal: e.detail.value
     });
+    */
   },
   closeAddLayer: function() {
     that.setData({
@@ -275,6 +278,7 @@ function getList(t, k) {
   var query1 = new Bmob.Query(Diary);
 
   //会员模糊查询
+  /*
   if (k) {
     query.equalTo("title", {
       "$regex": "" + k + ".*"
@@ -282,18 +286,23 @@ function getList(t, k) {
     query1.equalTo("content", {
       "$regex": "" + k + ".*"
     });
-  }
+    
+
+  } */
 
   //普通会员匹配查询
-  // query.equalTo("title", k);
+  if(k){
+    //console.log(k)
+    query.equalTo("title", k);
+  }
 
   query.descending('createdAt');
-  query.include("own")
+  //query.include("own")
   // 查询所有数据
   query.limit(that.data.limit);
 
-  var mainQuery = Bmob.Query.or(query, query1);
-  mainQuery= query
+  //var mainQuery = Bmob.Query.or(query, query1);
+  var mainQuery= query
   mainQuery.find({
     success: function(results) {
       // 循环处理查询到的数据

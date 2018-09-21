@@ -11,17 +11,15 @@ var grids = [
    {"name":"登录","ico":"login.png","url":"../login/login"},
    {"name":"注册","ico":"reg.png","url":"../register/register"},
    
-   {"name":"退出","ico":"logout.png","url":"../logout/logout"},
    { "name": "群聊", "ico": "liao.png", "url": "../interface/chatroom/chatroom" },
-   { "name": "客服处理", "ico": "login.png", "url": "../message/list/index" },
-   { "name": "微信手机号", "ico": "phone.png", "url": "getPhone/getPhone" },
+   
   
 ];
 Page({    
     data: {        
         userInfo: {},
-        grids: grids
-    
+        grids: grids,
+      background: ['http://bmob-cdn-21631.b0.upaiyun.com/2018/09/21/37e711a040c4430c8082052eae600c73.jpg', 'http://bmob-cdn-21631.b0.upaiyun.com/2018/09/21/503b2cf640663e0a80a76360ba799164.jpg', 'http://bmob-cdn-21631.b0.upaiyun.com/2018/09/21/d5d8ada140fd495680c56af776cfb621.jpg'],
     },
     onLoad:function(){
         var that = this 

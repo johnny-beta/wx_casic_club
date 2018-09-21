@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/interface/interface",
     "pages/index/index",
     "pages/index/detail/index",
-    "pages/interface/interface",
+    
     "pages/interface/article/index",
     "pages/interface/article/detail/index",    
     "pages/account/account",

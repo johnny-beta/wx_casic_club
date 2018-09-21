@@ -11,7 +11,7 @@
         </view>
       </view>
       <view class="weui-form-preview__bd weui-form-preview__img">
-        <image src='{{item.cover}}'></image>
+        <image mode="aspectFill" src='{{item.cover}}'></image>
       </view>
       <view class="weui-form-preview__hd">
         <view class="">{{item.createdAt}}</view>
