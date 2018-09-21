@@ -1,4 +1,5 @@
 var Bmob = require('../../utils/bmob.js');
+var Bmob1 = require('../../utils/Bmob-1.6.4.min.js');
 var common = require('../../utils/common.js');
 var app = getApp()
 Page({
@@ -41,11 +42,11 @@ Page({
     common.showModal('----');
   },
   getUserInfo: function(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+    Bmob1.User.upInfo(e.detail.userInfo)
   }
 })

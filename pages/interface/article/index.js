@@ -1,12 +1,14 @@
 // pages/interface/article/index.js
-var Bmob = require('../../../utils/bmob.js');
+const Bmob = require('../../../utils/bmob.js');
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    results:[]
+    results:[],
+    currentUser: app.globalData.currentUser
   },
 
   /**
@@ -25,12 +27,7 @@ Page({
       // query.equalTo("$and", ks);
       query.find({
         success: function(results) {
-          console.log("共查询到 " + results.length + " 条记录");
-          // 循环处理查询到的数据
-          for (var i = 0; i < results.length; i++) {
-            var object = results[i];
-            console.log(object.id + ' - ' + object.get('title'));
-          }
+          
           that.setData({
             results: results
           });

@@ -1,4 +1,5 @@
-var Bmob = require('../../../utils/bmob.js');
+//var Bmob = require('../../../utils/bmob.js');
+const Bmob = require('../../../utils/Bmob-1.6.4.min.js') 
 var common = require('../../../utils/common.js');
 var app = getApp()
 Page({
@@ -7,8 +8,13 @@ Page({
     },
     onLoad: function () {
         var that = this
+        var currentUser = Bmob.User.current();
+        if (currentUser) {
+          this.setData({
+            userInfo: currentUser
+          });
 
-
+        }
     },
     addFeedback: function (event) {
         var that = this;

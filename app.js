@@ -1,22 +1,56 @@
-//app.js
-
-var Bmob = require('utils/bmob.js')
-
-
-// var BmobSocketIo = require('utils/bmobSocketIo.js').BmobSocketIo;
-// const BmobSocketIo = require('utils/tunnel');
+const Bmob = require('utils/bmob.js') 
+const Bmob1 = require('utils/Bmob-1.6.4.min.js') 
 Bmob.initialize(
   '0bfe14d135afa2dd2abf54bb979ef145',
   'ce5c1c19a568921b07474e04839915d3'
 )
-
-// Bmob.initialize("983bc08c5a6d2e9bafa83b2c550a8175", "1a388a666e3bf56dedbcdd9d54a60e11");
+Bmob1.initialize(
+  '0bfe14d135afa2dd2abf54bb979ef145',
+  'ce5c1c19a568921b07474e04839915d3'
+)
 
 App({
   onLaunch: function () {
     wx.login({
       success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        if (res.code) {
+          Bmob1.User.auth().then(res => {
+            console.log('一键登陆成功')
+          }).catch(err => {
+            console.log(err)
+          });
+          Bmob1.User.requestOpenId(res.code, { 
+            success: function (userData) {
+              console.log(userData)
+              wx.getUserInfo({
+                success: function (result) {
+                  var userInfo = result.userInfo
+                  var nickName = userInfo.nickName
+
+                  var user = new Bmob.User(); //开始注册用户
+                  user.set("username", nickName);
+                  user.set("password", userData.openid); //因为密码必须提供，但是微信直接登录小程序是没有密码的，所以用openId作为唯一密码
+                  user.set("userData", userData);
+                  user.signUp(null, {
+                    success: function (res) {
+                      console.log("注册成功!");
+                    },
+                    error: function (userData, error) {
+                      console.log(error)
+                    }
+                  });
+                }
+              })
+            },
+            error: function (error) {
+              // Show the error message somewhere
+              console.log("Error: " + error.code + " " + error.message);
+            }
+          });
+
+        } else {
+          console.log('获取用户登录态失败！' + res.errMsg)
+        }
       }
     })
     // 获取用户信息
@@ -59,6 +93,7 @@ App({
     }
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    currentUser:Bmob1.User.current()
   }
 })
