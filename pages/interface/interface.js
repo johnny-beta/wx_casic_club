@@ -2,12 +2,12 @@ var Bmob = require('../../utils/bmob.js');
 var common=require('../../utils/common.js');
 var app = getApp()
 var grids = [
-   {"name":"发送短信","ico":"sms.png","url":"../sendSms/sendSms"},
-   {"name":"图片上传","ico":"pic.png","url":"../picasa/picasa"},
-   {"name":"微信自动登录","ico":"autologin.png","url":"../sendSms/sendSms","click":"autuLogin"},
-   {"name":"获取openid","ico":"openid.png","url":"../getOpenId/getOpenId"},
-   {"name":"微信支付","ico":"pay.png","url":"../pay/pay"},
-   {"name":"生成二维码","ico":"code.png","url":"code/code"},
+  { "name": "航天置换", "ico":"zhihuan.png","url":"../sendSms/sendSms"},
+   {"name":"航天团购","ico":"tuangou.png","url":"../picasa/picasa"},
+   {"name":"航天宝贝","ico":"baobei.png","url":"../sendSms/sendSms","click":"autuLogin"},
+   {"name":"房屋租售","ico":"zushou.png","url":"../getOpenId/getOpenId"},
+   {"name":"红娘牵线","ico":"qianxian.png","url":"../pay/pay"},
+
    {"name":"登录","ico":"login.png","url":"../login/login"},
    {"name":"注册","ico":"reg.png","url":"../register/register"},
    
