@@ -1,5 +1,5 @@
-@import "../common/index.wxss";
 
+@import "/style/weui.wxss";
 .navigator-hover button{
   background-color: #DEDEDE;
 }
