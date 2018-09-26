@@ -1,6 +1,5 @@
 // pages/index/detail/index.js
 var Bmob = require('../../../../utils/bmob.js');
-
 const WxParse = require('../../../../utils/wxParse/wxParse.js');
 
 Page({

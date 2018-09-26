@@ -7,7 +7,7 @@ Page({
   onLoad: function (e) {
     // 页面初始化 options为页面跳转所带来的参数
 
-    console.log(e.objectId)
+   // console.log(e.objectId)
     var objectId = e.objectId;
     var that = this;
     // if (!e.objectId) {
@@ -20,13 +20,13 @@ Page({
 
     query.get(objectId, {
       success: function (result) {
-        console.log(result, result.id);
+        console.log("ok");
+        console.log(result);
 
         that.setData({
           rows: result,
-
         })
-        // The object was retrieved successfully.        
+        
       },
       error: function (result, error) {
         console.log("查询失败");

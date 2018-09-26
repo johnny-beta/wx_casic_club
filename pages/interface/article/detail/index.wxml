@@ -1,32 +1,20 @@
 <!--pages/index/detail/index.wxml-->
-<import src="../../../../style/footer.wxml" />
 <view class="page">
-  <view class="page__hd i-header">
-    <view class="i-header-h1 h50">无需再造小程序后端服务</view>
-    <view class="i-header-h1">轻松拥有开发中需要的各种后端能力</view>
+  <view class="page__hd">
+      <view class="weui-article_h1">{{rows.title}}</view>
+      <view class="weui-article_h2">
+        <view class="weui-article_name">航YY</view>
+        <view class="weui-article_update_time">{{rows.updatedAt}} </view>
+      </view>
   </view>
-
+  <view class="weui-img_center">
+    <image class="image_frame" src='{{rows.cover}}' mode="scaleToFill"></image>
+  </view>
     <view class="page__bd">
         <view class="weui-article">
-            <view class="weui-article__h1"> {{rows.title}}</view>
-            <view class="weui-article__section">
-              
-
-                <view class="weui-article__section">
-                   
-                    <view class="weui-article__p">
-
-                       <import src="../../../../utils/wxParse/wxParse.wxml"/>
-      <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
-                    </view>
-                     <view class="weui-article__h3">创建时间：{{rows.createdAt}} </view>
-                </view>
-            </view>
+        <import src="../../../../utils/wxParse/wxParse.wxml"/>
+        <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
         </view>
     </view>
-   
-
-   <view class="page__ft" style='margin-top:20px;'>
-      <template is="foot"  />
-    </view>
+   <template is="foot"  />
 </view>
