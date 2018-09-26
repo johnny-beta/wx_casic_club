@@ -4,7 +4,8 @@ const WxParse = require('../../../../utils/wxParse/wxParse.js');
 
 Page({
   data: {
-    rows: {}
+    rows: {},
+    imgArr:[]
   },
   onLoad: function (e) {
     // 页面初始化 options为页面跳转所带来的参数
@@ -26,7 +27,7 @@ Page({
         WxParse.wxParse('content', 'html', result.get("content"), that);
         that.setData({
           rows: result,
-
+          imgArr:[result.cover]
         })
         // The object was retrieved successfully.        
       },
@@ -34,6 +35,16 @@ Page({
         console.log("查询失败");
       }
     });
+  },
+  bindClickImg: function (e) {
+    console.log(e);
+    wx.previewImage({
+    //  current: imageArr[selecIndex],  // 当前显示图片的http链接，注意这里不能放本地图片
+    //  urls: imageArr,                 // 需要预览的图片http链接列表，注意这里不能放本地图片
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
   },
   onReady: function () {
     // 页面渲染完成

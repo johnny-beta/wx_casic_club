@@ -4,6 +4,7 @@ var Bmob = require('../../../utils/bmob.js');
 var common = require('../../..//utils/common.js');
 var app = getApp();
 var that;
+var typeNumber;
 Page({
 
   data: {
@@ -14,13 +15,13 @@ Page({
     limit: 15,
     diaryList: [],
     modifyDiarys: false,
-    urlArr:[]
+    urlArr:[],
   },
   onReady: function(e) {},
   onShareAppMessage: function() {},
-  onLoad: function() {
+  onLoad: function (options) {
     that = this;
-
+    typeNumber = options.typeNumber;
     wx.showShareMenu({
       withShareTicket: true //要求小程序返回分享目标信息
     })
@@ -213,7 +214,7 @@ Page({
         var urlArr = new Array();
         // var urlArr={};
         var tempFilePaths = res.tempFilePaths;
-        console.log(tempFilePaths)
+        //console.log(tempFilePaths)
         var imgLength = tempFilePaths.length;
         if (imgLength > 0) {
           var newDate = new Date();
@@ -275,8 +276,7 @@ function getList(t, k) {
   that = t;
   var Diary = Bmob.Object.extend("diary");
   var query = new Bmob.Query(Diary);
-  var query1 = new Bmob.Query(Diary);
-
+  
   //会员模糊查询
   /*
   if (k) {
@@ -299,10 +299,14 @@ function getList(t, k) {
   query.descending('createdAt');
   //query.include("own")
   // 查询所有数据
-  query.limit(that.data.limit);
-
+  //query.equalTo("type", "==", 1);
+  //query.limit(that.data.limit);
+  
   //var mainQuery = Bmob.Query.or(query, query1);
-  var mainQuery= query
+  console.log(typeNumber);
+  var typeNumberTemp = parseInt(typeNumber);
+  query.equalTo("type", typeNumberTemp);
+  var mainQuery= query;
   mainQuery.find({
     success: function(results) {
       // 循环处理查询到的数据

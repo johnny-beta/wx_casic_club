@@ -39,7 +39,16 @@ Page({
       
   
   },
-
+  bindClickImg: function (e) {
+  //  console.log(e.cover);
+    wx.previewImage({
+      current: e.cover,  // 当前显示图片的http链接，注意这里不能放本地图片
+    //  urls: imageArr,                 // 需要预览的图片http链接列表，注意这里不能放本地图片
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
