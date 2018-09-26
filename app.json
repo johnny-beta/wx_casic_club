@@ -3,12 +3,13 @@
     "pages/interface/interface",
     "pages/index/index",
     "pages/index/detail/index",
-    
     "pages/interface/article/index",
-    "pages/interface/article/detail/index",    
+    "pages/interface/article/detail/index",
     "pages/account/account",
     "pages/account/feedback/feedback",
-    "pages/account/release/release"
+    "pages/account/release/release",
+    "pages/interface/type/type",
+    "pages/interface/chatroom/chatroom"
   ],
   "window": {
     "backgroundTextStyle": "light",
