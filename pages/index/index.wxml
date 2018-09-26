@@ -100,6 +100,7 @@
 
 
         <view class="weui-cell">
+         <view class="weui-cells__title">图片（必须上传一张）</view>
           <view class="weui-uploader__input-box">
              <view class="weui-uploader__files" id="uploaderFiles">
                 <block wx:for="{{urlArr}}" wx:key="*this">

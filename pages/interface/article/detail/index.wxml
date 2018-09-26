@@ -3,7 +3,7 @@
   <view class="page__hd">
       <view class="weui-article_h1">{{rows.title}}</view>
       <view class="weui-article_h2">
-        <view class="weui-article_name">航YY</view>
+        <view class="weui-article_name">航帮帮</view>
         <view class="weui-article_update_time">{{rows.updatedAt}} </view>
       </view>
   </view>

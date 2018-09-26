@@ -30,12 +30,12 @@ var grids = [{
   {
     "name": "登录",
     "ico": "login.png",
-    "url": "../interface/type/type"
+    "click": "autuLogin"
   },
   {
     "name": "注册",
     "ico": "reg.png",
-    "url": "../interface/type/type"
+    "click": "autuLogin"
   },
   {
     "name": "群聊",
@@ -52,8 +52,31 @@ Page({
   },
   onLoad: function() {
     var that = this
+    this.getBG();
+  },
+
+  getBG: function() {
+    var that = this
+    var Diary = Bmob.Object.extend("borad_bg");
+    var query = new Bmob.Query(Diary);
+    query.find({
+      success: function (results) {   
+        var backgrounds = []  
+        
+        for (var i = 0; i < results.length; i++) {
+          var object = results[i];
+          //console.log(object.id + ' - ' + object.get('title'));
+          backgrounds.push(object.get('imgurl'))
+        }
+        that.setData({ background: backgrounds })
+      },
+      error: function (error) {
+        console.log("查询失败: " + error.code + " " + error.message);
+      }
+    });
 
   },
+  onShareAppMessage: function () { },
   getUserInfo: function(e) {
     var userinfo = e.detail.userInfo;
     // 这里会把头像信息写入到数据库
@@ -61,7 +84,7 @@ Page({
     user.getUserInfo(userinfo)
   },
   autuLogin: function() {
-    common.showModal("测试按钮")
+    common.showModal("暂未开放！")
   }
 
 })
