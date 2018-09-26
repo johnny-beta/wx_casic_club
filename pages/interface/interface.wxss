@@ -6,3 +6,8 @@
 .other-navigator-hover button{
   background-color: #DEDEDE;
 }
+swiper {
+  padding: 0;
+  height: 240px;
+
+}
