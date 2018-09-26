@@ -4,6 +4,7 @@ Page({
   data: {
     rows: {}
   },
+  onShareAppMessage: function () { },
   onLoad: function (e) {
     // 页面初始化 options为页面跳转所带来的参数
 
