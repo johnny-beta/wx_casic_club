@@ -59,9 +59,9 @@
         </view>
       </view>
     </view>
-   
 
-   <view class="page__ft">
+
+    <view class="page__ft">
       <view class="page__bd page__bd_spacing">
         <view class="weui-footer ">
           <view class="weui-footer__text">---我是有底线的---</view>
@@ -74,9 +74,7 @@
 <view class="js_dialog" id="androidDialog1" style="opacity: 1;" wx:if="{{writeDiary}}">
   <view class="weui-mask"></view>
   <view class="weui-dialog weui-skin_android">
-    <view class="weui-dialog__hd">
-      <strong class="weui-dialog__title">添加信息</strong>
-    </view>
+    
     <form bindsubmit="addDiary" report-submit="true">
       <view class="weui-dialog__bd">
         <view class="weui-cells__title">标题</view>
@@ -97,22 +95,28 @@
           </view>
         </view>
 
-
-
-        <view class="weui-cell">
-         <view class="weui-cells__title">图片（必须上传一张）</view>
-          <view class="weui-uploader__input-box">
-             <view class="weui-uploader__files" id="uploaderFiles">
+        <view class="weui-cells__title">图片(必须上传一张)</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <!-- <view class="weui-cells__title">图片（必须上传一张）</view> -->
+            <view class="weui-uploader__hd">
+              <view class="weui-uploader__input-box">
+                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+              </view>
+              <view class="weui-uploader__files" id="uploaderFiles">
                 <block wx:for="{{urlArr}}" wx:key="*this">
-                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item.url}}">
-                        <image class="weui-uploader__img" src="{{item.url}}" mode="aspectFill" />
-                    </view>
+                  <view class="weui-uploader__file" bindtap="previewImage" id="{{item.url}}">
+                    <image class="weui-uploader__img" src="{{item.url}}" mode="aspectFill" />
+                  </view>
                 </block>
+              </view>
+              
             </view>
-            <view class="weui-uploader__input" bindtap="chooseImage"></view>
-          </view> 
-       
+
+          </view>
         </view>
+
+        
 
 
 

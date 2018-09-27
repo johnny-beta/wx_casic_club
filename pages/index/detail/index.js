@@ -45,5 +45,17 @@ Page({
   },
   onUnload: function () {
     // 页面关闭
+  },
+  preImg: function (o) {
+    var that = this
+    console.log(o)
+    wx.previewImage({
+      current: '',
+      urls: [that.data.rows.get('imgurl')],
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+
   }
 })

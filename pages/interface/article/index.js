@@ -20,7 +20,7 @@ Page({
       var query = new Bmob.Query(Diary);
       // query.equalTo("title", "bmob");
       // query.containedIn("title", ["Bmob", "hello", "sure"]);
-      // query.ascending(列名称);
+    query.descending('createdAt');
       // 查询当前数据数据
       // var ks = [{ "createdAt": { "$gte": { "__type": "Date", "iso": "2014-07-15 00:00:00" } } },
       // { "createdAt": { "$lte": { "__type": "Date", "iso": "2014-07-15 23:59:59" } } }];

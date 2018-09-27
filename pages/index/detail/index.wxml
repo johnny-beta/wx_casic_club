@@ -1,7 +1,7 @@
 <!--pages/index/detail/index.wxml-->
 <view class="page">
 <view class="weui-img_center">
-  <image class="image_frame" src='{{rows.imgurl}}' mode="scaleToFill"></image>
+  <image class="image_frame" src='{{rows.imgurl}}' mode="aspectFit" bindtap='preImg'></image>
 </view>
   
   <view class="page__hd">

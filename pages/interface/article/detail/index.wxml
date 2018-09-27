@@ -8,7 +8,7 @@
       </view>
   </view>
   <view class="weui-img_center">
-    <image class="image_frame" src='{{rows.cover}}' mode="scaleToFill"></image>
+    <image class="image_frame" src='{{rows.cover}}' mode="aspectFit" bindtap='preImg'></image>
   </view>
     <view class="page__bd">
         <view class="weui-article">
