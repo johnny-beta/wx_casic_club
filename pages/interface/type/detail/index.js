@@ -6,8 +6,7 @@ Page({
   },
   onLoad: function (e) {
     // 页面初始化 options为页面跳转所带来的参数
-
-    console.log(e.objectId)
+ 
     var objectId = e.objectId;
     var that = this;
     // if (!e.objectId) {

@@ -1,8 +1,10 @@
 // pages/index/detail/index.js
 var Bmob = require('../../../utils/bmob.js');
+var app = getApp();
 Page({
   data: {
-    rows: {}
+    rows: {},
+    nickName:""
   },
   onShareAppMessage: function () { },
   onLoad: function (e) {
@@ -15,24 +17,55 @@ Page({
     //   common.showTip("请重新进入", "loading");
     //   return false;
     // }
-
     var Diary = Bmob.Object.extend("diary");
     var query = new Bmob.Query(Diary);
-
+    var nickName = "航帮帮";
     query.get(objectId, {
-      success: function (result) {
-        console.log("ok");
-        console.log(result);
+      success: function (resultDiary) {
 
-        that.setData({
-          rows: result,
-        })
-        
+        var User = Bmob.Object.extend("_User");
+        var queryUser = new Bmob.Query(User);
+        if (resultDiary.attributes.openid){
+          queryUser.equalTo("openid", resultDiary.attributes.openid);
+          queryUser.find({
+            success: function (results) {
+              console.log(results);
+              nickName = results[0].attributes.nickName;
+              that.setData({
+                rows: resultDiary,
+                nickName: nickName
+              }) 
+            },
+            error: function (error) {
+              console.log("查询失败: " + error.code + " " + error.message);
+            }
+          });
+        }else{
+          that.setData({
+            rows: resultDiary,
+            nickName: nickName
+          }) 
+        }
+         
       },
       error: function (result, error) {
         console.log("查询失败");
       }
     });
+
+    var User = Bmob.Object.extend("_User");
+    var queryUser = new Bmob.Query(User);
+    queryUser.equalTo("openid", resultDiary.openid);
+    queryUser.find({
+      success: function (results) {
+        console.log(results);
+      },
+      error: function (error) {
+        console.log("查询失败: " + error.code + " " + error.message);
+      }
+    });
+    
+    
   },
   onReady: function () {
     // 页面渲染完成

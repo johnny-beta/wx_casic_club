@@ -55,9 +55,14 @@ Page({
     this.onShow()
   },
   toAddDiary: function() {
-    that.setData({
-      writeDiary: true
-    })
+    console.log(app.globalData.userInfo);
+    if(app.globalData.userInfo){
+      that.setData({
+        writeDiary: true
+      })
+    }else{
+      common.showModal("获得用户昵称才可以发布信息哦！请去我的选项中点击获取头像昵称")
+    }
   },
   addDiary: function(event) {
     var title = event.detail.value.title;
@@ -89,6 +94,8 @@ Page({
       diary.set("content", content);
       diary.set("imgurl", imgurl);
       diary.set("type", typeNumberTemp);
+      diary.set("openid", app.globalData.currentUser.openid); 
+
       var f = Bmob.File("a.jpg", [""]);
       diary.set("f", f);
       if (currentUser) {
