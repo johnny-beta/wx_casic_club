@@ -1,5 +1,5 @@
-//var Bmob = require('../../../utils/bmob.js');
-const Bmob = require('../../../utils/Bmob-1.6.4.min.js') 
+var Bmob = require('../../../utils/bmob.js');
+//const Bmob = require('../../../utils/Bmob-1.6.4.min.js') 
 var common = require('../../../utils/common.js');
 var app = getApp()
 Page({
