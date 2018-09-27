@@ -6,7 +6,6 @@ var app = getApp();
 var that;
 var typeNumber;
 Page({
-
   data: {
     writeDiary: false,
     loading: false,
@@ -16,6 +15,7 @@ Page({
     diaryList: [],
     modifyDiarys: false,
     urlArr:[],
+    typeName:""
   },
   onReady: function(e) {},
   onShareAppMessage: function() {},
@@ -24,6 +24,9 @@ Page({
     typeNumber = options.typeNumber;
     wx.showShareMenu({
       withShareTicket: true //要求小程序返回分享目标信息
+    })
+    that.setData({
+      typeName: options.typeName
     })
 
   },
@@ -80,10 +83,12 @@ Page({
       //增加信息
       var Diary = Bmob.Object.extend("diary");
       var diary = new Diary();
+      var typeNumberTemp = parseInt(typeNumber);
       diary.set("title", title);
       diary.set("formId", formId); //保存formId
       diary.set("content", content);
       diary.set("imgurl", imgurl);
+      diary.set("type", typeNumberTemp);
       var f = Bmob.File("a.jpg", [""]);
       diary.set("f", f);
       if (currentUser) {
@@ -205,7 +210,7 @@ Page({
   chooseImage: function(e) {
     var that = this;
     wx.chooseImage({
-      count: 9, // 默认9
+      count: 1, // 默认9
       sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {

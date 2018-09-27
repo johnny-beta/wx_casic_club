@@ -4,28 +4,27 @@ var app = getApp()
 var grids = [{
     "name": "航天置换",
     "ico": "zhihuan.png",
-    "url": "../interface/type/type?typeNumber=1"
+    "url": "../interface/type/type?typeNumber=1&typeName=航天置换"
   },
   {
     "name": "航天团购",
     "ico": "tuangou.png",
-    "url": "../interface/type/type?typeNumber=2"
+    "url": "../interface/type/type?typeNumber=2&typeName=航天团购"
   },
   {
     "name": "航天宝贝",
     "ico": "baobei.png",
-    "url": "../interface/type/type?typeNumber=3",
-    "click": "autuLogin"
+    "url": "../interface/type/type?typeNumber=3&typeName=航天宝贝"
   },
   {
     "name": "房屋租售",
     "ico": "zushou.png",
-    "url": "../interface/type/type?typeNumber=4"
+    "url": "../interface/type/type?typeNumber=4&typeName=房屋出租"
   },
   {
     "name": "红娘牵线",
     "ico": "qianxian.png",
-    "url": "../interface/type/type?typeNumber=5"
+    "url": "../interface/type/type?typeNumber=5&typeName=红娘牵线"
   },
   {
     "name": "登录",
@@ -40,7 +39,7 @@ var grids = [{
   {
     "name": "群聊",
     "ico": "liao.png",
-    "url": "../interface/type/type?typeNumber=6"
+    "click": "autuLogin"
   }
 
 ];
