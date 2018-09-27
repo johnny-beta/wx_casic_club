@@ -114,7 +114,6 @@ function getList(t, k) {
   mainQuery.find({
     success: function(results) {
       // 循环处理查询到的数据
-      console.log(results);
       that.setData({
         diaryList: results
       })

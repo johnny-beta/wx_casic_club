@@ -1,20 +1,17 @@
 var Bmob = require('../../../utils/bmob.js');
 //const Bmob = require('../../../utils/Bmob-1.6.4.min.js') 
 var common = require('../../../utils/common.js');
-var app = getApp()
+var app = getApp();
 Page({
     data: {
         userInfo: {},
     },
     onLoad: function () {
-        var that = this
-        var currentUser = Bmob.User.current();
-        if (currentUser) {
-          this.setData({
-            userInfo: currentUser
-          });
-
-        }
+      var that = this;
+      console.log(app.globalData.userInfo);
+      that.setData({
+        userInfo: app.globalData.userInfo
+      })
     },
     addFeedback: function (event) {
         var that = this;

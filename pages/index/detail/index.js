@@ -52,20 +52,7 @@ Page({
         console.log("查询失败");
       }
     });
-
-    var User = Bmob.Object.extend("_User");
-    var queryUser = new Bmob.Query(User);
-    queryUser.equalTo("openid", resultDiary.openid);
-    queryUser.find({
-      success: function (results) {
-        console.log(results);
-      },
-      error: function (error) {
-        console.log("查询失败: " + error.code + " " + error.message);
-      }
-    });
-    
-    
+ 
   },
   onReady: function () {
     // 页面渲染完成

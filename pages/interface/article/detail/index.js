@@ -10,7 +10,7 @@ Page({
   onLoad: function (e) {
     // 页面初始化 options为页面跳转所带来的参数
 
-    console.log(e.objectId)
+    //console.log(e.objectId)
     var objectId = e.objectId;
     var that = this;
     // if (!e.objectId) {
@@ -23,7 +23,6 @@ Page({
 
     query.get(objectId, {
       success: function (result) {
-        console.log(result);
         WxParse.wxParse('content', 'html', result.get("content"), that);
         that.setData({
           rows: result,
@@ -37,7 +36,6 @@ Page({
     });
   },
   bindClickImg: function (e) {
-    console.log(e);
     wx.previewImage({
     //  current: imageArr[selecIndex],  // 当前显示图片的http链接，注意这里不能放本地图片
     //  urls: imageArr,                 // 需要预览的图片http链接列表，注意这里不能放本地图片
