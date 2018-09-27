@@ -4,9 +4,9 @@
     <view class=""  >
       <swiper indicator-dots="true" autoplay="false" circular="true" interval="5000" duration="300" previous-margin="0px" next-margin="0px" >
         <block wx:for="{{background}}" wx:key="*this">
-          <swiper-item>
+          <swiper-item bindtap="preImg">
       
-              <image  mode="scaleToFill" style='width:100%;overflow:show;' src="{{item}}"></image>
+              <image  mode="widthFix" style='width:100%;overflow:show;' src="{{item}}"></image>
            
           </swiper-item>
         </block>

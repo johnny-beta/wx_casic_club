@@ -57,5 +57,19 @@ Page({
   },
   onUnload: function () {
     // 页面关闭
+  },  
+  preImg: function (o) {
+    var that = this
+    wx.previewImage({
+      current: '',
+      urls: [that.data.rows.get('cover')]
+    })
+
+  },
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
   }
 })

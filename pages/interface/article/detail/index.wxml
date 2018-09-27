@@ -7,8 +7,9 @@
         <view class="weui-article_update_time">{{rows.updatedAt}} </view>
       </view>
   </view>
-  <view class="weui-img_center" wx:for="{{imgArr}}">
-    <image class="image_frame" src='{{item}}' data-index='{{index}}' bindtap='bindClickImg' mode="scaleToFill"></image>
+
+  <view class="weui-img_center">
+    <image class="image_frame" src='{{rows.cover}}' mode="aspectFit" bindtap='preImg'></image>
   </view>
     <view class="page__bd">
         <view class="weui-article">

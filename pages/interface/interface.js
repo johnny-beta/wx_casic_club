@@ -59,6 +59,7 @@ Page({
     var that = this
     var Diary = Bmob.Object.extend("borad_bg");
     var query = new Bmob.Query(Diary);
+    query.descending('createdAt');
     query.find({
       success: function (results) {   
         var backgrounds = []  
@@ -85,6 +86,16 @@ Page({
   },
   autuLogin: function() {
     common.showModal("暂未开放！")
-  }
+  },
+  preImg: function(o) {
+    console.log(o)
+    wx.previewImage({
+      current: '',
+      urls: this.data.background,
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
 
+  }
 })
