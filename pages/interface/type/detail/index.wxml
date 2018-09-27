@@ -14,7 +14,7 @@
                 <view class="weui-article__section">
                    
                     <view class="weui-article__p">
-                       {{rows.content}}
+                      <text selectable='true'>{{rows.content}}</text>   
                     </view>
                      <view class="weui-article__h3">创建时间：{{rows.createdAt}} </view>
                 </view>

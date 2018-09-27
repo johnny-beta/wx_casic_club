@@ -13,7 +13,7 @@
   </view>
     <view class="page__bd">
         <view class="weui-article">
-          {{rows.content}}
+          <text selectable='true' >{{rows.content}}</text>            
         </view>
     </view>
    <template is="foot"  />

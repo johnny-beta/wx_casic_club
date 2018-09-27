@@ -90,5 +90,17 @@ Page({
       complete: function (res) { },
     })
 
-  }
+  },
+  // copy:function(e){
+  //   var that = this;
+  //   console.log(that);
+  //   wx.setClipboardData({
+  //     data: that.data.rows.attributes.content,
+  //     success:function(res){
+  //       wx.showToast({
+  //         title: '复制成功',
+  //       })
+  //     }
+  //   });
+  // }
 })

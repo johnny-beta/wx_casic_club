@@ -27,9 +27,9 @@ var grids = [{
     "url": "../interface/type/type?typeNumber=5&typeName=红娘牵线"
   },
   {
-    "name": "登录",
+    "name": "拼车出行",
     "ico": "login.png",
-    "click": "autuLogin"
+    "url": "../interface/type/type?typeNumber=6&typeName=拼车出行"    
   },
   {
     "name": "注册",
