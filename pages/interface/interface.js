@@ -22,20 +22,17 @@ var grids = [{
     "url": "../interface/type/type?typeNumber=4&typeName=房屋出租"
   },
   {
-    "name": "红娘牵线",
+    "name": "鹊桥征友",
     "ico": "qianxian.png",
-    "url": "../interface/type/type?typeNumber=5&typeName=红娘牵线"
+    "url": "../interface/type/type?typeNumber=5&typeName=鹊桥征友"
   },
   {
     "name": "拼车出行",
     "ico": "login.png",
-    "url": "../interface/type/type?typeNumber=6&typeName=拼车出行"    
+    "url": "../interface/type/type?typeNumber=6&typeName=拼车出行" ,   
+    "click": "autuLogin1"
   },
-  {
-    "name": "注册",
-    "ico": "reg.png",
-    "click": "autuLogin"
-  },
+  
   {
     "name": "群聊",
     "ico": "liao.png",
@@ -85,6 +82,9 @@ Page({
   },
   autuLogin: function() {
     common.showModal("暂未开放！")
+  },
+  autuLogin1: function () {
+    common.showModal("请详细阅读 我的-免责条款里的内容！")
   },
   preImg: function(o) {
     console.log(o)

@@ -17,6 +17,7 @@ Page({
     modifyDiarys: false
   },
   onLoad: function () {
+    app = getApp();
     var that = this;
     if (app.globalData.userInfo){
       that.setData({     
@@ -34,15 +35,17 @@ Page({
     })
   },
   onShow: function () {
+    app = getApp();
+    //console.log(app.globalData.userInfo);
     if (app.globalData.userInfo) {
       var that = this;
       var objectId;
-      var currentUser = app.globalData.currentUser;
+      var openid = app.globalData.currentUser.openid;
       //objectId = currentUser.id;
       var Diary = Bmob.Object.extend("diary");
       var query = new Bmob.Query(Diary);
-
-      query.equalTo("openid", currentUser.openid);
+      
+      query.equalTo("openid", openid);
       query.descending('createdAt');
 
       // 查询所有数据

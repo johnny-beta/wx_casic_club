@@ -18,6 +18,7 @@ Page({
     //   return false;
     // }
     var Diary = Bmob.Object.extend("diary");
+   
     var query = new Bmob.Query(Diary);
     var nickName = "航帮帮";
     query.get(objectId, {
@@ -40,19 +41,27 @@ Page({
               console.log("查询失败: " + error.code + " " + error.message);
             }
           });
+
         }else{
           that.setData({
             rows: resultDiary,
             nickName: nickName
           }) 
         }
-         
+        resultDiary.increment("count");
+        resultDiary.save();
       },
       error: function (result, error) {
         console.log("查询失败");
       }
+      
     });
- 
+   
+    
+
+    
+    
+    
   },
   onReady: function () {
     // 页面渲染完成

@@ -96,6 +96,7 @@ Page({
       diary.set("type", typeNumberTemp);
       diary.set("openid", app.globalData.currentUser.openid); 
       diary.set("isNew", true); 
+      diary.set("isDisplay", true); 
 
       var f = Bmob.File("a.jpg", [""]);
       diary.set("f", f);
