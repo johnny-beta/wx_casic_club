@@ -18,6 +18,7 @@ Page({
     //   return false;
     // }
     var Diary = Bmob.Object.extend("diary");
+   
     var query = new Bmob.Query(Diary);
     var nickName = "航帮帮";
     query.get(objectId, {
@@ -40,30 +41,25 @@ Page({
               console.log("查询失败: " + error.code + " " + error.message);
             }
           });
+
         }else{
           that.setData({
             rows: resultDiary,
             nickName: nickName
           }) 
         }
-         
+        resultDiary.increment("count");
+        resultDiary.save();
       },
       error: function (result, error) {
         console.log("查询失败");
       }
+      
     });
+   
+    
 
-    var User = Bmob.Object.extend("_User");
-    var queryUser = new Bmob.Query(User);
-    queryUser.equalTo("openid", resultDiary.openid);
-    queryUser.find({
-      success: function (results) {
-        console.log(results);
-      },
-      error: function (error) {
-        console.log("查询失败: " + error.code + " " + error.message);
-      }
-    });
+    
     
     
   },
