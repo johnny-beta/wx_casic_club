@@ -1,0 +1,15 @@
+<!--pages/account/freeduty/freeduty.wxml-->
+  <view class="page">
+    <view class="page__hd">
+        <view class="weui-article_h1">免责声明</view>
+    </view>
+    <view class="page__bd">
+        <view class="weui-article">
+          <import src="../../../utils/wxParse/wxParse.wxml"/>
+          <import src="../../../utils/wxParse/wxParse.wxml"/>
+          <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+        </view>
+    </view>
+    
+  </view>
+

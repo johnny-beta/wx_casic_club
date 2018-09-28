@@ -4,7 +4,8 @@ var app = getApp();
 Page({
   data: {
     rows: {},
-    nickName:""
+    nickName:"",
+    userPic:""
   },
   onShareAppMessage: function () { },
   onLoad: function (e) {
@@ -32,9 +33,12 @@ Page({
             success: function (results) {
               console.log(results);
               nickName = results[0].attributes.nickName;
+              var userPic = results[0].attributes.userPic;
+          
               that.setData({
                 rows: resultDiary,
-                nickName: nickName
+                nickName: nickName,
+                userPic: userPic
               }) 
             },
             error: function (error) {

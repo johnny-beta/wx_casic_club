@@ -30,3 +30,10 @@
   margin-bottom: .34em;
   font-weight: 200;
 }
+.userPic{
+width:40rpx;
+height:40rpx;
+border-radius: 50%;
+overflow: hidden;
+margin-right: 3px;
+}

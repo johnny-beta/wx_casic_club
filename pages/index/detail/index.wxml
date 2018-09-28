@@ -8,7 +8,7 @@
   <view class="page__hd">
       <view class="weui-article_h1">{{rows.title}}</view>
       <view class="weui-article_h2">
-        
+        <image class="userPic" src='{{userPic}}'  ></image>
         <view class="weui-article_name">{{nickName}}</view>
         <view class="weui-article_update_time">{{rows.updatedAt}} </view>
         <view class="weui-article_update_time">{{rows.count}}人浏览 </view>
