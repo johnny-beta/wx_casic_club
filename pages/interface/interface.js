@@ -7,9 +7,9 @@ var grids = [{
     "url": "../interface/type/type?typeNumber=1&typeName=航天置换"
   },
   {
-    "name": "航天团购",
+    "name": "航天步行街",
     "ico": "tuangou.png",
-    "url": "../interface/type/type?typeNumber=2&typeName=航天团购"
+    "url": "../interface/type/type?typeNumber=2&typeName=航天步行街"
   },
   {
     "name": "航天宝贝",

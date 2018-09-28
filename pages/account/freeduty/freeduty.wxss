@@ -1,0 +1,10 @@
+
+/* pages/index/detail/index.wxss */
+.weui-article_h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-left: 0.8em;
+  margin-top: .34em;
+  margin-bottom: .34em;
+  font-weight: 400;
+  }
