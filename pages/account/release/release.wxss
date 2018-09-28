@@ -93,7 +93,17 @@ form .weui-dialog__bd:first-child {
 
 .weui-label_move {
   position: absolute;
-  top:20%;
+  top:15%;
   left:80%;
 
 }
+.weui-edit{
+  /* font-size: 15px; */
+}
+.weui-delete{
+  /* font-size: 15px; */
+}
+.weui-release_content{
+  width: 80%;
+}
+

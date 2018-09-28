@@ -9,6 +9,7 @@
     "pages/account/feedback/feedback",
     "pages/account/freeduty/freeduty",
     "pages/account/release/release",
+    "pages/account/collect/collect",
     "pages/interface/type/type",
     "pages/interface/chatroom/chatroom"
   ],

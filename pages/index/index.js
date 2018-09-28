@@ -82,22 +82,12 @@ Page({
  */
 function getList(t, k) {
   that = t;
+  console.log(t);
   var Diary = Bmob.Object.extend("diary");
   var query = new Bmob.Query(Diary);
   var query1 = new Bmob.Query(Diary);
 
-  //会员模糊查询
-  /*
-  if (k) {
-    query.equalTo("title", {
-      "$regex": "" + k + ".*"
-    });
-    query1.equalTo("content", {
-      "$regex": "" + k + ".*"
-    });
-    
 
-  } */
   //普通会员匹配查询
   if(k){
     //console.log(k)
