@@ -91,3 +91,9 @@ form .weui-dialog__bd:first-child {
     padding-bottom: 10px;
 }
 
+.weui-label_move {
+  position: absolute;
+  top:20%;
+  left:80%;
+
+}

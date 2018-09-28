@@ -95,6 +95,7 @@ Page({
       diary.set("imgurl", imgurl);
       diary.set("type", typeNumberTemp);
       diary.set("openid", app.globalData.currentUser.openid); 
+      diary.set("isNew", true); 
 
       var f = Bmob.File("a.jpg", [""]);
       diary.set("f", f);
@@ -243,7 +244,7 @@ Page({
 
             var file = new Bmob.File(name, tempFilePath);
             file.save().then(function (res) {
-              console.log(res)
+              //console.log(res)
               // return
               wx.hideNavigationBarLoading()
               var url = res.url();
@@ -322,7 +323,7 @@ function getList(t, k) {
   mainQuery.find({
     success: function(results) {
       // 循环处理查询到的数据
-      console.log(results);
+      //console.log(results);
       that.setData({
         diaryList: results
       })

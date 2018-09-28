@@ -19,7 +19,7 @@ Page({
 
     query.get(objectId, {
       success: function (result) {
-        console.log(result, result.id);
+        //console.log(result, result.id);
 
         that.setData({
           rows: result,
