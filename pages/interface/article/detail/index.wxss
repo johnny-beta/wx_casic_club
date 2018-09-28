@@ -1,2 +1,34 @@
 /* pages/index/detail/index.wxss */
 @import "../../../../utils/wxParse/wxParse.wxss";
+.weui-img_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+.weui-article_h1 {
+  font-size: 18px;
+  margin-left: 0.8em;
+  margin-top: .34em;
+  margin-bottom: .34em;
+  font-weight: 400;
+}
+.weui-article_h2 {
+  display: flex;
+  flex-direction: row;
+  font-size: 18px;
+  margin-left: 0.8em;
+}
+.weui-article_name {
+  font-size: 10px;
+  margin-bottom: .34em;
+  font-weight: 400;
+  color: rgb(44, 142, 235);
+}
+.weui-article_update_time {
+  margin-left: 0.8em;
+  font-size: 10px;
+  margin-bottom: .34em;
+  font-weight: 200;
+}

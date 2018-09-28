@@ -1,8 +1,14 @@
-@import "../common/index.wxss";
 
+@import "/style/weui.wxss";
 .navigator-hover button{
   background-color: #DEDEDE;
 }
 .other-navigator-hover button{
   background-color: #DEDEDE;
+}
+swiper {
+  margin: 0;
+  padding: 0;
+  height: 230px;
+
 }

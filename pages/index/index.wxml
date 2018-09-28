@@ -1,5 +1,4 @@
 <import src="../../style/footer.wxml" />
-<image class="toWrite" bindtap="toAddDiary" src="http://bmob-cdn-12920.b0.upaiyun.com/2017/07/17/a0c21208406c7ec2806156de66e68754.jpg"></image>
 <view class="page">
   <scroll-view lower-threshold="800" bindscrolltolower="pullUpLoad" upper-threshold="0" scroll-y="true" style="height: {{windowHeight}}px;  ">
     <view class="page__bd">
@@ -59,9 +58,9 @@
         </view>
       </view>
     </view>
-   
 
-   <view class="page__ft">
+
+    <view class="page__ft">
       <view class="page__bd page__bd_spacing">
         <view class="weui-footer ">
           <view class="weui-footer__text">---我是有底线的---</view>
@@ -69,91 +68,4 @@
       </view>
     </view>
   </scroll-view>
-</view>
-
-<view class="js_dialog" id="androidDialog1" style="opacity: 1;" wx:if="{{writeDiary}}">
-  <view class="weui-mask"></view>
-  <view class="weui-dialog weui-skin_android">
-    <view class="weui-dialog__hd">
-      <strong class="weui-dialog__title">添加信息</strong>
-    </view>
-    <form bindsubmit="addDiary" report-submit="true">
-      <view class="weui-dialog__bd">
-        <view class="weui-cells__title">标题</view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__bd">
-              <input class="weui-input" name="title" placeholder="请输入标题" />
-            </view>
-          </view>
-        </view>
-        <view class="weui-cells__title">信息内容</view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell">
-            <view class="weui-cell__bd">
-              <textarea class="weui-textarea" name="content" placeholder="请输入信息内容" style="height: 3.3em" />
-              <view class="weui-textarea-counter">0/200</view>
-            </view>
-          </view>
-        </view>
-
-
-
-        <view class="weui-cell">
-          <view class="weui-uploader__input-box">
-             <view class="weui-uploader__files" id="uploaderFiles">
-                <block wx:for="{{urlArr}}" wx:key="*this">
-                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item.url}}">
-                        <image class="weui-uploader__img" src="{{item.url}}" mode="aspectFill" />
-                    </view>
-                </block>
-            </view>
-            <view class="weui-uploader__input" bindtap="chooseImage"></view>
-          </view> 
-       
-        </view>
-
-
-
-      </view>
-
-      <view class="weui-dialog__ft">
-        <view class="weui-dialog__btn weui-dialog__btn_default" bindtap="noneWindows">取消</view>
-        <button loading="{{loading}}" class="weui-dialog__btn weui-dialog__btn_primary" formType="submit">提交</button>
-      </view>
-    </form>
-  </view>
-</view>
-<view class="js_dialog" id="androidDialog2" style="opacity: 1;" wx:if="{{modifyDiarys}}">
-  <view class="weui-mask"></view>
-  <view class="weui-dialog weui-skin_android">
-    <view class="weui-dialog__hd">
-      <strong class="weui-dialog__title">修改信息</strong>
-    </view>
-    <form bindsubmit="modifyDiary">
-      <view class="weui-dialog__bd">
-        <view class="weui-cells__title">标题</view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__bd">
-              <input class="weui-input" name="title" value="{{nowTitle}}" placeholder="请输入标题" />
-            </view>
-          </view>
-        </view>
-        <view class="weui-cells__title">信息内容</view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell">
-            <view class="weui-cell__bd">
-              <textarea class="weui-textarea" name="content" value="{{nowContent}}" placeholder="请输入信息内容" style="height: 3.3em" />
-              <view class="weui-textarea-counter">0/200</view>
-            </view>
-          </view>
-        </view>
-      </view>
-      <view class="weui-dialog__ft">
-        <view class="weui-dialog__btn weui-dialog__btn_default" bindtap="noneWindows">取消</view>
-        <button loading="{{loading}}" class="weui-dialog__btn weui-dialog__btn_primary" formType="submit">提交</button>
-      </view>
-    </form>
-  </view>
 </view>

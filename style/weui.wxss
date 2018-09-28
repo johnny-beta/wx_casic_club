@@ -636,7 +636,7 @@ icon {
 .weui-grid {
   position: relative;
   float: left;
-  padding: 20px 10px;
+  padding: 10px 5px;
   width: 33.33333333%;
   box-sizing: border-box;
   border-right: 1rpx solid #D9D9D9;
@@ -647,8 +647,8 @@ icon {
 }
 .weui-grid__icon {
   display: block;
-  width: 28px;
-  height: 28px;
+  width: 45px;
+  height: 45px;
   margin: 0 auto;
 }
 .weui-grid__label {

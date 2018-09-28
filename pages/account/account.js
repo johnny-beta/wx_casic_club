@@ -39,7 +39,7 @@ Page({
   },
 
   about: function(e) {
-    common.showModal('----');
+    common.showModal('航帮帮是海淀永定路地区生活类信息沟通的看板，您有好的建议可以通过本页面的“反馈建议”功能或座机87811联系，感谢您的使用！');
   },
   getUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo
