@@ -3,15 +3,14 @@ var common = require('../../utils/common.js');
 var app = getApp()
 var grids = [  
   {
-    "name": "国庆活动1",
+    "name": "国庆-晒照专区",
     "ico": "guoqing.png",
-    "click": "autuLogin"
+    "url": "../interface/type/type?typeNumber=10&typeName=晒照专区"
   },
-
   {
-    "name": "国庆活动2",
+    "name": "国庆-意见征集",
     "ico": "guoqing2.png",
-    "click": "autuLogin"
+    "url": "../interface/type/type?typeNumber=11&typeName=意见征集"
   },{
     "name": "航天置换",
     "ico": "zhihuan.png",
