@@ -15,7 +15,9 @@ Page({
     inputContent:"写评论",
     limit: 15,
     windowHeight: 0,
-    windowWidth: 0
+    windowWidth: 0,
+    collectionStatus:false,
+    collectionPic:"/image/collectOff.png"
   },
   onShareAppMessage: function () { },
   onLoad: function (e) {
@@ -115,20 +117,31 @@ Page({
     });
     
     //查询收藏状态
-    // var CollectionQuery = Bmob.Object.extend("diary_collect");
-    // var collectionQuery = new Bmob.Query(CollectionQuery);
+    var CollectionQuery = Bmob.Object.extend("diary_collect");
+    var collectionQuery = new Bmob.Query(CollectionQuery);
     // console.log(that.data.currentUserInformation.openid);
-    // collectionQuery.equalTo("openID", that.data.currentUserInformation.openid);
-    // collectionQuery.equalTo("diaryID", objectId);
-    // collectionQuery.find({
-    //   success: function (resultCollection) {
-    //     console.log(resultCollection);
-
-    //   },
-    //   error: function (error) {
-    //     console.log("查询失败: " + error.code + " " + error.message);
-    //   }
-    // });
+    // console.log(objectId);
+    collectionQuery.equalTo("openID", that.data.currentUserInformation.openid);
+    collectionQuery.equalTo("diaryID", objectId);
+    collectionQuery.find({
+      success: function (resultCollection) {
+        console.log(resultCollection);
+        if (resultCollection.length > 0){
+          that.setData({
+            collectionStatus: true,
+            collectionPic: "/image/collect.png"
+          });
+        }else{
+          that.setData({
+            collectionStatus: false,
+            collectionPic: "/image/collectOff.png"
+          });
+        }
+      },
+      error: function (error) {
+        console.log("查询失败: " + error.code + " " + error.message);
+      }
+    });
 
     
   },
@@ -238,15 +251,35 @@ Page({
     })
     that.onShow()
   },
-  addCollection:function(e){
-    // var that = this;
+  // addCollection:function(e){
+  //   var that = this;
+  //   var CollectionQuery = Bmob.Object.extend("diary_collect");
+  //   var collectionQuery = new Bmob.Query(CollectionQuery);
 
-    // var LeaveMessage = Bmob.Object.extend("leave_message");
-    // var leaveMessage = new LeaveMessage();
-    // leaveMessage.set("userOpenid", that.data.currentUserInformation.openid);
-    // currentUserInformation;
-    // currentObjectId;
-  }
+  //   collectionQuery.equalTo("openID", that.data.currentUserInformation.openid);
+  //   collectionQuery.equalTo("diaryID", that.data.objectId);
+  //   console.log(that.data.currentUserInformation.openid);
+    
+  //   collectionQuery.find().then(function (todos) {
+  //     console.log(todos);
+  //     return Bmob.Object.destroyAll(todos);
+  //   }).then(function (todos) {
+  //     //console.log(todos);
+  //     // 删除成功
+  //   }, function (error) {
+  //     // 异常处理
+  //   });
+  //   if(that.data.collectionStatus == true){
+
+  //   } else if (that.data.collectionStatus == false){
+
+  //   }
+  //   // var LeaveMessage = Bmob.Object.extend("leave_message");
+  //   // var leaveMessage = new LeaveMessage();
+  //   // leaveMessage.set("userOpenid", that.data.currentUserInformation.openid);
+  //   // currentUserInformation;
+  //   // currentObjectId;
+  // }
 })
 
 

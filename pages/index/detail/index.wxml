@@ -53,7 +53,7 @@
       <view class="input-panel">
           <input class="send-input" type="text" value="{{inputContent}}" bindfocus="userMessageFocus" bindinput ="userMessageInput" bindblur="userMessageBlur" bindconfirm="sendMessage" ></input>
           <button bindtap="sendMessage" class="send-btn">发送</button>
-          <image class="wxui-collection" bindtap='addCollection' src="/image/icon_huodong_HL.png" />
+          <image class="wxui-collection" bindtap='addCollection' src="{{collectionPic}}" />
           <image class="wxui-home" bindtap='' src="/image/icon_huodong_HL.png" />
           <image class="wxui-transmit" bindtap='' src="/image/icon_huodong_HL.png" />
       </view>
