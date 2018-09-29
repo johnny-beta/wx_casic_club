@@ -9,6 +9,6 @@
 swiper {
   margin: 0;
   padding: 0;
-  height: 230px;
+  height: 460rpx;
 
 }

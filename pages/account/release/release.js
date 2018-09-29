@@ -51,7 +51,7 @@ Page({
       // 查询所有数据
       query.find({
         success: function (results) {
-          console.log(results);
+          //console.log(results);
           that.setData({
             diaryList: results
           })
@@ -76,6 +76,7 @@ Page({
 
   },
   pullUpLoad: function (e) {
+    console.log(e);
     var limit = that.data.limit + 2
     this.setData({
       limit: limit
@@ -194,7 +195,7 @@ Page({
     query.get(nowId, {
       success: function (result) {
 
-        console.log(result.attributes.imgurl);
+        //console.log(result.attributes.imgurl);
         urlArr.push({ "url": result.attributes.imgurl });
 
         showPic(urlArr, that);
@@ -226,7 +227,7 @@ Page({
         common.showTip('标题或内容不能为空', 'loading');
       }
       else {
-        console.log(modyContent)
+        //console.log(modyContent)
         var Diary = Bmob.Object.extend("diary");
         var query = new Bmob.Query(Diary);
         // 这个 id 是要修改条目的 id，你在生成这个存储并成功时可以获取到，请看前面的文档
@@ -236,7 +237,7 @@ Page({
             // 回调中可以取得这个 GameScore 对象的一个实例，然后就可以修改它了
             result.set('title', modyTitle);
             result.set('content', modyContent);
-            console.log(imgurl);
+            //console.log(imgurl);
             if (imgurl)
               result.set("imgurl", imgurl);
             result.save();

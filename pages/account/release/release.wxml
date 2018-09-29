@@ -12,7 +12,8 @@
             </view>
         </view>
     </view>
-  <scroll-view lower-threshold="800" bindscrolltolower="pullUpLoad" upper-threshold="0" scroll-y="true" style="height: {{windowHeight}}px;  ">
+  <!-- <scroll-view lower-threshold="800" bindscrolltolower="pullUpLoad" upper-threshold="0" scroll-y="true" style="height: {{windowHeight}}px;  "> -->
+  <scroll-view lower-threshold="800" upper-threshold="0" scroll-y="true" style="height: {{windowHeight}}px;  ">
     <view class="page__bd">
 
       <!--<button type="primary" bindtap="toAddDiary" hover-class="other-button-hover"> 增加日记 </button>-->
@@ -20,17 +21,19 @@
         <view class="weui-panel__hd">帖子列表</view>
         <view class="weui-panel__bd">
           <view class="weui-media-box weui-media-box_text" wx:for="{{diaryList}}" wx:key="diaryItem">
-            <view class="weui-media-box__title weui-media-box__title_in-text">{{item.title}}</view>
             <switch checked="{{item.isDisplay}}" class="weui-label_move" bindchange='switchClick' data-id="{{item.objectId}}"></switch>
+            <view class="weui-release_content">
+            <view class="weui-media-box__title weui-media-box__title_in-text">{{item.title}}</view>
             <view class="weui-media-box__desc">{{item.content}}</view>
+            </view>
             <view class="weui-media-box__info">
               <view class="weui-media-box__info__meta weui-media-time">时间：{{item.updatedAt}}</view>
 
               <view class="weui-media-box__info__meta weui-media-box__info__operate">
                 <icon type="success" size="16"></icon>
-                <text bindtap="toModifyDiary" data-id="{{item.objectId}}" data-content="{{item.content}}" data-title="{{item.title}}">编辑 </text>
+                <text class="weui-edit" bindtap="toModifyDiary" data-id="{{item.objectId}}" data-content="{{item.content}}" data-title="{{item.title}}"> 编辑 </text>
                 <icon type="cancel" size="16"></icon>
-                <text class="del" bindtap="deleteDiary1" data-id="{{item.objectId}}">删除</text>  
+                <text class="weui-delete" bindtap="deleteDiary1" data-id="{{item.objectId}}">删除</text>  
               </view>
             </view>
           </view>
