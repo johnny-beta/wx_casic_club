@@ -2,34 +2,37 @@
 var Bmob = require('../../../utils/bmob.js');
 var common = require('../../..//utils/common.js');
 var app = getApp();
+var date = new Date();
+var myDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+
 Page({
   data: {
     rows: {},
-    nickName:"",
-    userPic:"",
-    messageInput:"",
-    currentUserInfoInformation:{},
+    nickName: "",
+    userPic: "",
+    messageInput: "",
+    currentUserInfoInformation: {},
     currentUserInformation: {},
-    currentObjectId:"",
+    currentObjectId: "",
     leaveMessageArr: [],
-    inputContent:"写评论",
+    inputContent: "写评论",
     limit: 15,
     windowHeight: 0,
     windowWidth: 0,
-    collectionStatus:false,
-    collectionPic:"/image/collectOff.png"
+    collectionStatus: false,
+    collectionPic: "/image/collectOff.png"
   },
-  onShareAppMessage: function () { },
-  onLoad: function (e) {
+  onShareAppMessage: function() {},
+  onLoad: function(e) {
 
     // 页面初始化 options为页面跳转所带来的参数
-   // console.log(e.objectId)
+    // console.log(e.objectId)
     var objectId = e.objectId;
     var that = this;
     app = getApp();
     that.data.currentUserInfoInformation = app.globalData.userInfo;
     that.data.currentUserInformation = app.globalData.currentUser;
-    that.data.currentObjectId = objectId ; 
+    that.data.currentObjectId = objectId;
     // if (!e.objectId) {
     //   common.showTip("请重新进入", "loading");
     //   return false;
@@ -38,84 +41,88 @@ Page({
     var query = new Bmob.Query(Diary);
     var nickName = "航帮帮";
     query.get(objectId, {
-      success: function (resultDiary) {
-
+      success: function(resultDiary) {
+        var pNum = resultDiary.get('praiseNum');
+        if (!pNum) pNum = 0;
+        that.setData({
+          pNum: pNum
+        });
         that.setData({
           rows: resultDiary
-        }) 
+        });
         var User = Bmob.Object.extend("_User");
         var queryUser = new Bmob.Query(User);
-        if (resultDiary.attributes.openid){
+        if (resultDiary.attributes.openid) {
           queryUser.equalTo("openid", resultDiary.attributes.openid);
           queryUser.find({
-            success: function (results) {
+            success: function(results) {
               //console.log(results);
               nickName = results[0].attributes.nickName;
               var userPic = results[0].attributes.userPic;
-          
+
               that.setData({
                 nickName: nickName,
                 userPic: userPic
-              }) 
+              })
             },
-            error: function (error) {
+            error: function(error) {
               console.log("查询失败: " + error.code + " " + error.message);
             }
           });
 
-        }else{
+        } else {
           that.setData({
             rows: resultDiary,
             nickName: nickName
-          }) 
+          })
         }
         resultDiary.increment("count");
         resultDiary.save();
       },
-      error: function (result, error) {
+      error: function(result, error) {
         console.log("查询失败");
       }
-      
+
     });
-    
+
     //留言功能
     var leaveMessageArr = new Array();
     var LeaveMessageQuery = Bmob.Object.extend("leave_message");
     var leaveMessageQuery = new Bmob.Query(LeaveMessageQuery);
     leaveMessageQuery.equalTo("diaryObjectId", objectId);
     leaveMessageQuery.find({
-      success: function (resultLeaveMessages) {
+      success: function(resultLeaveMessages) {
         //console.log(resultLeaveMessages);
-        resultLeaveMessages.forEach(function(detail){
+        resultLeaveMessages.forEach(function(detail) {
           var UserQuery = Bmob.Object.extend("_User");
           var userQuery = new Bmob.Query(UserQuery);
           userQuery.equalTo("openid", detail.attributes.userOpenid);
           userQuery.find({
-            success: function (resultUser) {
-              leaveMessageArr.push({ 
+            success: function(resultUser) {
+              leaveMessageArr.push({
                 "messageContent": detail.attributes.messageContent,
                 "messageUser": resultUser[0].attributes.nickName,
-                "messagePic": resultUser[0].attributes.userPic       
+                "messagePic": resultUser[0].attributes.userPic
               });
 
               that.setData({
                 leaveMessageArr: leaveMessageArr
               })
             },
-            error: function (error) {
+            error: function(error) {
               console.log("查询失败: " + error.code + " " + error.message);
             }
           });
-          
+
 
         });
-        
+
       },
-      error: function (error) {
+      error: function(error) {
         console.log("查询失败: " + error.code + " " + error.message);
       }
     });
-    
+
     //查询收藏状态
     var CollectionQuery = Bmob.Object.extend("diary_collect");
     var collectionQuery = new Bmob.Query(CollectionQuery);
@@ -124,34 +131,47 @@ Page({
     collectionQuery.equalTo("openID", that.data.currentUserInformation.openid);
     collectionQuery.equalTo("diaryID", objectId);
     collectionQuery.find({
-      success: function (resultCollection) {
+      success: function(resultCollection) {
         console.log(resultCollection);
-        if (resultCollection.length > 0){
+        if (resultCollection.length > 0) {
           that.setData({
             collectionStatus: true,
             collectionPic: "/image/collect.png"
           });
-        }else{
+        } else {
           that.setData({
             collectionStatus: false,
             collectionPic: "/image/collectOff.png"
           });
         }
       },
-      error: function (error) {
+      error: function(error) {
         console.log("查询失败: " + error.code + " " + error.message);
       }
     });
 
-    
+
+    var cache = wx.getStorageSync('cache_key');
+    if (cache) {
+      var currentCache = cache[objectId];
+      this.setData({
+        collection: currentCache == myDate
+      })
+    } else {
+      var cache = {};
+      cache[objectId] = "";
+      // 把设置的当前文章点赞放在整体的缓存中
+      wx.setStorageSync('cache_key', cache);
+    }
+
   },
-  onReady: function () {
+  onReady: function() {
     // 页面渲染完成
     var that = this;
     app = getApp();
     that.data.currentUserInfoInformation = app.globalData.currentUser;
   },
-  onShow: function () {
+  onShow: function() {
     // 页面显示
     var that = this;
     app = getApp();
@@ -165,28 +185,28 @@ Page({
       }
     })
   },
-  onHide: function () {
+  onHide: function() {
     // 页面隐藏
   },
-  onUnload: function () {
+  onUnload: function() {
     // 页面关闭
   },
-  preImg: function (o) {
+  preImg: function(o) {
     var that = this
     //console.log(o)
     wx.previewImage({
       current: '',
       urls: [that.data.rows.get('imgurl')],
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
     })
 
   },
-  sendMessage: function (e) {
+  sendMessage: function(e) {
     var that = this;
-    if (that.data.currentUserInfoInformation){
-      if(that.data.messageInput){
+    if (that.data.currentUserInfoInformation) {
+      if (that.data.messageInput) {
         //console.log(that.data.messageInput);
         var LeaveMessage = Bmob.Object.extend("leave_message");
         var leaveMessage = new LeaveMessage();
@@ -194,22 +214,143 @@ Page({
         leaveMessage.set("userOpenid", that.data.currentUserInfoInformation.openid);
         leaveMessage.set("messageContent", that.data.messageInput);
         leaveMessage.set("diaryObjectId", that.data.currentObjectId);
-  
+
         var leaveMessageArrTemp = that.data.leaveMessageArr;
         leaveMessageArrTemp.push({
           "messageContent": that.data.messageInput,
           "messageUser": that.data.currentUserInfoInformation.nickName,
-          "messagePic": that.data.currentUserInfoInformation.userPic 
+          "messagePic": that.data.currentUserInfoInformation.userPic
         });
         leaveMessage.save(null, {
-          success: function (result) {
+          success: function(result) {
             that.setData({
-              messageInput:"",
-              inputContent:"",
+              messageInput: "",
+              inputContent: "",
               leaveMessageArr: leaveMessageArrTemp
             })
           },
-          error: function (result, error) {
+          error: function(result, error) {
+
+          }
+        });
+      }
+    } else {
+      common.showModal("获取昵称和头像之后才能评论哦，请去我的选项中获取~~", "提示");
+    }
+  },
+  userMessageInput: function(e) {
+    var that = this;
+    that.setData({
+      messageInput: e.detail.value
+    })
+  },
+  userMessageFocus: function(e) {
+    var that = this;
+    if (!that.data.messageInput) {
+      that.setData({
+        messageInput: "",
+        inputContent: ""
+      })
+    }
+  },
+  userMessageBlur: function(e) {
+    var that = this;
+
+    if (!that.data.messageInput) {
+      that.setData({
+        inputContent: "写评论"
+      })
+
+    }
+  },
+  pullUpLoad: function(e) {
+    var that = this;
+    var limit = that.data.limit + 2;
+    that.setData({
+      limit: limit
+    });
+    that.onShow();
+  },
+  toAddPraise: function() {
+    console.log(112);
+    var that = this
+    var resultDiary = that.data.rows;
+    var num = that.data.rows.get('praiseNum')
+    if (!num) num = 0;
+    num++;
+    resultDiary.increment("praiseNum");
+    resultDiary.save();
+    this.setData({
+      pNum: num,
+      collection: true
+    });
+  },
+
+  toCollect: function(event) {
+    var that = this
+    // 更新缓存
+    var objectId = that.data.rows.id;
+    var cache = wx.getStorageSync('cache_key');
+    cache[objectId] = myDate;
+    wx.setStorageSync('cache_key', cache);
+
+    //点赞数+1
+    // 更新数据绑定,从而切换图片，数字加1
+    this.toAddPraise();
+  },
+  returnHome: function() {
+    wx.switchTab({
+      url: '/pages/interface/interface',
+    })
+  },
+  addCollection: function(e) {
+    var that = this;
+    if (!that.data.currentUserInfoInformation) {
+
+      if (that.data.collectionStatus == true) {
+        var CollectionQuery = Bmob.Object.extend("diary_collect");
+        var collectionQuery = new Bmob.Query(CollectionQuery);
+        var Diary = Bmob.Object.extend("diary");
+        var diary = new Diary();
+        diary.id = that.data.currentObjectId;
+        collectionQuery.equalTo("openID", that.data.currentUserInformation.openid);
+        collectionQuery.equalTo("diaryID", diary);
+        //console.log(that.data.currentUserInformation.openid);
+
+        collectionQuery.find().then(function(todos) {
+          console.log(todos);
+          return Bmob.Object.destroyAll(todos);
+        }).then(function(todos) {
+          that.setData({
+            collectionStatus: false,
+            collectionPic: "/image/collectOff.png"
+          });
+        }, function(error) {
+          // 异常处理
+        });
+      } else if (that.data.collectionStatus == false) {
+
+        var CollectionQuery = Bmob.Object.extend("diary_collect");
+        var collectionQuery = new CollectionQuery();
+        var Diary = Bmob.Object.extend("diary");
+        var diary = new Diary();
+        diary.id = that.data.currentObjectId;
+
+        collectionQuery.set("diaryID", diary);
+        collectionQuery.set("openID", that.data.currentUserInformation.openid);
+        // console.log(that.data.currentObjectId);
+
+        collectionQuery.save(null, {
+          success: function(result) {
+            console.log("日记创建成功, objectId:" + result.id);
+            that.setData({
+              collectionStatus: true,
+              collectionPic: "/image/collect.png"
+            });
+          },
+          error: function(result, error) {
+            // 添加失败
+            console.log('创建日记失败');
 
           }
         });
@@ -217,69 +358,5 @@ Page({
     }else{
       common.showModal("获取昵称和头像之后才能评论哦，请去我的选项中获取~~", "提示");
     }
-  },
-  userMessageInput:function(e){
-    var that = this;
-    that.setData({
-      messageInput: e.detail.value
-    })
-  },
-  userMessageFocus:function(e){
-    var that = this;
-    if(!that.data.messageInput){
-      that.setData({
-        messageInput: "",
-        inputContent: ""
-      })
-    }
-  },
-  userMessageBlur:function(e){
-    var that = this;
-    
-    if (!that.data.messageInput){
-      that.setData({
-        inputContent: "写评论"
-      })
-      
-    }
-  },
-  pullUpLoad: function (e) {
-    var that = this;
-    var limit = that.data.limit + 2
-    that.setData({
-      limit: limit
-    })
-    that.onShow()
-  },
-  // addCollection:function(e){
-  //   var that = this;
-  //   var CollectionQuery = Bmob.Object.extend("diary_collect");
-  //   var collectionQuery = new Bmob.Query(CollectionQuery);
-
-  //   collectionQuery.equalTo("openID", that.data.currentUserInformation.openid);
-  //   collectionQuery.equalTo("diaryID", that.data.objectId);
-  //   console.log(that.data.currentUserInformation.openid);
-    
-  //   collectionQuery.find().then(function (todos) {
-  //     console.log(todos);
-  //     return Bmob.Object.destroyAll(todos);
-  //   }).then(function (todos) {
-  //     //console.log(todos);
-  //     // 删除成功
-  //   }, function (error) {
-  //     // 异常处理
-  //   });
-  //   if(that.data.collectionStatus == true){
-
-  //   } else if (that.data.collectionStatus == false){
-
-  //   }
-  //   // var LeaveMessage = Bmob.Object.extend("leave_message");
-  //   // var leaveMessage = new LeaveMessage();
-  //   // leaveMessage.set("userOpenid", that.data.currentUserInformation.openid);
-  //   // currentUserInformation;
-  //   // currentObjectId;
-  // }
+  }
 })
-
-

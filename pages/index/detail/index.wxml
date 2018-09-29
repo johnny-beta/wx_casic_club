@@ -5,59 +5,64 @@
     <view class="weui-img_center">
       <image class="image_frame" src='{{rows.imgurl}}' mode="aspectFit" bindtap='preImg'></image>
     </view>
-    
+
     <view class="page__hd">
-        <view class="weui-article_h1">{{rows.title}}</view>
-        <view class="weui-article_h2">
-          <image class="userPic_article" src='{{userPic}}'  ></image>
-          <view class="weui-article_name">{{nickName}}</view>
-          <view class="weui-article_update_time">{{rows.updatedAt}} </view>
-          <view class="weui-article_update_time">{{rows.count}}人浏览 </view>
-        </view>
+      <view class="weui-article_h1">{{rows.title}}</view>
+      <view class="weui-article_h2">
+        <image class="userPic_article" src='{{userPic}}'></image>
+        <view class="weui-article_name">{{nickName}}</view>
+        <image wx:if="{{collection}}" class="addPraise" src="/image/beenPraised.png"></image>
+        <image wx:else class="addPraise" bindtap="toCollect" src="/image/praise.png"></image>
+        <text class="weui-articel_praise">{{pNum}}</text>
+      </view>
+      <view class="weui-article_h2">
+        <view class="weui-article_update_time">{{rows.updatedAt}} </view>
+        <view class="weui-article_update_time">{{rows.count}}人浏览 </view>
+      </view>
     </view>
     <view class="page__bd">
-        <view class="weui-article">
-          <text selectable='true' >{{rows.content}}</text>            
-        </view>
+      <view class="weui-article">
+        <text selectable='true'>{{rows.content}}</text>
+      </view>
     </view>
-    
+
     <view class="weui-panel__hd">留言区</view>
-        <view class="weui-panel__bd">
-          <block wx:if="{{leaveMessageArr.length>0}}">
-            <navigator class="weui-media-box weui-media-box_appmsg" wx:for="{{leaveMessageArr}}" wx:key="diaryItem">
-              <view class="weui-media-box__hd">
-                <image class="userPic_leaveMessage" src="{{item.messagePic}}" />
-              </view>
+    <view class="weui-panel__bd">
+      <block wx:if="{{leaveMessageArr.length>0}}">
+        <navigator class="weui-media-box weui-media-box_appmsg" wx:for="{{leaveMessageArr}}" wx:key="diaryItem">
+          <view class="weui-media-box__hd">
+            <image class="userPic_leaveMessage" src="{{item.messagePic}}" />
+          </view>
 
-              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                <view class="weui-leaveMessage_name">
-                  {{item.messageUser}}
-                  <view class="weui-badge" wx:if="{{item.isNew}}" style="margin-left: 2px;">新</view>
-                </view>
-
-                <view class="weui-leaveMessage_content ">{{item.messageContent}}</view>
-
-              </view>
-
-            </navigator>
-          </block>
-          <block wx:else>
-            <view class="weui-media-box weui-media-box_text">
-              <view class=" weui-media-box__desc">
-                暂无留言，欢迎留言哦~</view>
-
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-leaveMessage_name">
+              {{item.messageUser}}
+              <view class="weui-badge" wx:if="{{item.isNew}}" style="margin-left: 2px;">新</view>
             </view>
-          </block>
+
+            <view class="weui-leaveMessage_content ">{{item.messageContent}}</view>
+
+          </view>
+
+        </navigator>
+      </block>
+      <block wx:else>
+        <view class="weui-media-box weui-media-box_text">
+          <view class=" weui-media-box__desc">
+            暂无留言，欢迎留言哦~</view>
+
+        </view>
+      </block>
       <view class="content-blank">
       </view>
       <view class="input-panel">
-          <input class="send-input" type="text" value="{{inputContent}}" bindfocus="userMessageFocus" bindinput ="userMessageInput" bindblur="userMessageBlur" bindconfirm="sendMessage" ></input>
-          <button bindtap="sendMessage" class="send-btn">发送</button>
-          <image class="wxui-collection" bindtap='addCollection' src="{{collectionPic}}" />
-          <image class="wxui-home" bindtap='' src="/image/icon_huodong_HL.png" />
-          <image class="wxui-transmit" bindtap='' src="/image/icon_huodong_HL.png" />
+        <input class="send-input" type="text" value="{{inputContent}}" bindfocus="userMessageFocus" bindinput="userMessageInput" bindblur="userMessageBlur" bindconfirm="sendMessage"></input>
+        <button class="send-btn" bindtap="sendMessage">发送</button>
+        <image class="wxui-transmit" bindtap='addCollection' src="{{collectionPic}}" />
+        <image class="wxui-transmit" bindtap='' src="/image/share.png" />
+        <image class="wxui-transmit" bindtap='returnHome' src="/image/home.png" />
       </view>
     </view>
-    
+
   </scroll-view>
 </view>

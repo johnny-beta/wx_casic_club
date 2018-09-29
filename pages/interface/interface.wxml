@@ -6,7 +6,7 @@
         <block wx:for="{{background}}" wx:key="*this">
           <swiper-item bindtap="preImg">
       
-              <image  mode="aspectFit" style='width:100%;overflow:show;' src="{{item}}"></image>
+              <image  mode="widthFix" style='width:100%;overflow:show;' src="{{item}}"></image>
            
           </swiper-item>
         </block>
