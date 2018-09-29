@@ -1,15 +1,26 @@
 var Bmob = require('../../utils/bmob.js');
 var common = require('../../utils/common.js');
 var app = getApp()
-var grids = [{
+var grids = [  
+  {
+    "name": "国庆活动1",
+    "ico": "guoqing.png",
+    "click": "autuLogin"
+  },
+
+  {
+    "name": "国庆活动2",
+    "ico": "guoqing2.png",
+    "click": "autuLogin"
+  },{
     "name": "航天置换",
     "ico": "zhihuan.png",
     "url": "../interface/type/type?typeNumber=1&typeName=航天置换"
   },
   {
-    "name": "航天步行街",
-    "ico": "tuangou.png",
-    "url": "../interface/type/type?typeNumber=2&typeName=航天步行街"
+    "name": "航天漫步",
+    "ico": "login.png",
+    "url": "../interface/type/type?typeNumber=2&typeName=航天漫步"
   },
   {
     "name": "航天宝贝",
@@ -28,7 +39,7 @@ var grids = [{
   },
   {
     "name": "拼车出行",
-    "ico": "login.png",
+    "ico": "car.png",
     "url": "../interface/type/type?typeNumber=6&typeName=拼车出行" ,   
     "click": "autuLogin1"
   },
