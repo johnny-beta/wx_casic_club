@@ -192,12 +192,12 @@ Page({
     var Diary = Bmob.Object.extend("diary");
     var query = new Bmob.Query(Diary);
     var urlArr = new Array();
+    nowContent = nowContent + " ";
     query.get(nowId, {
       success: function (result) {
 
         //console.log(result.attributes.imgurl);
         urlArr.push({ "url": result.attributes.imgurl });
-
         showPic(urlArr, that);
 
       },
@@ -313,7 +313,7 @@ Page({
               //   console.log(imgLength, urlArr);
               //如果担心网络延时问题，可以去掉这几行注释，就是全部上传完成后显示。
               showPic(urlArr, that);
-
+        
               // }
 
             }, function (error) {
@@ -327,6 +327,9 @@ Page({
       }
     })
   },
+  skipDetail:function(e){
+    console.log(e);
+  }
 
 })
 //上传完成后显示图片

@@ -35,6 +35,11 @@
   font-weight: 300;
   color: rgb(0, 0, 0);
 }
+.weui-leaveMessage_updatetime {
+  font-size: 8px;
+  font-weight: 300;
+  color: rgb(0, 0, 0);
+}
 .weui-article_update_time {
   margin-left: 0.8em;
   font-size: 10px;
@@ -60,6 +65,7 @@ height:60rpx;
 border-radius: 50%;
 overflow: hidden;
 margin-right: 3px;
+top:2px;
 }
 .input-panel {
 height: 100rpx;
@@ -110,4 +116,14 @@ border-radius: 50%;
 overflow: hidden;
 margin-top: .32em;
 margin-left: 8px;
+}
+.wxui-share{
+  width: 70rpx;
+  height: 68rpx;
+
+  position: absolute;
+  right: 40px;
+  top:3px;
+  display:block;
+  opacity:0
 }

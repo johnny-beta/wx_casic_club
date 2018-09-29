@@ -30,17 +30,17 @@
     <view class="weui-panel__bd">
       <block wx:if="{{leaveMessageArr.length>0}}">
         <navigator class="weui-media-box weui-media-box_appmsg" wx:for="{{leaveMessageArr}}" wx:key="diaryItem">
-          <view class="weui-media-box__hd">
+          <view class="weui-media-box__hd userPic_leaveMessage">
             <image class="userPic_leaveMessage" src="{{item.messagePic}}" />
           </view>
 
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
             <view class="weui-leaveMessage_name">
               {{item.messageUser}}
-              <view class="weui-badge" wx:if="{{item.isNew}}" style="margin-left: 2px;">新</view>
             </view>
 
             <view class="weui-leaveMessage_content ">{{item.messageContent}}</view>
+            <view class="weui-leaveMessage_updatetime ">{{item.messageupdateAt}}</view>
 
           </view>
 
@@ -59,7 +59,8 @@
         <input class="send-input" type="text" value="{{inputContent}}" bindfocus="userMessageFocus" bindinput="userMessageInput" bindblur="userMessageBlur" bindconfirm="sendMessage"></input>
         <button class="send-btn" bindtap="sendMessage">发送</button>
         <image class="wxui-transmit" bindtap='addCollection' src="{{collectionPic}}" />
-        <image class="wxui-transmit" bindtap='' src="/image/share.png" />
+        <image class="wxui-transmit" bindtap='' src="/image/share.png" plain='true' />
+        <button open-type="share" class="wxui-share"></button>
         <image class="wxui-transmit" bindtap='returnHome' src="/image/home.png" />
       </view>
     </view>

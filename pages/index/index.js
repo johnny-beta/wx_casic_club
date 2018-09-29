@@ -95,8 +95,6 @@ function getList(t, k) {
   }
 
   query.descending('createdAt');
-  //query.include("own")
-  // 查询所有数据
   query.limit(that.data.limit);
 
   //var mainQuery = Bmob.Query.or(query, query1);
