@@ -223,6 +223,7 @@ Page({
         });
         leaveMessage.save(null, {
           success: function(result) {
+            common.showTip('评论成功！','success')
             that.setData({
               messageInput: "",
               inputContent: "",
@@ -305,7 +306,7 @@ Page({
   },
   addCollection: function(e) {
     var that = this;
-    if (!that.data.currentUserInfoInformation) {
+    if (that.data.currentUserInfoInformation) {
 
       if (that.data.collectionStatus == true) {
         var CollectionQuery = Bmob.Object.extend("diary_collect");
