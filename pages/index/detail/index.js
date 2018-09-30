@@ -110,6 +110,7 @@ Page({
         });
         leaveMessage.save(null, {
           success: function(result) {
+            common.showTip('评论成功！','success')
             that.setData({
               messageInput: "",
               inputContent: "",
