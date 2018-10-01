@@ -1,7 +1,8 @@
 //index.js
 //获取应用实例
-var Bmob = require('../../utils/bmob.js');
-var common = require('../../utils/common.js');
+var Bmob = require('../../../utils/bmob.js');
+var Bmob1 = require('../../../utils/Bmob-1.6.4.min.js');
+var common = require('../../../utils/common.js');
 var app = getApp();
 var that;
 Page({
@@ -13,24 +14,29 @@ Page({
     limit: 15,
     diaryList: [],
     modifyDiarys: false,
-    urlArr: [{url:''}]
+    urlArr: [{ url: '' }]
   },
-  onReady: function(e) {},
-  onShareAppMessage: function() {},
-  onLoad: function() {
-    that = this;
-    wx.showShareMenu({
-      withShareTicket: true //要求小程序返回分享目标信息
-    })
+  onReady: function (e) { },
+  onShareAppMessage: function () { },
+  onLoad: function () {
+    app = getApp();
+    var that = this;
+    if (app.globalData.userInfo) {
+      that.setData({
+        userInfo: app.globalData.userInfo
+      })
+    } else {
+      common.showModal('请先获取头像和昵称', "提示");
+    }
 
   },
-  noneWindows: function() {
+  noneWindows: function () {
     that.setData({
       writeDiary: "",
       modifyDiarys: ""
     })
   },
-  onShow: function() {
+  onShow: function () {
     getList(this);
     wx.getSystemInfo({
       success: (res) => {
@@ -41,36 +47,36 @@ Page({
       }
     })
   },
-  pullUpLoad: function(e) {
+  pullUpLoad: function (e) {
     var limit = that.data.limit + 2
     this.setData({
       limit: limit
     })
     this.onShow()
   },
-  showInput: function() {
+  showInput: function () {
     this.setData({
       inputShowed: true
     });
   },
-  hideInput: function() {
+  hideInput: function () {
     this.setData({
       inputVal: "",
       inputShowed: false
     });
     getList(this);
   },
-  clearInput: function() {
+  clearInput: function () {
     this.setData({
       inputVal: ""
     });
     getList(this);
   },
-  inputTyping: function(e) {
+  inputTyping: function (e) {
     //搜索数据
     getList(this, e.detail.value);
   },
-  closeAddLayer: function() {
+  closeAddLayer: function () {
     that.setData({
       modifyDiarys: false
     })
@@ -82,31 +88,23 @@ Page({
  */
 function getList(t, k) {
   that = t;
-  console.log(t);
-  var Diary = Bmob.Object.extend("diary");
-  var query = new Bmob.Query(Diary);
-  var query1 = new Bmob.Query(Diary);
-
-
-  //普通会员匹配查询
-  if(k){
-    //console.log(k)
-    query.equalTo("title", k);
-  }
-
+  var DiaryCollect = Bmob.Object.extend("diary_collect");
+  var query = new Bmob.Query(DiaryCollect);
+  query.equalTo("openID", app.globalData.currentUser.openid);
   query.descending('createdAt');
+  query.include("diaryID");
+  // 查询所有数据
   query.limit(that.data.limit);
-
-  //var mainQuery = Bmob.Query.or(query, query1);
-  var mainQuery= query
+  var mainQuery = query
   mainQuery.find({
-    success: function(results) {
+    success: function (results) {
+      console.log(results[0]);
       // 循环处理查询到的数据
       that.setData({
         diaryList: results
       })
     },
-    error: function(error) {
+    error: function (error) {
       console.log("查询失败: " + error.code + " " + error.message);
     }
   });

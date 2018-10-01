@@ -1,6 +1,6 @@
 <import src="../../style/footer.wxml" />
 <view class="page">
-  <scroll-view lower-threshold="800" bindscrolltolower="pullUpLoad" upper-threshold="0" scroll-y="true" style="height: {{windowHeight}}px;  ">
+  <scroll-view lower-threshold="800" bindscrolltolower="pullUpLoad" upper-threshold="0" scroll-y="true" style="height: {{windowHeight}}px;">
     <view class="page__bd">
 
       <!--<button type="primary" bindtap="toAddDiary" hover-class="other-button-hover"> 增加信息 </button>-->

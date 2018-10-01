@@ -55,7 +55,7 @@ Page({
     this.onShow()
   },
   toAddDiary: function() {
-    console.log(app.globalData.userInfo);
+    //console.log(app.globalData.userInfo);
     if(app.globalData.userInfo){
       that.setData({
         writeDiary: true
@@ -71,7 +71,7 @@ Page({
     if (this.data.urlArr)
     var urlArr = this.data.urlArr
     var imgurl = urlArr[0].url
-    console.log("event", event)
+    //console.log("event", event)
     if (!title) {
       common.showTip("标题不能为空", "loading");
     } else if (!content) {
@@ -203,13 +203,12 @@ Page({
   },
   inputTyping: function(e) {
     //搜索数据
-    
+    //console.log(e.detail.value);
     getList(this, e.detail.value);
-    /*
+    
     this.setData({
       inputVal: e.detail.value
     });
-    */
   },
   closeAddLayer: function() {
     that.setData({
@@ -292,35 +291,36 @@ function getList(t, k) {
   var query = new Bmob.Query(Diary);
   
   //会员模糊查询
-  /*
-  if (k) {
-    query.equalTo("title", {
-      "$regex": "" + k + ".*"
-    });
-    query1.equalTo("content", {
-      "$regex": "" + k + ".*"
-    });
-    
-
-  } */
+  
 
   //普通会员匹配查询
-  if(k){
-    //console.log(k)
-    query.equalTo("title", k);
-  }
+  // if(k){
+  //   //console.log(k)
+  //   query.equalTo("title", k);
+  // }
 
-  query.descending('createdAt');
-  //query.include("own")
-  // 查询所有数据
+  
+  
   //query.equalTo("type", "==", 1);
   //query.limit(that.data.limit);
   
-  //var mainQuery = Bmob.Query.or(query, query1);
-  console.log(typeNumber);
+  //console.log(k);
+  if(k){
+    var query1 = new Bmob.Query(Diary);
+    query1.equalTo("title", { "$regex": "" + k + ".*" });
+    //query1.equalTo("title", k);
+    var query2 = new Bmob.Query(Diary);
+    query2.equalTo("content", {"$regex": "" + k + ".*"});
+    //query2.equalTo("content", k);
+    var mainQuery = Bmob.Query.or(query1, query2);
+  }else{
+    var mainQuery = query;
+  }
+  
   var typeNumberTemp = parseInt(typeNumber);
-  query.equalTo("type", typeNumberTemp);
-  var mainQuery= query;
+  mainQuery.equalTo("type", typeNumberTemp);
+  mainQuery.descending('createdAt');
+
   mainQuery.find({
     success: function(results) {
       // 循环处理查询到的数据
@@ -349,7 +349,7 @@ function modify(t, e) {
     if (modyTitle == "" || modyContent == "") {
       common.showTip('标题或内容不能为空', 'loading');
     } else {
-      console.log(modyContent)
+      //console.log(modyContent)
       var Diary = Bmob.Object.extend("diary");
       var query = new Bmob.Query(Diary);
       // 这个 id 是要修改条目的 id，你在生成这个存储并成功时可以获取到，请看前面的文档

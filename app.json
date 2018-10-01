@@ -9,13 +9,14 @@
     "pages/account/feedback/feedback",
     "pages/account/freeduty/freeduty",
     "pages/account/release/release",
+    "pages/account/collect/collect",
     "pages/interface/type/type",
     "pages/interface/chatroom/chatroom"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#3891f8",
-    "navigationBarTitleText": "航帮帮-航天人的沟通看板",
+    "navigationBarTitleText": "航帮帮-航天人的信息沟通看板",
     "navigationBarTextStyle": "#fff"
   },
   "tabBar": {

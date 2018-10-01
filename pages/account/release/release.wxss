@@ -30,7 +30,6 @@
   top:12px;
 }
 .diary_list button.modify{right:90px;}
-navigator{width:100%;height:40px;line-height:40px;background:#dadada;text-align: center;border-radius:3px;border:1px solid #ccc;margin-bottom:10px}
 
 .weui-media-box__info__operate{
   float:right;
@@ -93,7 +92,139 @@ form .weui-dialog__bd:first-child {
 
 .weui-label_move {
   position: absolute;
-  top:20%;
+  top:15%;
   left:80%;
 
+}
+.weui-edit{
+  /* font-size: 15px; */
+}
+.weui-delete{
+  /* font-size: 15px; */
+}
+.weui-release_content{
+  width: 60%;
+  position: absolute;
+  top:10px;
+  left: 80px;
+}
+
+/* pages/index/detail/index.wxss */
+.weui-img_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.weui-article_h1 {
+  font-size: 18px;
+  margin-left: 0.8em;
+  margin-bottom: .34em;
+  font-weight: 400;
+}
+.weui-article_h2 {
+  display: flex;
+  flex-direction: row;
+  font-size: 18px;
+  margin-left: 0.8em;
+}
+.weui-article_name {
+  font-size: 12px;
+  margin-top: .45em;
+  margin-left: .25em;
+  font-weight: 400;
+  color: rgb(44, 142, 235);
+}
+.weui-leaveMessage_name {
+  font-size: 11px;
+  font-weight: 300;
+  color: rgb(44, 142, 235);
+}
+.weui-leaveMessage_content {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgb(0, 0, 0);
+}
+.weui-leaveMessage_updatetime {
+  font-size: 8px;
+  font-weight: 300;
+  color: rgb(0, 0, 0);
+}
+.weui-article_update_time {
+  margin-left: 0.8em;
+  font-size: 10px;
+  margin-bottom: .34em;
+  font-weight: 200;
+}
+.weui-articel_praise{
+  margin-left: 0.3em;
+  font-size: 10px;
+  margin-top: .75em;
+  font-weight: 300;
+}
+.userPic_article{
+width:60rpx;
+height:60rpx;
+border-radius: 50%;
+overflow: hidden;
+margin-right: 3px;
+}
+.userPic_leaveMessage{
+width:60rpx;
+height:60rpx;
+border-radius: 50%;
+overflow: hidden;
+margin-right: 3px;
+top:2px;
+}
+.input-panel {
+height: 100rpx;
+width: 100%;
+box-sizing: border-box;
+padding: 13rpx 20rpx 0;
+background: #f5f5f7;
+border-top:#d7d7d9 1rpx solid;
+display: flex;
+flex-direction: row;
+position:fixed;
+align-items:center;
+bottom:0;
+}
+
+.send-input {
+height: 70rpx;
+width: 50%;
+background: #fff;
+border:#ddd 1rpx solid;
+border-radius: 5rpx;
+margin-right: 20rpx;
+box-sizing: border-box;
+padding: 0 10rpx;
+}
+.content-blank {
+height: 300rpx;
+}
+.send-btn {
+width: 120rpx;
+height: 68rpx;
+background-color: #3891f8;
+font-size: 30rpx;
+color:#fff;
+text-align-last: center;
+}
+.wxui-transmit {
+width:60rpx;
+height:60rpx;
+margin-left: 10rpx;
+top:0%;
+
+}
+.addPraise{
+width:30rpx;
+height:30rpx;
+border-radius: 50%;
+overflow: hidden;
+margin-top: .32em;
+margin-left: 8px;
 }
