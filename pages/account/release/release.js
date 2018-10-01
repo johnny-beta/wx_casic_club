@@ -93,6 +93,9 @@ Page({
       writeDiary: false
     })
   },
+  switchClickView:function(){
+    
+  },
   switchClick: function (event) {
     var status = event.detail.value;
     var objectId = event.target.dataset.id;

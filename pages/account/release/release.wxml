@@ -20,8 +20,10 @@
       <view class="weui-panel">
         <view class="weui-panel__hd">帖子列表</view>
         <view class="weui-panel__bd">
-          <navigator class="weui-media-box weui-media-box_text" wx:for="{{diaryList}}" wx:key="diaryItem" url="/pages/index/detail/index?objectId={{item.objectId}}">
-            <switch checked="{{item.isDisplay}}" class="weui-label_move" bindchange='switchClick' data-id="{{item.objectId}}"></switch>
+          <navigator class="weui-media-box weui-media-box_text" hover-start-time="5000" wx:for="{{diaryList}}" wx:key="diaryItem" url="/pages/index/detail/index?objectId={{item.objectId}}">
+            <view class='weui-label_move' catchtap="switchClickView">
+              <switch class="weui-label_move"  checked="{{item.isDisplay}}" catchchange='switchClick' data-id="{{item.objectId}}"></switch>
+            </view>
             <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
               <image class="weui-media-box__thumb" src="{{item.imgurl}}" />
             </view>
@@ -34,9 +36,9 @@
 
               <view class="weui-media-box__info__meta weui-media-box__info__operate">
                 <icon type="success" size="16"></icon>
-                <text class="weui-edit" bindtap="toModifyDiary" data-id="{{item.objectId}}" data-content="{{item.content}}" data-title="{{item.title}}"> 编辑 </text>
+                <text class="weui-edit" catchtap="toModifyDiary" data-id="{{item.objectId}}" data-content="{{item.content}}" data-title="{{item.title}}"> 编辑 </text>
                 <icon type="cancel" size="16"></icon>
-                <text class="weui-delete" bindtap="deleteDiary1" data-id="{{item.objectId}}">删除</text>
+                <text class="weui-delete" catchtap="deleteDiary1" data-id="{{item.objectId}}">删除</text>
               </view>
             </view>
           </navigator>

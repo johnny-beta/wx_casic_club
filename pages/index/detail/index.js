@@ -1,6 +1,6 @@
 // pages/index/detail/index.js
 var Bmob = require('../../../utils/bmob.js');
-var common = require('../../..//utils/common.js');
+var common = require('../../../utils/common.js');
 var app = getApp();
 var date = new Date();
 var myDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
@@ -318,6 +318,7 @@ function getDiaryContent(that) {
 
   });
 }
+//获取留言列表
 function getLeaveMessage(that){
   var leaveMessageArr = new Array();
   var LeaveMessageQuery = Bmob.Object.extend("leave_message");

@@ -29,7 +29,7 @@
     <view class="weui-panel__hd">留言区</view>
     <view class="weui-panel__bd">
       <block wx:if="{{leaveMessageArr.length>0}}">
-        <navigator class="weui-media-box weui-media-box_appmsg" wx:for="{{leaveMessageArr}}" wx:key="diaryItem">
+        <view class="weui-media-box weui-media-box_appmsg" wx:for="{{leaveMessageArr}}" wx:key="diaryItem">
           <view class="weui-media-box__hd userPic_leaveMessage">
             <image class="userPic_leaveMessage" src="{{item.messagePic}}" />
           </view>
@@ -40,12 +40,14 @@
                {{index+1}}楼. {{item.messageUser}}
             </view>
 
-            <view class="weui-leaveMessage_content ">{{item.messageContent}}</view>
+            <view class="weui-leaveMessage_content ">
+              <text selectable='true'>{{item.messageContent}}</text>
+            </view>
             <view class="weui-leaveMessage_updatetime ">{{item.messageupdateAt}}</view>
 
           </view>
 
-        </navigator>
+        </view>
       </block>
       <block wx:else>
         <view class="weui-media-box weui-media-box_text">
