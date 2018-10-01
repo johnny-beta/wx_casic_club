@@ -35,8 +35,9 @@
           </view>
 
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          
             <view class="weui-leaveMessage_name">
-              {{item.messageUser}}
+               {{index+1}}楼. {{item.messageUser}}
             </view>
 
             <view class="weui-leaveMessage_content ">{{item.messageContent}}</view>
