@@ -288,7 +288,7 @@ function showPic(urlArr, t) {
 function getList(t, k) {
   that = t;
   var Diary = Bmob.Object.extend("diary");
-  var query = new Bmob.Query(Diary);
+  
   
   //会员模糊查询
   
@@ -314,6 +314,7 @@ function getList(t, k) {
     //query2.equalTo("content", k);
     var mainQuery = Bmob.Query.or(query1, query2);
   }else{
+    var query = new Bmob.Query(Diary);
     var mainQuery = query;
   }
   

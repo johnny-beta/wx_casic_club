@@ -333,34 +333,34 @@ function getLeaveMessage(that){
         var UserQuery = Bmob.Object.extend("_User");
         var userQuery = new Bmob.Query(UserQuery);
         userQuery.equalTo("openid", detail.attributes.userOpenid);
+        //console.log(detail);
         userQuery.find({
           success: function (resultUser) {
-            //console.log(resultUser);
             leaveMessageArr.push({
               "messageContent": detail.attributes.messageContent,
               "messageUser": resultUser[0].attributes.nickName,
               "messagePic": resultUser[0].attributes.userPic,
-              "messageupdateAt": resultUser[0].updatedAt
+              "messageupdateAt": detail.createdAt
+            });   
+            leaveMessageArr.sort(function (a, b) {
+              return Date.parse(a.messageupdateAt) - Date.parse(b.messageupdateAt);//时间正序
             });
-
             that.setData({
               leaveMessageArr: leaveMessageArr
-            })
+            });
           },
           error: function (error) {
             console.log("查询失败: " + error.code + " " + error.message);
           }
         });
-
-
+        
       });
-
+      
     },
     error: function (error) {
       console.log("查询失败: " + error.code + " " + error.message);
     }
   });
-
 };
 function getCollectionStatus(that){
 

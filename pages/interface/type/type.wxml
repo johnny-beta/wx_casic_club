@@ -10,7 +10,7 @@
           <view class="weui-search-bar__form">
             <view class="weui-search-bar__box">
               <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-              <input type="text" class="weui-search-bar__input" placeholder="标题搜索(资源限制，目前暂不支持模糊查询)" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+              <input type="text" class="weui-search-bar__input" placeholder="搜索标题内容都可以哦" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
               <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
                 <icon type="clear" size="14"></icon>
               </view>

@@ -82,26 +82,35 @@ Page({
  */
 function getList(t, k) {
   that = t;
-  console.log(t);
   var Diary = Bmob.Object.extend("diary");
-  var query = new Bmob.Query(Diary);
-  var query1 = new Bmob.Query(Diary);
 
-
-  //普通会员匹配查询
-  if(k){
-    //console.log(k)
-    query.equalTo("title", k);
+  if (k) {
+    var query1 = new Bmob.Query(Diary);
+    query1.equalTo("title", { "$regex": "" + k + ".*" });
+    //query1.equalTo("title", k);
+    var query2 = new Bmob.Query(Diary);
+    query2.equalTo("content", { "$regex": "" + k + ".*" });
+    //query2.equalTo("content", k);
+    var mainQuery = Bmob.Query.or(query1, query2);
+  } else {
+    var query = new Bmob.Query(Diary);
+    var mainQuery = query;
   }
 
-  query.descending('createdAt');
-  query.limit(that.data.limit);
+  //普通会员匹配查询
+  // if(k){
+  //   //console.log(k)
+  //   query.equalTo("title", k);
+  // }
+
+  mainQuery.descending('createdAt');
+  mainQuery.limit(that.data.limit);
 
   //var mainQuery = Bmob.Query.or(query, query1);
-  var mainQuery= query
   mainQuery.find({
     success: function(results) {
       // 循环处理查询到的数据
+      //console.log(results);
       that.setData({
         diaryList: results
       })
