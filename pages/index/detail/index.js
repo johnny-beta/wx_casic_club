@@ -240,21 +240,16 @@ Page({
     }
   }
 })
-//查询页面内容
+//查询页面内容--可以先把帖子的内容缓存到本地
 function getDiaryContent(that) {
   var Diary = Bmob.Object.extend("diary");
   var query = new Bmob.Query(Diary);
-  var nickName = "航帮帮";
+  var nickName = that.data.defaultNickName
+  var userPic = that.data.defaultUserPic
   query.get(that.data.currentObjectId, {
     success: function(resultDiary) {
       var pNum = resultDiary.get('praiseNum');
-      if (!pNum) pNum = 0;
-      that.setData({
-        pNum: pNum
-      });
-      that.setData({
-        rows: resultDiary
-      });
+      if (!pNum) pNum = 0;        
       var User = Bmob.Object.extend("_User");
       var queryUser = new Bmob.Query(User);
       if (resultDiary.attributes.openid) {
@@ -262,23 +257,25 @@ function getDiaryContent(that) {
         queryUser.find({
           success: function(results) {
             nickName = results[0].attributes.nickName;
-            var userPic = results[0].attributes.userPic;
+            userPic = results[0].attributes.userPic;            
             that.setData({
+              pNum: pNum,
+              rows: resultDiary,
               nickName: nickName,
               userPic: userPic
-            })
-          },
-          error: function(error) {
+            })           
+          }, error: function(error) {
             console.log("查询失败: " + error.code + " " + error.message);
           }
         });
-
       } else {
         that.setData({
+          pNum: pNum,
           rows: resultDiary,
-          nickName: nickName
+          nickName: nickName,
+          userPic: userPic
         })
-      }
+      }      
       resultDiary.increment("count");
       resultDiary.save();
     },
@@ -288,7 +285,7 @@ function getDiaryContent(that) {
 
   });
 }
-//获取留言列表
+//获取留言列表--可以先把留言内容缓存到本地
 function getLeaveMessage(that) {
   var leaveMessageArr = new Array();
   var LeaveMessageQuery = Bmob.Object.extend("leave_message");
