@@ -11,8 +11,9 @@ Page({
     nickName: "",
     userPic: "",
     messageInput: "",
-    currentUserInfoInformation: {},
-    currentUserInformation: {},
+    //currentUserInfoInformation: {},
+    //currentUserInformation: {},
+    currentUser: {},
     currentObjectId: "",
     leaveMessageArr: [],
     inputContent: "写评论",
@@ -20,21 +21,23 @@ Page({
     windowHeight: 0,
     windowWidth: 0,
     collectionStatus: false,
-    collectionPic: "/image/collectOff.png"
+    collectionPic: "/image/collectOff.png",
+    defaultNickName: '航帮帮',
+    defaultUserPic: 'http://bmob-cdn-21677.b0.upaiyun.com/2018/09/29/c51b3731409bcf5f800fb7305b11bf48.png'
   },
   onShareAppMessage: function() {},
   onLoad: function(e) {
+    var that = this;
     if (!e.objectId) {
       common.showTip("请重新进入", "loading");
       return false;
     }
-    // 页面初始化 options为页面跳转所带来的参数
-    // console.log(e.objectId)
     var objectId = e.objectId;
-    var that = this;
     that.data.currentObjectId = objectId;
-    that.data.currentUserInfoInformation = app.globalData.userInfo;
-    that.data.currentUserInformation = app.globalData.currentUser;
+    //that.data.currentUserInfoInformation = app.globalData.userInfo;
+    //that.data.currentUserInformation = app.globalData.currentUser;
+    //上面两个变量重复了。用户的有关信息，统一以下面的变量currentUser为准
+    that.data.currentUser = app.globalData.currentUser
     //查询页面帖子内容
     getDiaryContent(that);
     //查询收藏状态
@@ -45,20 +48,13 @@ Page({
   },
   onReady: function() {
     // 页面渲染完成
-    var that = this;
-    app = getApp();
-    that.data.currentUserInfoInformation = app.globalData.currentUser;
   },
-  
+
   onShow: function() {
     // 页面显示
     var that = this;
-    app = getApp();
-    that.data.currentUserInfoInformation = app.globalData.userInfo;
-    that.data.currentUserInformation = app.globalData.currentUser;
     //留言功能
-    getLeaveMessage(that);   
-
+    getLeaveMessage(that);
     wx.getSystemInfo({
       success: (res) => {
         that.setData({
@@ -76,41 +72,34 @@ Page({
   },
   preImg: function(o) {
     var that = this
-    //console.log(o)
     wx.previewImage({
       current: '',
       urls: [that.data.rows.get('imgurl')],
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
     })
 
   },
   sendMessage: function(e) {
     var that = this;
-    if (that.data.currentUserInfoInformation) {
+    if (that.data.currentUser) {
       if (that.data.messageInput) {
-        //console.log(that.data.messageInput);
         var LeaveMessage = Bmob.Object.extend("leave_message");
         var leaveMessage = new LeaveMessage();
-        //console.log(that.data.currentUserInformation);
-        leaveMessage.set("userOpenid", that.data.currentUserInfoInformation.openid);
+
+        leaveMessage.set("userOpenid", that.data.currentUser.openid);
         leaveMessage.set("messageContent", that.data.messageInput);
         leaveMessage.set("diaryObjectId", that.data.currentObjectId);
-
         var leaveMessageArrTemp = that.data.leaveMessageArr;
-        
         var date = new Date();
         var myDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
         leaveMessageArrTemp.push({
           "messageContent": that.data.messageInput,
-          "messageUser": that.data.currentUserInfoInformation.nickName,
-          "messagePic": that.data.currentUserInfoInformation.userPic,
+          "messageUser": that.data.currentUser.nickName,
+          "messagePic": that.data.currentUser.userPic,
           "messageupdateAt": myDate
         });
         leaveMessage.save(null, {
           success: function(result) {
-            common.showTip('评论成功！','success')
+            common.showTip('评论成功！', 'success')
             that.setData({
               messageInput: "",
               inputContent: "",
@@ -159,20 +148,6 @@ Page({
     });
     //that.onShow();
   },
-  toAddPraise: function() {
-    console.log(112);
-    var that = this
-    var resultDiary = that.data.rows;
-    var num = that.data.rows.get('praiseNum')
-    if (!num) num = 0;
-    num++;
-    resultDiary.increment("praiseNum");
-    resultDiary.save();
-    this.setData({
-      pNum: num,
-      collection: true
-    });
-  },
 
   toCollect: function(event) {
     var that = this
@@ -184,7 +159,18 @@ Page({
 
     //点赞数+1
     // 更新数据绑定,从而切换图片，数字加1
-    this.toAddPraise();
+    //改为立即执行函数
+    (function() {
+      var resultDiary = that.data.rows;
+      var num = resultDiary.get('praiseNum')
+      if (!num) num = 0;
+      that.setData({
+        pNum: num++,
+        collection: true
+      });
+      resultDiary.increment("praiseNum");
+      resultDiary.save();
+    })();
   },
   returnHome: function() {
     wx.switchTab({
@@ -193,32 +179,27 @@ Page({
   },
   addCollection: function(e) {
     var that = this;
-    if (that.data.currentUserInfoInformation) {
-
+    if (that.data.currentUser) {
       if (that.data.collectionStatus == true) {
         var CollectionQuery = Bmob.Object.extend("diary_collect");
         var collectionQuery = new Bmob.Query(CollectionQuery);
         var Diary = Bmob.Object.extend("diary");
         var diary = new Diary();
         diary.id = that.data.currentObjectId;
-        collectionQuery.equalTo("openID", that.data.currentUserInformation.openid);
+        collectionQuery.equalTo("openID", that.data.currentUser.openid);
         collectionQuery.equalTo("diaryID", diary);
-        //console.log(that.data.currentUserInformation.openid);
-
         collectionQuery.find().then(function(todos) {
-          console.log(todos);
           return Bmob.Object.destroyAll(todos);
         }).then(function(todos) {
           that.setData({
             collectionStatus: false,
             collectionPic: "/image/collectOff.png"
           });
-          common.showTip("已取消收藏","success");
+          common.showTip("已取消收藏", "success");
         }, function(error) {
           // 异常处理
         });
-      } else if (that.data.collectionStatus == false) {
-
+      } else if (!that.data.collectionStatus) {
         var CollectionQuery = Bmob.Object.extend("diary_collect");
         var collectionQuery = new CollectionQuery();
         var Diary = Bmob.Object.extend("diary");
@@ -226,12 +207,9 @@ Page({
         diary.id = that.data.currentObjectId;
 
         collectionQuery.set("diaryID", diary);
-        collectionQuery.set("openID", that.data.currentUserInformation.openid);
-        // console.log(that.data.currentObjectId);
-
+        collectionQuery.set("openID", that.data.currentUser.openid);
         collectionQuery.save(null, {
           success: function(result) {
-            //console.log("日记创建成功, objectId:" + result.id);
             that.setData({
               collectionStatus: true,
               collectionPic: "/image/collect.png"
@@ -239,31 +217,24 @@ Page({
             common.showTip("已成功收藏", "success");
           },
           error: function(result, error) {
-            // 添加失败
-            console.log('创建日记失败');
-
+            console.log('创建留言失败');
           }
         });
       }
-    }else{
+    } else {
       common.showModal("获取昵称和头像之后才能收藏哦，请去我的选项中获取~~", "提示");
     }
   },
   /**
- * 进行页面分享
- */
-  onShareAppMessage: function (options) {
-    if (options.from === 'button') {
-      
-      console.log(options)
-    }
+   * 进行页面分享
+   */
+  onShareAppMessage: function(options) {
     return {
-      success: function (res) {
-        //这是我自定义的函数，可替换自己的操作
+      success: function(res) {
         util.showToast(1, '转发成功');
       },
-      //## 转发操作失败/取消 后的回调处理，一般是个提示语句即可
-      fail: function () {
+
+      fail: function() {
         util.showToast(0, '转发失败');
       }
     }
@@ -275,7 +246,7 @@ function getDiaryContent(that) {
   var query = new Bmob.Query(Diary);
   var nickName = "航帮帮";
   query.get(that.data.currentObjectId, {
-    success: function (resultDiary) {
+    success: function(resultDiary) {
       var pNum = resultDiary.get('praiseNum');
       if (!pNum) pNum = 0;
       that.setData({
@@ -289,8 +260,7 @@ function getDiaryContent(that) {
       if (resultDiary.attributes.openid) {
         queryUser.equalTo("openid", resultDiary.attributes.openid);
         queryUser.find({
-          success: function (results) {
-            //console.log(results);
+          success: function(results) {
             nickName = results[0].attributes.nickName;
             var userPic = results[0].attributes.userPic;
             that.setData({
@@ -298,7 +268,7 @@ function getDiaryContent(that) {
               userPic: userPic
             })
           },
-          error: function (error) {
+          error: function(error) {
             console.log("查询失败: " + error.code + " " + error.message);
           }
         });
@@ -312,85 +282,76 @@ function getDiaryContent(that) {
       resultDiary.increment("count");
       resultDiary.save();
     },
-    error: function (result, error) {
+    error: function(result, error) {
       console.log("查询失败");
     }
 
   });
 }
 //获取留言列表
-function getLeaveMessage(that){
+function getLeaveMessage(that) {
   var leaveMessageArr = new Array();
   var LeaveMessageQuery = Bmob.Object.extend("leave_message");
   var leaveMessageQuery = new Bmob.Query(LeaveMessageQuery);
   leaveMessageQuery.descending('createdAt');
-  leaveMessageQuery.equalTo("diaryObjectId", that.data.currentObjectId); 
+  leaveMessageQuery.equalTo("diaryObjectId", that.data.currentObjectId);
   //leaveMessageQuery.limit(that.data.limit);
   leaveMessageQuery.find({
-    success: function (resultLeaveMessages) {
-      //console.log(resultLeaveMessages);
-      resultLeaveMessages.forEach(function (detail) {
+    success: function(resultLeaveMessages) {
+      resultLeaveMessages.forEach(function(detail) {
         var UserQuery = Bmob.Object.extend("_User");
         var userQuery = new Bmob.Query(UserQuery);
         userQuery.equalTo("openid", detail.attributes.userOpenid);
-        //console.log(detail);
         userQuery.find({
-          success: function (resultUser) {
+          success: function(resultUser) {
             leaveMessageArr.push({
               "messageContent": detail.attributes.messageContent,
               "messageUser": resultUser[0].attributes.nickName,
               "messagePic": resultUser[0].attributes.userPic,
               "messageupdateAt": detail.createdAt
-            });   
-            leaveMessageArr.sort(function (a, b) {
-              return Date.parse(a.messageupdateAt) - Date.parse(b.messageupdateAt);//时间正序
+            });
+            leaveMessageArr.sort(function(a, b) {
+              return Date.parse(a.messageupdateAt) - Date.parse(b.messageupdateAt); //时间正序
             });
             that.setData({
               leaveMessageArr: leaveMessageArr
             });
           },
-          error: function (error) {
+          error: function(error) {
             console.log("查询失败: " + error.code + " " + error.message);
           }
         });
-        
+
       });
-      
+
     },
-    error: function (error) {
+    error: function(error) {
       console.log("查询失败: " + error.code + " " + error.message);
     }
   });
 };
-function getCollectionStatus(that){
 
+function getCollectionStatus(that) {
   var CollectionQuery = Bmob.Object.extend("diary_collect");
   var collectionQuery = new Bmob.Query(CollectionQuery);
-  // console.log(that.data.currentUserInformation.openid);
-  // console.log(objectId);
-  collectionQuery.equalTo("openID", that.data.currentUserInformation.openid);
+  collectionQuery.equalTo("openID", that.data.currentUser.openid);
   collectionQuery.equalTo("diaryID", that.data.currentObjectId);
   collectionQuery.find({
-    success: function (resultCollection) {
-      //console.log(resultCollection);
-      if (resultCollection.length > 0) {
-        that.setData({
-          collectionStatus: true,
-          collectionPic: "/image/collect.png"
-        });
-      } else {
-        that.setData({
-          collectionStatus: false,
-          collectionPic: "/image/collectOff.png"
-        });
-      }
+    success: function(resultCollection) {
+
+      var haveRes = (resultCollection.length > 0);
+      that.setData({
+        collectionStatus: haveRes,
+        collectionPic: haveRes ? "/image/collect.png" : "/image/collectOff.png"
+      });
     },
-    error: function (error) {
+    error: function(error) {
       console.log("查询失败: " + error.code + " " + error.message);
     }
   });
 };
-function getPraiseStatus(that){
+
+function getPraiseStatus(that) {
   var cache = wx.getStorageSync('cache_key');
   if (cache) {
     var currentCache = cache[that.data.currentObjectId];
