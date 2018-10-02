@@ -9,16 +9,35 @@
     <view class="page__hd">
       <view class="weui-article_h1">{{rows.title}}</view>
       <view class="weui-article_h2">
-        <image class="userPic_article" src='{{userPic}}'></image>
-        <view class="weui-article_name">{{nickName}}</view>
-        <image wx:if="{{collection}}" class="addPraise" src="/image/beenPraised.png"></image>
-        <image wx:else class="addPraise" bindtap="toCollect" src="/image/praise.png"></image>
-        <text class="weui-articel_praise">{{pNum}}</text>
+        <view class="weui-media-box__hd">
+          <image class="userPic_article" src='{{userPic}}'></image>
+        </view>
+
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+
+          <view class='' style='display:flex;'>
+            <view class="weui-article_name">{{nickName}}</view>
+
+            <image wx:if="{{collection}}" class="addPraise" src="/image/beenPraised.png"></image>
+            <image wx:else class="addPraise" bindtap="toCollect" src="/image/praise.png"></image>
+            <text class="weui-articel_praise">{{pNum}}</text>
+          </view>
+
+          <view class='' style='display:flex;'>
+            <view class="weui-article_update_time">
+                {{rows.createdAt}}  
+                <text decode="{{true}}" space="{{true}}">&nbsp;&nbsp;</text>
+                {{rows.count}}次浏览
+             </view>
+            
+          </view>
+
+        </view>
+
+
+
       </view>
-      <view class="weui-article_h2">
-        <view class="weui-article_update_time">{{rows.updatedAt}} </view>
-        <view class="weui-article_update_time">{{rows.count}}人浏览 </view>
-      </view>
+
     </view>
     <view class="page__bd">
       <view class="weui-article">
@@ -35,9 +54,9 @@
           </view>
 
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-          
+
             <view class="weui-leaveMessage_name">
-               {{index+1}}楼. {{item.messageUser}}
+              {{index+1}}楼. {{item.messageUser}}
             </view>
 
             <view class="weui-leaveMessage_content ">
