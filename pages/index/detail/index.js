@@ -79,6 +79,7 @@ Page({
 
   },
   sendMessage: function(e) {
+    //console.log('form发生了submit事件，携带数据为：', e)
     var that = this;
     if (that.data.currentUser) {
       if (that.data.messageInput) {
@@ -88,6 +89,7 @@ Page({
         leaveMessage.set("userOpenid", that.data.currentUser.openid);
         leaveMessage.set("messageContent", that.data.messageInput);
         leaveMessage.set("diaryObjectId", that.data.currentObjectId);
+        leaveMessage.set("formId", e.detail.formId);
         var leaveMessageArrTemp = that.data.leaveMessageArr;
         var date = new Date();
         var myDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
@@ -99,12 +101,32 @@ Page({
         });
         leaveMessage.save(null, {
           success: function(result) {
-            common.showTip('评论成功！', 'success')
+            
+            //console.log('留言保存结果', result)
             that.setData({
               messageInput: "",
               inputContent: "",
               leaveMessageArr: leaveMessageArrTemp
             })
+
+            //第一次留言，调用云函数，推送微信消息
+            if (leaveMessageArrTemp.length ==1) {
+              //console.log('两个ID', that.data.currentObjectId, result.id )
+              Bmob.Cloud.run('s', { 
+                'diaryId': that.data.currentObjectId,
+                'leaveMsgId': result.id                
+               }, {
+                success: function (result) {
+                  console.log('result'+result);
+                },
+                error: function (error) {
+                  console.log('error'+error);
+                }
+              })
+              common.showTip('评论成功！您是首位留言者，将会发通知给该作者', 'success')      
+            } else {
+              common.showTip('评论成功！', 'success')
+            }
           },
           error: function(result, error) {
 
