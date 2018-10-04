@@ -13,7 +13,8 @@ Page({
     limit: 15,
     diaryList: [],
     modifyDiarys: false,
-    urlArr: [{url:''}]
+    urlArr: [{url:''}],
+    scrollTop: 0
   },
   onReady: function(e) {},
   onShareAppMessage: function() {},
@@ -74,7 +75,25 @@ Page({
     that.setData({
       modifyDiarys: false
     })
+  },
+  goTop: function (e) {
+    this.setData({
+      scrollTop: 0
+    })
+  },
+  scroll:function(e, res) {
+    // 容器滚动时将此时的滚动距离赋值给 this.data.scrollTop
+    if (e.detail.scrollTop > 300) {
+      this.setData({
+        floorstatus: true
+      });
+    } else {
+      this.setData({
+        floorstatus: false
+      });
+    }
   }
+
 })
 
 /*
@@ -110,7 +129,7 @@ function getList(t, k) {
   mainQuery.find({
     success: function(results) {
       // 循环处理查询到的数据
-      //console.log(results);
+     // console.log(results);
       that.setData({
         diaryList: results
       })

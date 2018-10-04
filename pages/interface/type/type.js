@@ -15,7 +15,8 @@ Page({
     diaryList: [],
     modifyDiarys: false,
     urlArr:[],
-    typeName:""
+    typeName:"",
+    scrollTop: 0
   },
   onReady: function(e) {},
   onShareAppMessage: function() {},
@@ -99,6 +100,9 @@ Page({
       diary.set("openid", app.globalData.currentUser.openid); 
       diary.set("isNew", true); 
       diary.set("isDisplay", true); 
+      diary.set("praiseNum", 0); 
+      diary.set("leaveMessageCount", 0); 
+      diary.set("count", 0); 
 
       var f = Bmob.File("a.jpg", [""]);
       diary.set("f", f);
@@ -272,6 +276,23 @@ Page({
       }
     })
   },
+  goTop: function (e) {
+    this.setData({
+      scrollTop: 0
+    })
+  },
+  scroll: function (e, res) {
+    // 容器滚动时将此时的滚动距离赋值给 this.data.scrollTop
+    if (e.detail.scrollTop > 300) {
+      this.setData({
+        floorstatus: true
+      });
+    } else {
+      this.setData({
+        floorstatus: false
+      });
+    }
+  }
 
 })
 

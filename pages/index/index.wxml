@@ -1,6 +1,6 @@
 <import src="../../style/footer.wxml" />
 <view class="page">
-  <scroll-view lower-threshold="800" bindscrolltolower="pullUpLoad" upper-threshold="0" scroll-y="true" style="height: {{windowHeight}}px;">
+  <scroll-view lower-threshold="800" bindscrolltolower="pullUpLoad" scroll-top= "{{scrollTop}}" bindscroll="scroll" scroll-y="true" style="height: {{windowHeight}}px;">
     <view class="page__bd">
 
       <!--<button type="primary" bindtap="toAddDiary" hover-class="other-button-hover"> 增加信息 </button>-->
@@ -41,9 +41,9 @@
                 </view>
 
                 <view class="weui-media-box__desc">{{item.content}}</view>
-
+                <view class="weui-media-box__desc_last">{{item.praiseNum}}人点赞 {{item.leaveMessageCount}}人评论 {{item.count}}人浏览</view>
               </view>
-
+              
             </navigator>
           </block>
           <block wx:else>
@@ -56,6 +56,9 @@
           </block>
 
         </view>
+      </view>
+      <view class="com-widget-goTop" bindtap="goTop" wx:if="{{floorstatus}}">
+            <image class="userPic_article"src="/image/top.png"></image>
       </view>
     </view>
 

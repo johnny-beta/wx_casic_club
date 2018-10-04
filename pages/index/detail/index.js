@@ -91,8 +91,7 @@ Page({
           success: function (userResults) {
             var LeaveMessage = Bmob.Object.extend("leave_message");
             var leaveMessage = new LeaveMessage();
-            var User1 = Bmob.Object.extend("_User");
-            var user1 = new User1();
+            var user1 = new User();
             user1.id = userResults[0].id;//将该留言用户的objectId与leaveMessage中的userObjectId进行绑定
             leaveMessage.set("userOpenid", that.data.currentUser.openid);
             leaveMessage.set("messageContent", that.data.messageInput);
@@ -115,8 +114,13 @@ Page({
                   messageInput: "",
                   inputContent: "",
                   leaveMessageArr: leaveMessageArrTemp
-                })
-
+                });
+            //成功留言leaveMessageCount+1
+            (function () {
+              var resultDiary = that.data.rows;
+              resultDiary.increment("leaveMessageCount");
+              resultDiary.save();
+            })();
                 //第一次留言，调用云函数，推送微信消息
                 if (leaveMessageArrTemp.length == 1) {
                   //console.log('两个ID', that.data.currentObjectId, result.id )
@@ -202,7 +206,7 @@ Page({
       var num = resultDiary.get('praiseNum')
       if (!num) num = 0;
       that.setData({
-        pNum: num++,
+        pNum: ++num,
         collection: true
       });
       resultDiary.increment("praiseNum");
@@ -333,6 +337,7 @@ function getLeaveMessage(that) {
   leaveMessageQuery.include("userObjectId");
   leaveMessageQuery.find({
     success: function(resultLeaveMessages) {
+      //console.log(resultLeaveMessages)
       resultLeaveMessages.forEach(function(detail) {
         leaveMessageArr.push({
               "messageContent": detail.attributes.messageContent,
