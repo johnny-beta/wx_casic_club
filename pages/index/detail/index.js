@@ -81,7 +81,7 @@ Page({
   sendMessage: function(e) {
     //console.log('form发生了submit事件，携带数据为：', e)
     var that = this;
-    if (that.data.currentUser) {
+    if (that.data.currentUser && that.data.currentUser.openid) {
       if (that.data.messageInput) {
         var LeaveMessage = Bmob.Object.extend("leave_message");
         var leaveMessage = new LeaveMessage();
@@ -317,16 +317,18 @@ function getLeaveMessage(that) {
   //leaveMessageQuery.limit(that.data.limit);
   leaveMessageQuery.find({
     success: function(resultLeaveMessages) {
+      console.log(resultLeaveMessages)
       resultLeaveMessages.forEach(function(detail) {
         var UserQuery = Bmob.Object.extend("_User");
         var userQuery = new Bmob.Query(UserQuery);
-        userQuery.equalTo("openid", detail.attributes.userOpenid);
+        //如果帖子中没有存userOpenid，就按照1来查
+        userQuery.equalTo("openid", detail.get('userOpenid') || '1');
         userQuery.find({
           success: function(resultUser) {
             leaveMessageArr.push({
               "messageContent": detail.attributes.messageContent,
-              "messageUser": resultUser[0].attributes.nickName,
-              "messagePic": resultUser[0].attributes.userPic,
+              "messageUser": resultUser[0].attributes.nickName || that.data.defaultNickName,
+              "messagePic": resultUser[0].attributes.userPic || that.data.defaultUserPic,
               "messageupdateAt": detail.createdAt
             });
             leaveMessageArr.sort(function(a, b) {

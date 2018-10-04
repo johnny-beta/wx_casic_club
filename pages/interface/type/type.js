@@ -73,9 +73,11 @@ Page({
     var imgurl = urlArr[0].url
     //console.log("event", event)
     if (!title) {
-      common.showTip("标题不能为空", "loading");
+      common.showTip("标题不能空", "loading");
     } else if (!content) {
-      common.showTip("内容不能为空", "loading");
+      common.showTip("内容不能空", "loading");
+    } else if (!app.globalData.currentUser.openid) {
+      common.showTip("请重启小程序", "loading");
     } else {
       that.setData({
         loading: true
