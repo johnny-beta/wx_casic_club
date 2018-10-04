@@ -92,8 +92,8 @@
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell">
             <view class="weui-cell__bd">
-              <textarea class="weui-textarea" name="content" placeholder="请输入信息内容" style="height: 3.3em" />
-              <view class="weui-textarea-counter">0/200</view>
+              <textarea class="weui-textarea" maxlength="200" name="content" bindinput="contentInput" placeholder="请输入信息内容" style="height: 3.3em" />
+              <view class="weui-textarea-counter">{{contentNum}}/200</view>
             </view>
           </view>
         </view>

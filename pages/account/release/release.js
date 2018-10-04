@@ -14,7 +14,8 @@ Page({
     userInfo: {},
     diaryList: {},
     urlArr: [],
-    modifyDiarys: false
+    modifyDiarys: false,
+    v: 0
   },
   onLoad: function () {
     app = getApp();
@@ -25,7 +26,8 @@ Page({
       })
     }else{
       common.showModal('请先获取头像和昵称', "提示");
-    }
+    };
+    
   },
   noneWindows: function () {
     var that = this;
@@ -196,6 +198,7 @@ Page({
     var query = new Bmob.Query(Diary);
     var urlArr = new Array();
     nowContent = nowContent + " ";
+    console.log(nowContent.length);
     query.get(nowId, {
       success: function (result) {
 
@@ -212,7 +215,8 @@ Page({
       modifyDiarys: true,
       nowTitle: nowTile,
       nowContent: nowContent,
-      nowId: nowId
+      nowId: nowId,
+      contentNum: nowContent.length
     })
   },
   modifyDiary: function (e) {
@@ -332,6 +336,11 @@ Page({
   },
   skipDetail:function(e){
     console.log(e);
+  },
+  contentInput: function (e) {
+    this.setData({
+      contentNum: e.detail.value.length
+    });
   }
 
 })

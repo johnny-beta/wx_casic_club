@@ -16,7 +16,8 @@ Page({
     modifyDiarys: false,
     urlArr:[],
     typeName:"",
-    scrollTop: 0
+    scrollTop: 0,
+    contentNum:0
   },
   onReady: function(e) {},
   onShareAppMessage: function() {},
@@ -292,6 +293,11 @@ Page({
         floorstatus: false
       });
     }
+  },
+  contentInput:function(e){
+    this.setData({
+      contentNum: e.detail.value.length
+    });
   }
 
 })
