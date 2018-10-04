@@ -333,6 +333,7 @@ function getLeaveMessage(that) {
   leaveMessageQuery.include("userObjectId");
   leaveMessageQuery.find({
     success: function(resultLeaveMessages) {
+      //console.log(resultLeaveMessages)
       resultLeaveMessages.forEach(function(detail) {
         leaveMessageArr.push({
               "messageContent": detail.attributes.messageContent,
