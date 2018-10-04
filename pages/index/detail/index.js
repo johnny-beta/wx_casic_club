@@ -81,57 +81,72 @@ Page({
   sendMessage: function(e) {
     //console.log('form发生了submit事件，携带数据为：', e)
     var that = this;
-    if (that.data.currentUser) {
+    if (that.data.currentUser && that.data.currentUser.openid) {
       if (that.data.messageInput) {
-        var LeaveMessage = Bmob.Object.extend("leave_message");
-        var leaveMessage = new LeaveMessage();
+        //首先根据_User表的openid查找该用户的objectid
+        var User = Bmob.Object.extend("_User");
+        var user = new Bmob.Query(User);
+        user.equalTo("openid", that.data.currentUser.openid);
+        user.find({
+          success: function (userResults) {
+            var LeaveMessage = Bmob.Object.extend("leave_message");
+            var leaveMessage = new LeaveMessage();
+            var User1 = Bmob.Object.extend("_User");
+            var user1 = new User1();
+            user1.id = userResults[0].id;//将该留言用户的objectId与leaveMessage中的userObjectId进行绑定
+            leaveMessage.set("userOpenid", that.data.currentUser.openid);
+            leaveMessage.set("messageContent", that.data.messageInput);
+            leaveMessage.set("diaryObjectId", that.data.currentObjectId);     
+            leaveMessage.set("formId", e.detail.formId);
+            leaveMessage.set("userObjectId", user1);//加入关联_User表ObjectId字段，用来查询用户信息
+            var leaveMessageArrTemp = that.data.leaveMessageArr;
+            var date = new Date();
+            var myDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+            leaveMessageArrTemp.push({
+              "messageContent": that.data.messageInput,
+              "messageUser": that.data.currentUser.nickName,
+              "messagePic": that.data.currentUser.userPic,
+              "messageupdateAt": myDate
+            });
+            leaveMessage.save(null, {
+              success: function (result) {
+                //console.log('留言保存结果', result)
+                that.setData({
+                  messageInput: "",
+                  inputContent: "",
+                  leaveMessageArr: leaveMessageArrTemp
+                })
 
-        leaveMessage.set("userOpenid", that.data.currentUser.openid);
-        leaveMessage.set("messageContent", that.data.messageInput);
-        leaveMessage.set("diaryObjectId", that.data.currentObjectId);
-        leaveMessage.set("formId", e.detail.formId);
-        var leaveMessageArrTemp = that.data.leaveMessageArr;
-        var date = new Date();
-        var myDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-        leaveMessageArrTemp.push({
-          "messageContent": that.data.messageInput,
-          "messageUser": that.data.currentUser.nickName,
-          "messagePic": that.data.currentUser.userPic,
-          "messageupdateAt": myDate
-        });
-        leaveMessage.save(null, {
-          success: function(result) {
-            
-            //console.log('留言保存结果', result)
-            that.setData({
-              messageInput: "",
-              inputContent: "",
-              leaveMessageArr: leaveMessageArrTemp
-            })
-
-            //第一次留言，调用云函数，推送微信消息
-            if (leaveMessageArrTemp.length ==1) {
-              //console.log('两个ID', that.data.currentObjectId, result.id )
-              Bmob.Cloud.run('s', { 
-                'diaryId': that.data.currentObjectId,
-                'leaveMsgId': result.id                
-               }, {
-                success: function (result) {
-                  console.log('result'+result);
-                },
-                error: function (error) {
-                  console.log('error'+error);
+                //第一次留言，调用云函数，推送微信消息
+                if (leaveMessageArrTemp.length == 1) {
+                  //console.log('两个ID', that.data.currentObjectId, result.id )
+                  Bmob.Cloud.run('s', {
+                    'diaryId': that.data.currentObjectId,
+                    'leaveMsgId': result.id
+                  }, {
+                      success: function (result) {
+                        console.log('result' + result);
+                      },
+                      error: function (error) {
+                        console.log('error' + error);
+                      }
+                    })
+                  common.showTip('评论成功！您是首位留言者，将会发通知给该作者', 'success')
+                } else {
+                  common.showTip('评论成功！', 'success')
                 }
-              })
-              common.showTip('评论成功！您是首位留言者，将会发通知给该作者', 'success')      
-            } else {
-              common.showTip('评论成功！', 'success')
-            }
-          },
-          error: function(result, error) {
+              },
+              error: function (result, error) {
 
+              }
+            });
+          },
+          error: function (error) {
+            console.log("查询失败: " + error.code + " " + error.message);
           }
         });
+
+        
       }
     } else {
       common.showModal("获取昵称和头像之后才能评论哦，请去我的选项中获取~~", "提示");
@@ -168,7 +183,7 @@ Page({
     that.setData({
       limit: limit
     });
-    //that.onShow();
+    that.onShow();
   },
 
   toCollect: function(event) {
@@ -312,37 +327,23 @@ function getLeaveMessage(that) {
   var leaveMessageArr = new Array();
   var LeaveMessageQuery = Bmob.Object.extend("leave_message");
   var leaveMessageQuery = new Bmob.Query(LeaveMessageQuery);
-  leaveMessageQuery.descending('createdAt');
+  leaveMessageQuery.ascending('createdAt');
   leaveMessageQuery.equalTo("diaryObjectId", that.data.currentObjectId);
-  //leaveMessageQuery.limit(that.data.limit);
+  leaveMessageQuery.limit(that.data.limit);
+  leaveMessageQuery.include("userObjectId");
   leaveMessageQuery.find({
     success: function(resultLeaveMessages) {
       resultLeaveMessages.forEach(function(detail) {
-        var UserQuery = Bmob.Object.extend("_User");
-        var userQuery = new Bmob.Query(UserQuery);
-        userQuery.equalTo("openid", detail.attributes.userOpenid);
-        userQuery.find({
-          success: function(resultUser) {
-            leaveMessageArr.push({
+        leaveMessageArr.push({
               "messageContent": detail.attributes.messageContent,
-              "messageUser": resultUser[0].attributes.nickName,
-              "messagePic": resultUser[0].attributes.userPic,
+              "messageUser": detail.attributes.userObjectId.nickName || that.data.defaultNickName,//使用关联字段查询
+              "messagePic": detail.attributes.userObjectId.userPic || that.data.defaultUserPic,
               "messageupdateAt": detail.createdAt
             });
-            leaveMessageArr.sort(function(a, b) {
-              return Date.parse(a.messageupdateAt) - Date.parse(b.messageupdateAt); //时间正序
-            });
-            that.setData({
-              leaveMessageArr: leaveMessageArr
-            });
-          },
-          error: function(error) {
-            console.log("查询失败: " + error.code + " " + error.message);
-          }
-        });
-
       });
-
+      that.setData({
+          leaveMessageArr: leaveMessageArr
+        });
     },
     error: function(error) {
       console.log("查询失败: " + error.code + " " + error.message);

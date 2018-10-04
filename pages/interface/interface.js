@@ -59,6 +59,7 @@ Page({
   onLoad: function() {
     var that = this
     this.getBG();
+    //initLeaveMessageDataSheet();
   },
 
   getBG: function() {
@@ -108,3 +109,47 @@ Page({
 
   }
 })
+// function initLeaveMessageDataSheet(){
+//   var LeaveMessage = Bmob.Object.extend("leave_message");
+//   var leaveMessage = new Bmob.Query(LeaveMessage);
+//   // 查询所有数据
+//   leaveMessage.limit(200);
+//   leaveMessage.find({
+//     success: function (resultLeaveMessage) {
+//       console.log(resultLeaveMessage);
+//       console.log("共查询到 " + resultLeaveMessage.length + " 条记录");
+//       resultLeaveMessage.forEach(function (detail) {
+//         //console.log(detail.id);
+//         var User = Bmob.Object.extend("_User");
+//         var user = new Bmob.Query(User);
+//         user.equalTo("openid", detail.attributes.userOpenid);
+//         user.find({
+//           success: function (resultUser) {
+//             //console.log(resultUser[0].id);
+//             var LeaveMessage1 = Bmob.Object.extend("leave_message");
+//             var leaveMessage1 = new Bmob.Query(LeaveMessage1);
+//             var User1 = Bmob.Object.extend("_User");
+//             var user1 = new User();
+//             user1.id = resultUser[0].id;
+//             leaveMessage1.get(detail.id, {
+//               success: function (result) {
+//                 result.set('userObjectId', user1);
+//                 result.save();
+//               },
+//               error: function (object, error) {
+
+//               }
+//             });
+//           },
+//           error: function (error) {
+//             console.log("查询失败: " + error.code + " " + error.message);
+//           }
+//         });
+//       });
+
+//     },
+//     error: function (error) {
+//       console.log("查询失败: " + error.code + " " + error.message);
+//     }
+//   });
+// }
