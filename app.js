@@ -11,8 +11,7 @@ Bmob1.initialize(
 
 App({
   onLaunch: function () {
-    this.checkUpdate();
-    wx.setNavigationBarTitle({ title: '航帮帮V' + this.globalData.version+' -航天人的信息沟通看板'})
+    this.checkUpdate();    
     wx.login({
       success: res => {
         if (res.code) {

@@ -20,6 +20,7 @@ Page({
   onReady: function(e) {},
   onShareAppMessage: function() {},
   onLoad: function() {
+    wx.setNavigationBarTitle({ title: '航帮帮V' + app.globalData.version + ' -航天人的信息沟通看板' })
     that = this;
     wx.showShareMenu({
       withShareTicket: true //要求小程序返回分享目标信息

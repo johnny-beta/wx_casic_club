@@ -9,6 +9,7 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   onLoad: function() {
+    wx.setNavigationBarTitle({ title: '航帮帮V' + app.globalData.version + ' -航天人的信息沟通看板' })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
