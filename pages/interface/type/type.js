@@ -16,13 +16,14 @@ Page({
     modifyDiarys: false,
     urlArr:[],
     typeName:"",
-    scrollTop: 0
+    scrollTop: 0,
   },
   onReady: function(e) {},
   onShareAppMessage: function() {},
   onLoad: function (options) {
     that = this;
     typeNumber = options.typeNumber;
+
     wx.showShareMenu({
       withShareTicket: true //要求小程序返回分享目标信息
     })

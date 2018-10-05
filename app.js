@@ -12,6 +12,7 @@ Bmob1.initialize(
 App({
   onLaunch: function () {
     this.checkUpdate();
+    wx.setNavigationBarTitle({ title: '航帮帮V' + this.globalData.version+' -航天人的信息沟通看板'})
     wx.login({
       success: res => {
         if (res.code) {
@@ -119,6 +120,17 @@ App({
     }
   },
   globalData: {
+    version: '1.5.1',
+    grids: {
+      "10": "国庆-晒照专区",
+      "11": "国庆-意见征集",
+      "1": "航天置换",
+      "2": "航天漫步",
+      "3": "航天宝贝",
+      "4": "房屋租售",
+      "5": "鹊桥征友",
+      "6": "拼车出行"
+    },
     userInfo: null,
     currentUser:Bmob1.User.current()
   }

@@ -14,7 +14,8 @@ Page({
     diaryList: [],
     modifyDiarys: false,
     urlArr: [{url:''}],
-    scrollTop: 0
+    scrollTop: 0,
+    grids: app.globalData.grids
   },
   onReady: function(e) {},
   onShareAppMessage: function() {},
