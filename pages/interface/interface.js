@@ -57,8 +57,10 @@ Page({
     background: ['http://bmob-cdn-21631.b0.upaiyun.com/2018/09/25/1ee585d74019bc7780e315a40dfa212a.png', ]
   },
   onLoad: function() {
+    wx.setNavigationBarTitle({ title: '航帮帮V' + app.globalData.version + ' -航天人的信息沟通看板' })
     var that = this
     this.getBG();
+
     //initLeaveMessageDataSheet();
     //initLeaveMessage();
   },

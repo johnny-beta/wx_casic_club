@@ -16,6 +16,10 @@
 
 
   <view class="page__bd">
+    <view>
+      <official-account></official-account>
+    </view>
+    
     <view class="weui-grids">
       <block wx:for-items="{{grids}}" wx:key="{{index}}">
         <navigator url="{{item.url}}" bindtap="{{item.click}}" class="weui-grid" wx:if="{{item.click}}" hover-class="weui-grid_active">
@@ -30,5 +34,5 @@
 
     </view>
   </view>
-
+  <ad unit-id="adunit-1f3debf4bce237da"></ad>
 </view>

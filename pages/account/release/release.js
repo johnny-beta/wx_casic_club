@@ -15,7 +15,7 @@ Page({
     diaryList: {},
     urlArr: [],
     modifyDiarys: false,
-    v: 0
+    contentNum: 0
   },
   onLoad: function () {
     app = getApp();

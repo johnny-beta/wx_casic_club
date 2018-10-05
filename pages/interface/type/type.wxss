@@ -116,14 +116,17 @@ textarea, input {
   display: none;
 }
 
-/*.dels{
-  background-image: 
+.weui-media-box__title{
+  margin-left: 0;
+  display: -webkit-box;
+
 }
-.edits{}*/
+
 .weui-media-box__desc_last {
   color: rgb(31, 59, 97);
-  font-size: 8px;
-  line-height: 1.2;
+  font-size: 11px;
+  margin-top: 2px;
+  margin-bottom: 1px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

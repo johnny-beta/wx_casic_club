@@ -1,6 +1,7 @@
 <!--pages/index/detail/index.wxml-->
 <import src="/style/footer.wxml" />
 <view class="page">
+  
   <scroll-view lower-threshold="800" bindscrolltolower="pullUpLoad" upper-threshold="0" scroll-y="true" style="height:{{windowHeight}}px;">
     <view class="weui-img_center">
       <image class="image_frame" src='{{rows.imgurl}}' mode="aspectFit" bindtap='preImg'></image>
@@ -43,7 +44,7 @@
         <text selectable='true'>{{rows.content}}</text>
       </view>
     </view>
-
+    
     <view class="weui-panel__hd">留言区</view>
     <view class="weui-panel__bd">
       <block wx:if="{{leaveMessageArr.length>0}}">
@@ -74,8 +75,10 @@
 
         </view>
       </block>
+      <ad unit-id="adunit-7829e0832f70f7d7"></ad> 
       <view class="content-blank">
       </view>
+      
       <form bindsubmit="sendMessage" report-submit="true">
         <view class="input-panel">
 
