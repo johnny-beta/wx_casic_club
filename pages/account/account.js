@@ -6,9 +6,11 @@ Page({
   data: {
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    tipStatus: false
   },
   onLoad: function() {
+
     wx.setNavigationBarTitle({ title: '航帮帮V' + app.globalData.version + ' -航天人的信息沟通看板' })
     if (app.globalData.userInfo) {
       this.setData({
@@ -36,9 +38,13 @@ Page({
         }
       })
     }
+    
 
   },
-
+  onShow: function () {
+    var that = this;
+    checkNewMessage(that);
+  },
   about: function(e) {
     common.showModal('航帮帮V'+app.globalData.version+'是海淀永定路地区生活类信息沟通的看板，您有好的建议可以通过本页面的“反馈建议”功能或座机87811联系，感谢您的使用！');
   },
@@ -51,3 +57,29 @@ Page({
     Bmob1.User.upInfo(e.detail.userInfo)
   }
 })
+function checkNewMessage(that){
+  //留言提醒
+  try {
+    // 同步接口立即返回值
+    var newMessageIDArr = wx.getStorageSync("newMessageIDArr");
+    //console.log(newMessageIDArr);
+    if (newMessageIDArr.length > 0) {
+      that.setData({
+        newMessageFlag: true
+      })
+      wx.showTabBarRedDot({
+        index: 3
+      })
+    } else {
+      that.setData({
+        newMessageFlag: false
+      })
+      wx.hideTabBarRedDot({
+        index: 3
+      })
+    }
+    console.log("第二次读取成功");
+  } catch (e) {
+    console.log('第二次读取失败')
+  }
+}

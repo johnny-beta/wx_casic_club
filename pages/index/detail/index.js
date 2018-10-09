@@ -24,7 +24,8 @@ Page({
     collectionStatus: false,
     collectionPic: "/image/collectOff.png",
     defaultNickName: '航帮帮',
-    defaultUserPic: 'http://bmob-cdn-21677.b0.upaiyun.com/2018/09/29/c51b3731409bcf5f800fb7305b11bf48.png'
+    defaultUserPic: 'http://bmob-cdn-21677.b0.upaiyun.com/2018/09/29/c51b3731409bcf5f800fb7305b11bf48.png',
+    buttonDisable:false
   },
   onShareAppMessage: function() {},
   onLoad: function(e) {
@@ -86,6 +87,9 @@ Page({
   sendMessage: function(e) {
     //console.log('form发生了submit事件，携带数据为：', e)
     var that = this;
+    that.setData({
+      buttonDisable: true
+    });
     if (that.data.currentUser && that.data.currentUser.openid) {
       if (that.data.messageInput) {
         //首先根据_User表的openid查找该用户的objectid
@@ -118,7 +122,8 @@ Page({
                 that.setData({
                   messageInput: "",
                   inputContent: "",
-                  leaveMessageArr: leaveMessageArrTemp
+                  leaveMessageArr: leaveMessageArrTemp,
+                  buttonDisable: false
                 });
                 //成功留言leaveMessageCount+1
                 (function() {
@@ -290,10 +295,39 @@ Page({
 function getDiaryContent(that) {
   var Diary = Bmob.Object.extend("diary");
   var query = new Bmob.Query(Diary);
-  var nickName = that.data.defaultNickName
-  var userPic = that.data.defaultUserPic
+  var nickName = that.data.defaultNickName;
+  var userPic = that.data.defaultUserPic;
   query.get(that.data.currentObjectId, {
     success: function(resultDiary) {
+      //console.log(resultDiary);
+      //console.log(that.data.currentUser.openid);
+      if (resultDiary.attributes.openid == that.data.currentUser.openid){
+        try {
+          // 同步接口立即写入
+          wx.setStorageSync(resultDiary.id, resultDiary.attributes.leaveMessageCount);
+          console.log("第四次写入成功");
+          try {
+            // 同步接口立即返回值
+            var newMessageIDArr = wx.getStorageSync("newMessageIDArr");
+            //console.log(resultDiary.id);
+            newMessageIDArr.remove(resultDiary.id);
+            //console.log(newMessageIDArr);
+            console.log("第五次读取成功");
+            try {
+              // 同步接口立即写入
+              wx.setStorageSync("newMessageIDArr", newMessageIDArr);
+              console.log("第六次写入成功");
+            } catch (e) {
+              console.log("第六次写入失败");
+            }
+            
+          } catch (e) {
+            console.log('第五次读取失败')
+          }
+        } catch (e) {
+          console.log("第四次写入失败");
+        }
+      }
       var pNum = resultDiary.get('praiseNum');
       if (!pNum) pNum = 0;
       var User = Bmob.Object.extend("_User");
@@ -396,3 +430,15 @@ function getPraiseStatus(that) {
     wx.setStorageSync('cache_key', cache);
   }
 }
+Array.prototype.aindexOf = function (val) {
+  for (var i = 0; i < this.length; i++) {
+    if (this[i] == val) return i;
+  }
+  return -1;
+};
+Array.prototype.remove = function (val) {
+  var index = this.aindexOf(val);
+  if (index > -1) {
+    this.splice(index, 1);
+  }
+};

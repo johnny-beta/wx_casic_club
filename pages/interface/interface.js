@@ -56,17 +56,22 @@ Page({
   data: {
     userInfo: {},
     grids: grids,
-    background: ['http://bmob-cdn-21631.b0.upaiyun.com/2018/09/25/1ee585d74019bc7780e315a40dfa212a.png', ]
+    background: ['http://bmob-cdn-21631.b0.upaiyun.com/2018/09/25/1ee585d74019bc7780e315a40dfa212a.png', ],
+    newMessageFlag: 0
   },
   onLoad: function() {
     wx.setNavigationBarTitle({ title: '航帮帮V' + app.globalData.version + ' -航天人的信息沟通看板' })
-    var that = this
+    var that = this;
     this.getBG();
-
+     
     //initLeaveMessageDataSheet();
     //initLeaveMessage();
   },
-
+  onShow: function () {
+    var currentUser = app.globalData.currentUser;
+    checkNewMessage(currentUser);
+    
+  },
   getBG: function() {
     var that = this
     var Diary = Bmob.Object.extend("borad_bg");
@@ -114,3 +119,56 @@ Page({
 
   }
 })
+function checkNewMessage(currentUser) {
+  //try {
+    var newMessageIDArr = new Array();
+    var currentUserID = currentUser.openid;
+    var Diary = Bmob.Object.extend("diary");
+    var query = new Bmob.Query(Diary);
+    query.equalTo("openid", currentUserID);
+    // 查询所有数据
+    query.find({
+      success: function (results) {
+        //console.log(results.length);
+        for (var i = 0; i < results.length; i++) {
+          var localLeaveMessageCount = wx.getStorageSync(results[i].id);
+          if (localLeaveMessageCount != results[i].attributes.leaveMessageCount) {
+            newMessageIDArr.push(results[i].id);
+            
+          }
+          //console.log(localLeaveMessageCount);
+          if (localLeaveMessageCount == null) {
+            try {
+              // 同步接口立即写入
+              wx.setStorageSync(results[i].id, results[i].attributes.leaveMessageCount);
+              console.log("第0次写入成功");
+            } catch (e) {
+              console.log("第0次写入失败");
+            }
+          }
+        }
+        if (newMessageIDArr.length > 0) {
+          wx.showTabBarRedDot({
+            index: 3
+          })
+        } else {
+          wx.hideTabBarRedDot({
+            index: 3
+          })
+        }
+        try {
+          // 同步接口立即写入
+          wx.setStorageSync("newMessageIDArr", newMessageIDArr);
+          console.log("第一次写入成功");
+        } catch (e) {
+          console.log("第一次写入失败");
+        }
+      },
+      error: function (error) {
+        console.log("查询失败: " + error.code + " " + error.message);
+      }
+    });
+  // } catch (e) {
+  //   console.log("获取留言信息失败，可能因为没有获取用户信息");
+  // }
+}

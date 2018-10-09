@@ -228,3 +228,12 @@ overflow: hidden;
 margin-top: .32em;
 margin-left: 8px;
 }
+.tip {
+	background:#f00;
+	border-radius:50%;
+	width:14px;
+	height:14px;
+	top:10px;
+	left:10px;
+	position:absolute;
+}

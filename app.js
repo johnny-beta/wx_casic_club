@@ -74,6 +74,8 @@ App({
         }
       }
     })
+    //checkNewMessage();
+    
   },
 
   checkUpdate: function() {
@@ -131,6 +133,58 @@ App({
       "6": "拼车出行"
     },
     userInfo: null,
-    currentUser:Bmob1.User.current()
+    currentUser:Bmob1.User.current(),
   }
 })
+// function checkNewMessage(){
+//   try{
+//     var newMessageIDArr = new Array();
+//     var currentUser = Bmob1.User.current();
+//     var Diary = Bmob.Object.extend("diary");
+//     var query = new Bmob.Query(Diary);
+//     query.equalTo("openid", currentUser.openid);
+//     // 查询所有数据
+//     query.find({
+//       success: function (results) {
+
+//         for (var i = 0; i < results.length; i++) {
+//           var localLeaveMessageCount = wx.getStorageSync(results[i].id);
+//           //newMessageIDArr.push(results[i].id);
+          
+//           if (localLeaveMessageCount != results[i].attributes.leaveMessageCount) {
+//             newMessageIDArr.push(results[i].id);
+//           }
+
+//           if (localLeaveMessageCount == "") {
+//             try {
+//               // 同步接口立即写入
+//               wx.setStorageSync(results[i].id, results[i].attributes.leaveMessageCount);
+//               console.log("第0次写入成功");
+//             } catch (e) {
+//               console.log("第0次写入失败");
+//             }
+//           }
+//           //console.log(localLeaveMessageCount);
+//           //console.log(results[i].attributes.leaveMessageCount);
+//         }
+//         if (newMessageIDArr.length > 0){
+//           wx.showTabBarRedDot({
+//             index: 3
+//           })
+//         }
+//         try {
+//           // 同步接口立即写入
+//           wx.setStorageSync("newMessageIDArr", newMessageIDArr);
+//           console.log("第一次写入成功");
+//         } catch (e) {
+//           console.log("第一次写入失败");
+//         }
+//       },
+//       error: function (error) {
+//         console.log("查询失败: " + error.code + " " + error.message);
+//       }
+//     });
+//   }catch(e){
+//     console.log("获取留言信息失败，可能因为没有获取用户信息");
+//   }
+// }

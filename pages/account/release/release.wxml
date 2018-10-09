@@ -24,6 +24,9 @@
             <view class='weui-label_move' catchtap="switchClickView">
               <switch class="weui-label_move"  checked="{{item.isDisplay}}" catchchange='switchClick' data-id="{{item.objectId}}"></switch>
             </view>
+            <view wx:if="{{item.newMessage}}">
+                <view class='tip'></view>
+            </view>
             <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
               <image class="weui-media-box__thumb" src="{{item.imgurl}}" />
             </view>

@@ -26,3 +26,12 @@
 .userinfo-nickname{
   color: #fff;
 }
+.tip {
+	background:#f00;
+	border-radius:50%;
+	width:14px;
+	height:14px;
+	top:15px;
+	right:40px;
+	position:absolute;
+}
