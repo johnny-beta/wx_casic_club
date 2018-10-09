@@ -17,5 +17,6 @@
           <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
         </view>
     </view>
+    <ad unit-id="adunit-7829e0832f70f7d7"></ad>
    <template is="foot"  />
 </view>
