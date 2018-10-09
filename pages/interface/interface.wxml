@@ -19,7 +19,6 @@
     <view>
       <official-account></official-account>
     </view>
-    
     <view class="weui-grids">
       <block wx:for-items="{{grids}}" wx:key="{{index}}">
         <navigator url="{{item.url}}" bindtap="{{item.click}}" class="weui-grid" wx:if="{{item.click}}" hover-class="weui-grid_active">

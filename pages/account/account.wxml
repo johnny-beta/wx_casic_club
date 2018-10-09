@@ -1,80 +1,82 @@
-<import src="../../style/footer.wxml"  />
+<import src="../../style/footer.wxml" />
 <view class="page">
-    <view class="page__hd i-header">
-        <view class="g-bd">
-            <view></view>
-            <view class="g-bda">
-                <view bindtap="" class="g-bda-userinfo">
-                    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-                    <block wx:else>
-                      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-                      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-                    </block>
-                </view>
-            </view>
+  <view class="page__hd i-header">
+    <view class="g-bd">
+      <view></view>
+      <view class="g-bda">
+        <view bindtap="" class="g-bda-userinfo">
+          <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+          <block wx:else>
+            <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+            <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+          </block>
         </view>
+      </view>
     </view>
-    
-    <view class="page__bd">
-        <view class="weui-panel">
-            <view class="weui-panel__hd">账户中心</view>
-            <view class="weui-panel__bd">
-                <view class="weui-media-box weui-media-box_small-appmsg">
-                    <view class="weui-cells weui-cells_in-small-appmsg">
-                        <navigator url="release/release" class="weui-cell weui-cell_access"
-                                   hover-class="weui-cell_active">
-                            <view class="weui-cell__hd">
-                                <image src="/image/edits.png" style="width: 20px;height: 20px;margin-right: 5px"  />
-                            </view>
-                            <view class="weui-cell__bd weui-cell_primary">
-                                <view>我的发布</view>
-                            </view>
-                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-                        </navigator>
-                        <navigator url="collect/collect" class="weui-cell weui-cell_access"
-                                   hover-class="weui-cell_active">
-                            <view class="weui-cell__hd">
-                                <image src="/image/collect.png" style="width: 20px;height: 20px;margin-right: 5px"  />
-                            </view>
-                            <view class="weui-cell__bd weui-cell_primary">
-                                <view>我的收藏</view>
-                            </view>
-                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-                        </navigator>
-                        <navigator url="feedback/feedback" class="weui-cell weui-cell_access"
-                                   hover-class="weui-cell_active">
-                            <view class="weui-cell__hd">
-                                <image src="/image/edit.png" style="width: 20px;height: 20px;margin-right: 5px"  />
-                            </view>
-                            <view class="weui-cell__bd weui-cell_primary">
-                                <view>反馈建议</view>
-                            </view>
-                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-                        </navigator>
-                        <navigator url="freeduty/freeduty"  class="weui-cell weui-cell_access"
-                                   hover-class="weui-cell_active">
-                            <view class="weui-cell__hd">
-                                <image src="/image/login0.png" style="width: 20px;height: 20px;margin-right: 5px"  />
-                            </view>
-                            <view class="weui-cell__bd weui-cell_primary">
-                                <view>免责条款</view>
-                            </view>
-                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-                        </navigator>
-                         <navigator url="" bindtap="about" class="weui-cell weui-cell_access"
-                                   hover-class="weui-cell_active">
-                            <view class="weui-cell__hd">
-                                <image src="/image/help.png" style="width: 20px;height: 20px;margin-right: 5px"  />
-                            </view>
-                            <view class="weui-cell__bd weui-cell_primary">
-                                <view>关于本程序</view>
-                            </view>
-                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-                        </navigator>
-                    </view>
-                </view>
-            </view>
+  </view>
+
+  <view class="page__bd">
+    <view class="weui-panel">
+      <view class="weui-panel__hd">账户中心</view>
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+          <view class="weui-cells weui-cells_in-small-appmsg">
+            <navigator url="release/release" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__hd">
+                <image src="/image/edits.png" style="width: 20px;height: 20px;margin-right: 5px" />
+              </view>
+              <view class="weui-cell__bd weui-cell_primary">
+                <view>我的发布</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="collect/collect" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__hd">
+                <image src="/image/collect.png" style="width: 20px;height: 20px;margin-right: 5px" />
+              </view>
+              <view class="weui-cell__bd weui-cell_primary">
+                <view>我的收藏</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="feedback/feedback" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__hd">
+                <image src="/image/edit.png" style="width: 20px;height: 20px;margin-right: 5px" />
+              </view>
+              <view class="weui-cell__bd weui-cell_primary">
+                <view>反馈建议</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="freeduty/freeduty" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__hd">
+                <image src="/image/login0.png" style="width: 20px;height: 20px;margin-right: 5px" />
+              </view>
+              <view class="weui-cell__bd weui-cell_primary">
+                <view>免责条款</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="" bindtap="about" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__hd">
+                <image src="/image/help.png" style="width: 20px;height: 20px;margin-right: 5px" />
+              </view>
+              <view class="weui-cell__bd weui-cell_primary">
+                <view>关于本程序</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+          </view>
         </view>
+      </view>
     </view>
-    <template is="foot"  />
+    <view>
+      <official-account></official-account>
+    </view>
+    <view style='height:35rpx;'>
+      
+    </view>
+  </view>
+
+  <template is="foot" />
 </view>

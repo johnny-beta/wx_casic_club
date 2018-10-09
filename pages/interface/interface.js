@@ -2,16 +2,17 @@ var Bmob = require('../../utils/bmob.js');
 var common = require('../../utils/common.js');
 var app = getApp()
 var grids = [  
+  // {
+  //   "name": "国庆-晒照专区",
+  //   "ico": "guoqing.png",
+  //   "url": "../interface/type/type?typeNumber=10&typeName=晒照专区"
+  // },
+  // {
+  //   "name": "国庆-意见征集",
+  //   "ico": "guoqing2.png",
+  //   "url": "../interface/type/type?typeNumber=11&typeName=意见征集"
+  // },
   {
-    "name": "国庆-晒照专区",
-    "ico": "guoqing.png",
-    "url": "../interface/type/type?typeNumber=10&typeName=晒照专区"
-  },
-  {
-    "name": "国庆-意见征集",
-    "ico": "guoqing2.png",
-    "url": "../interface/type/type?typeNumber=11&typeName=意见征集"
-  },{
     "name": "航天置换",
     "ico": "zhihuan.png",
     "url": "../interface/type/type?typeNumber=1&typeName=航天置换"
@@ -39,13 +40,14 @@ var grids = [
   {
     "name": "拼车出行",
     "ico": "car.png",
-    "url": "../interface/type/type?typeNumber=6&typeName=拼车出行" ,   
+    "url": "../interface/type/type?typeNumber=6&typeName=拼车出行",   
     "click": "autuLogin1"
   },
   
   {
     "name": "群聊",
     "ico": "liao.png",
+    //"url": "../interface/chatroom/chatroom",
     "click": "autuLogin"
   }
 
