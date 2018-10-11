@@ -35,7 +35,10 @@
               </view>
 
               <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                <view class="weui-media-box__title ">{{item.title}}<view class="weui-badge" wx:if="{{item.isNew}}" style="margin-left: 2px;margin-top:0;padding-top:0">新</view>
+                <view class="weui-media-box__title" style="width:95%;">
+                <view class="weui-badge" wx:if="{{!item.isDisplay}}" style="margin-left: 2px;margin-top:0;padding-top:0">已失效</view> 
+                <view class="weui-badge" wx:if="{{item.isNew}}" style="margin-left: 2px;margin-top:0;padding-top:0">新</view> 
+                {{item.title}}
                 </view>
                 <view class="weui-media-box__desc_last">{{grids[item.type]}} -- {{item.createdAt}}</view>
                 <view class="weui-media-box__desc">{{item.content}}</view>

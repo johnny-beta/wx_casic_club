@@ -355,7 +355,9 @@ function getList(t, k) {
   
   var typeNumberTemp = parseInt(typeNumber);
   mainQuery.equalTo("type", typeNumberTemp);
+  mainQuery.descending('isDisplay');
   mainQuery.descending('createdAt');
+  
 
   mainQuery.find({
     success: function(results) {
