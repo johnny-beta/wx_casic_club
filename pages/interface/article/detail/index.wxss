@@ -32,3 +32,17 @@
   margin-bottom: .34em;
   font-weight: 200;
 }
+.com-widget-goTop { 
+    position: fixed; 
+    bottom: 125px; 
+    right: 5px; 
+    overflow: hidden; 
+    z-index: 500; 
+} 
+.userPic_article {
+  width: 75rpx;
+  height: 75rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 3px;
+}

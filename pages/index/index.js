@@ -123,6 +123,7 @@ function getList(t, k) {
   //   //console.log(k)
   //   query.equalTo("title", k);
   // }
+  mainQuery.descending('isStick');
   mainQuery.descending('isDisplay');
   mainQuery.descending('createdAt');
   mainQuery.limit(that.data.limit);

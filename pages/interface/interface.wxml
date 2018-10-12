@@ -3,11 +3,9 @@
   <view class="page__hd ">
     <view class=""  >
       <swiper indicator-dots="true" autoplay="false" circular="true" interval="5000" duration="300" previous-margin="0px" next-margin="0px" >
-        <block wx:for="{{background}}" wx:key="*this">
+        <block wx:for="{{background}}" wx:key="item" >
           <swiper-item bindtap="preImg">
-      
-              <image  mode="widthFix" style='width:100%;overflow:show;' src="{{item}}"></image>
-           
+              <image  mode="widthFix" style='width:100%;overflow:show;' data-src="{{item}}" src="{{item.imgurl}}"></image>          
           </swiper-item>
         </block>
       </swiper>
@@ -34,5 +32,5 @@
 
     </view>
   </view>
-  <ad unit-id="adunit-1f3debf4bce237da"></ad>
+  <!-- <ad unit-id="adunit-1f3debf4bce237da"></ad> -->
 </view>

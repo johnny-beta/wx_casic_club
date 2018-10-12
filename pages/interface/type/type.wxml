@@ -27,19 +27,32 @@
         <view class="weui-panel__bd">
           <block wx:if="{{diaryList.length>0}}">
             <navigator class="weui-media-box weui-media-box_appmsg" wx:for="{{diaryList}}" wx:key="diaryItem" url="/pages/index/detail/index?objectId={{item.objectId}}">
-              <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                <image class="weui-media-box__thumb" src="{{item.imgurl}}" />
-              </view>
-
-              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                <view class="weui-media-box__title" style="width:95%;">
-                <view class="weui-badge" wx:if="{{!item.isDisplay}}" style="margin-left: 2px;margin-top:0;padding-top:0">已失效</view> 
-                <view class="weui-badge" wx:if="{{item.isNew}}" style="margin-left: 2px;margin-top:0;padding-top:0">新</view> 
-                {{item.title}}
+              <view class="weui-media-box weui-media-box_appmsg weui-box-width" wx:if="{{item.isDisplay}}">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg image_size">
+                  <image class="weui-media-box__thumb" mode="aspectFill" src="{{item.imgurl}}" />    
+                  <image class="image_zhiding" wx:if="{{item.isStick}}" src="/image/zhiding.png" />     
                 </view>
-                <view class="weui-media-box__desc_last">{{item.createdAt}}</view>
-                <view class="weui-media-box__desc">{{item.content}}</view>
-                <view class="weui-media-box__desc_last">  {{item.praiseNum || 0}}次点赞 {{item.leaveMessageCount || 0}}次评论 {{item.count || 0}}次浏览</view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg weui-box-width">
+                  <view class="weui-media-box__title">
+                    <view class="weui-badge" wx:if="{{item.isNew}}" style="margin-left: 2px;margin:0;">新</view>{{item.title}}
+                  </view>
+                  <view class="weui-media-box__desc_last">{{typeName}} {{item.createdAt}}</view>
+                  <view class="weui-media-box__desc">{{item.content}}</view>
+                  <view class="weui-media-box__desc_last">  {{item.praiseNum || 0}}次点赞 {{item.leaveMessageCount || 0}}次评论 {{item.count || 0}}次浏览</view>
+                </view>
+              </view>
+              <view class="weui-media-box weui-media-box_appmsg weui-box-width" wx:if="{{!item.isDisplay}}" style="background-color:rgba(230, 227, 227, 0.979)">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg image_size">
+                  <image class="weui-media-box__thumb" mode="aspectFill" src="{{item.imgurl}}" />
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg weui-box-width">
+                  <view class="weui-media-box__title" style="width:95%;">
+                  [已失效]{{item.title}}
+                  </view>
+                  <view class="weui-media-box__desc_last">{{typeName}} {{item.createdAt}}</view>
+                  <view class="weui-media-box__desc weui-box-width">{{item.content}}</view>
+                  <view class="weui-media-box__desc_last">  {{item.praiseNum || 0}}次点赞 {{item.leaveMessageCount || 0}}次评论 {{item.count || 0}}次浏览</view>
+                </view>
               </view>
             </navigator>
           </block>

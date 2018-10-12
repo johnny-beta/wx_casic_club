@@ -7,7 +7,14 @@
   margin-top: 0.5em;
   margin-bottom: 0.5em;
 }
-
+.weui-reward_center{
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
 .weui-article_h1 {
   font-size: 38rpx;
   margin-left: 0.8em;
@@ -140,4 +147,42 @@
   top: 3px;
   display: block;
   opacity: 0;
+}
+.supportMoney{
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: center;  
+
+
+}
+.supportMoneySub{
+  display: flex;
+  height: 50px;
+  width:50px;
+  margin-left: 10px;
+  align-items: center;
+  justify-content: center;  
+  border-radius: 10px;
+  border-color:  rgb(238, 58, 13);
+  border-style: solid; 
+  border-width: 1px;
+}
+.supportMoneySubChecked{
+  display: flex;
+  height: 50px;
+  width:50px;
+  margin-left: 10px;
+  align-items: center;
+  justify-content: center;  
+  border-radius: 10px;
+  border-color:  rgb(44, 100, 221);
+  border-style: solid; 
+  border-width: 1px;
+}
+.reward-icon {
+  width: 150rpx;
+  height: 150rpx;
+  overflow: hidden;
+  margin-right: 3px;
 }
