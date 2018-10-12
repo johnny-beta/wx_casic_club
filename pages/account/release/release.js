@@ -60,9 +60,9 @@ Page({
             // 同步接口立即返回值
             var newMessageIDArr = wx.getStorageSync("newMessageIDArr");
             //console.log(newMessageIDArr);
-            console.log("第三次读取成功");
+            //console.log("第三次读取成功");
           } catch (e) {
-            console.log('第三次读取失败')
+            //console.log('第三次读取失败')
           }
           for (var i = 0; i < results.length;i++ ){
             if(newMessageIDArr.indexOf(results[i].id) != -1){

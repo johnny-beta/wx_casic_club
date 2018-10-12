@@ -35,6 +35,11 @@ Page({
       }
     });
   },
+  returnHome: function () {
+    wx.switchTab({
+      url: '/pages/interface/interface',
+    })
+  },
   bindClickImg: function (e) {
     wx.previewImage({
     //  current: imageArr[selecIndex],  // 当前显示图片的http链接，注意这里不能放本地图片

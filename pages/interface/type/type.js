@@ -103,6 +103,7 @@ Page({
       diary.set("openid", app.globalData.currentUser.openid); 
       diary.set("isNew", true); 
       diary.set("isDisplay", true); 
+      diary.set("isStick", false);
       diary.set("praiseNum", 0); 
       diary.set("leaveMessageCount", 0); 
       diary.set("count", 0); 
@@ -355,6 +356,7 @@ function getList(t, k) {
   
   var typeNumberTemp = parseInt(typeNumber);
   mainQuery.equalTo("type", typeNumberTemp);
+  mainQuery.descending('isStick');
   mainQuery.descending('isDisplay');
   mainQuery.descending('createdAt');
   

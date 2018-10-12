@@ -154,3 +154,22 @@ textarea, input {
   overflow: hidden;
   margin-right: 3px;
 }
+.weui-box-width{
+  width: 95%;
+}
+.tip_new{
+  position: absolute;
+  left: 10px;
+  top: 12px;
+}
+.image_size{
+  width: 70px;
+  height: 70px;
+}
+.image_zhiding{
+  position: absolute;
+  left: 46px;
+  top: 17px;
+  width: 39px;
+  height: 30px;
+}
