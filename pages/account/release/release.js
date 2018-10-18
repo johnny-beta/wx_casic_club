@@ -21,6 +21,7 @@ Page({
   onLoad: function () {
     app = getApp();
     var that = this;
+    //console.log(app.globalData);
     if (app.globalData.userInfo){
       that.setData({     
         userInfo: app.globalData.userInfo
@@ -95,7 +96,7 @@ Page({
 
   },
   pullUpLoad: function (e) {
-    console.log(e);
+    //console.log(e);
     var limit = that.data.limit + 2
     this.setData({
       limit: limit
