@@ -12,7 +12,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.2.4",
-	"appid": "wxc775f6df781e19b0",
+	"appid": "wx43ee6e9490f4653a",
 	"projectname": "%E4%BA%8C%E9%99%A2%E6%B2%9F%E9%80%9A",
 	"isGameTourist": false,
 	"condition": {
@@ -33,13 +33,31 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 3,
 			"list": [
 				{
 					"id": 0,
 					"name": "11",
 					"pathName": "pages/index/detail/index",
 					"query": "objectId=6f12f605f5"
+				},
+				{
+					"id": -1,
+					"name": "11",
+					"pathName": "pages/interface/interface",
+					"query": "objectId=6f12f605f5",
+					"scene": "1047"
+				},
+				{
+					"id": -1,
+					"name": "222",
+					"pathName": "pages/interface/chatroom/chatroom",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "support",
+					"pathName": "pages/account/support/support"
 				}
 			]
 		}

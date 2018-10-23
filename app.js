@@ -1,14 +1,16 @@
 const Bmob = require('utils/bmob.js') 
 const Bmob1 = require('utils/Bmob-1.6.4.min.js') 
+var BmobSocketIo = require('utils/bmobSocketIo.js').BmobSocketIo;
+
 Bmob.initialize(
-  '0bfe14d135afa2dd2abf54bb979ef145',
-  'ce5c1c19a568921b07474e04839915d3'
+  '8ba6ca0020b02ac927a510d62a7ff376',
+  'a52372aed4d4257237272a4479fc93f3'
 )
 Bmob1.initialize(
-  '0bfe14d135afa2dd2abf54bb979ef145',
-  'ce5c1c19a568921b07474e04839915d3'
+  '8ba6ca0020b02ac927a510d62a7ff376',
+  'a52372aed4d4257237272a4479fc93f3'
 )
-
+BmobSocketIo.initialize("8ba6ca0020b02ac927a510d62a7ff376");
 App({
   onLaunch: function () {
     this.checkUpdate();    
@@ -74,8 +76,6 @@ App({
         }
       }
     })
-    //checkNewMessage();
-    
   },
 
   checkUpdate: function() {
@@ -121,10 +121,10 @@ App({
     }
   },
   globalData: {
-    version: '1.5.2',
+    version: '1.6.5',
     grids: {
-      "10": "国庆-晒照专区",
-      "11": "国庆-意见征集",
+      "10": "航天锦鲤",
+      // "11": "国庆-意见征集",
       "1": "航天置换",
       "2": "航天漫步",
       "3": "航天宝贝",
@@ -133,58 +133,6 @@ App({
       "6": "拼车出行"
     },
     userInfo: null,
-    currentUser:Bmob1.User.current(),
+    currentUser:Bmob1.User.current()
   }
 })
-// function checkNewMessage(){
-//   try{
-//     var newMessageIDArr = new Array();
-//     var currentUser = Bmob1.User.current();
-//     var Diary = Bmob.Object.extend("diary");
-//     var query = new Bmob.Query(Diary);
-//     query.equalTo("openid", currentUser.openid);
-//     // 查询所有数据
-//     query.find({
-//       success: function (results) {
-
-//         for (var i = 0; i < results.length; i++) {
-//           var localLeaveMessageCount = wx.getStorageSync(results[i].id);
-//           //newMessageIDArr.push(results[i].id);
-          
-//           if (localLeaveMessageCount != results[i].attributes.leaveMessageCount) {
-//             newMessageIDArr.push(results[i].id);
-//           }
-
-//           if (localLeaveMessageCount == "") {
-//             try {
-//               // 同步接口立即写入
-//               wx.setStorageSync(results[i].id, results[i].attributes.leaveMessageCount);
-//               console.log("第0次写入成功");
-//             } catch (e) {
-//               console.log("第0次写入失败");
-//             }
-//           }
-//           //console.log(localLeaveMessageCount);
-//           //console.log(results[i].attributes.leaveMessageCount);
-//         }
-//         if (newMessageIDArr.length > 0){
-//           wx.showTabBarRedDot({
-//             index: 3
-//           })
-//         }
-//         try {
-//           // 同步接口立即写入
-//           wx.setStorageSync("newMessageIDArr", newMessageIDArr);
-//           console.log("第一次写入成功");
-//         } catch (e) {
-//           console.log("第一次写入失败");
-//         }
-//       },
-//       error: function (error) {
-//         console.log("查询失败: " + error.code + " " + error.message);
-//       }
-//     });
-//   }catch(e){
-//     console.log("获取留言信息失败，可能因为没有获取用户信息");
-//   }
-// }
