@@ -8,9 +8,11 @@
     "pages/account/account",
     "pages/account/feedback/feedback",
     "pages/account/freeduty/freeduty",
+    "pages/account/support/support",
     "pages/account/release/release",
     "pages/account/collect/collect",
-    "pages/interface/type/type"
+    "pages/interface/type/type",
+    "pages/interface/chatroom/chatroom"
   ],
   "window": {
     "backgroundTextStyle": "light",

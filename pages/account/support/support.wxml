@@ -1,0 +1,54 @@
+
+<view class="container">
+  <view class="page-head">
+    <view class="page-head-title">赞助支持</view>
+    <view class="page-head-line"></view>
+    <!-- S<view wx:if="{{desc}}" class="page-head-desc">{{desc}}</view> -->
+  </view>
+  <view class="page-body">
+    <view class="page-section">
+
+      <view  class="supportMoney"> 
+        <view wx:if="{{checkMoneyFlag1}}" class ="supportMoneySub" data-id="1" data-value="1" bindtap="chooseMoney">¥1</view>
+        <view wx:elif="{{!checkMoneyFlag1}}" class ="supportMoneySubChecked" data-id="1" data-value="1" bindtap="chooseMoney">¥1</view>
+
+        <view wx:if="{{checkMoneyFlag2}}" class ="supportMoneySub" data-id="2" data-value="5" bindtap="chooseMoney">¥5</view>
+        <view wx:elif="{{!checkMoneyFlag2}}" class ="supportMoneySubChecked" data-id="2" data-value="5" bindtap="chooseMoney">¥5</view>
+
+        <view wx:if="{{checkMoneyFlag3}}" class ="supportMoneySub" data-id="3" data-value="10" bindtap="chooseMoney">¥10</view>
+        <view wx:elif="{{!checkMoneyFlag3}}" class ="supportMoneySubChecked" data-id="3" data-value="10" bindtap="chooseMoney">¥10</view>
+
+        <view wx:if="{{checkMoneyFlag4}}" class ="supportMoneySub" data-id="4" data-value="20" bindtap="chooseMoney">其他</view>
+        <view wx:elif="{{!checkMoneyFlag4}}" class ="supportMoneySubChecked" data-id="4" data-value="20" bindtap="chooseMoney">其他</view>
+      </view>
+      <view wx:if="{{checkMoneyFlag4}}" >
+        <view class="price"><input class="weui-input" type="digit" bindinput="amountInput" placeholder="金额" /></view>
+      </view>
+ 
+      <view class="desc">赞助金额将用于航帮帮后续研发和活动推广，以提升用户体验度和满意度，如您有更好的赞助方式请添加微信402931147。</view>
+      <view wx:if="{{checkMoneyFlag4}}" class="btn-area">
+        <button type="primary" bindtap="requestPayment" loading="{{loading}}">支付</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="js_dialog" id="androidDialog2" style="opacity:1;" wx:if="{{thankPageFlag}}">
+  <view class="weui-mask" ></view>
+  <view class="weui-dialog weui-skin_android" >
+       <image class="userinfo-avatar" src="{{userInfo.userPic}}"></image>
+       <view style='display:flex;flex-direction:column'> 
+        <view class="weui-dialog__title" >尊敬的{{userInfo.nickName}}</view>
+        <view class="weui-dialog__title" >您已经成功支付{{amount}}元</view>
+        <view class="weui-cells__title" style='display:flex;flex-direction:column'>  感谢您的慷慨赞助，赞助金额将用于航帮帮后续研发和活动推广，以提升用户体验度和满意度，如您有更好的赞助方式请添加微信402931147。</view>
+      </view>
+
+
+      <view class="weui-dialog__ft">
+        <view class="weui-dialog__btn weui-dialog__btn_default thank-button" bindtap="continueSupport">继续支付</view>
+        <view class="weui-dialog__btn weui-dialog__btn_default thank-button" bindtap="returnHome">返回首页</view>
+      </view>
+
+  </view>
+
+</view>
