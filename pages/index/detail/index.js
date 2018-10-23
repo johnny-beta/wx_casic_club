@@ -507,7 +507,7 @@ Array.prototype.remove = function (val) {
   if (index > -1) {
     this.splice(index, 1);
   }
-}
+};
 function weChatPayTest(that) {
   // console.log(openId);
   // console.log(parseFloat(amount));
@@ -545,84 +545,6 @@ function weChatPayTest(that) {
         orderData.set("userNickName", that.data.currentUser.nickName);
         orderData.set("paymentGoods", diaryTitle);
         orderData.set("paymentDescription", diaryType + "-" + diaryTitle);
-        orderData.set("paymentAmount", amount);
-        orderData.set("orderNumber", orderId);
-        //添加数据，第一个入口参数是null
-        orderData.save(null, {
-          success: function (result) {
-            // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
-            console.log("订单成功保存");
-            that.setData({
-              thankPageFlag: true,
-              amount: amount
-            })
-          },
-          error: function (result, error) {
-            // 添加失败
-            console.log('订单保存失败');
-            that.setData({
-              checkMoneyFlag1: false,
-              checkMoneyFlag2: false,
-              checkMoneyFlag3: false,
-              checkMoneyFlag4: false
-            })
-          }
-        });
-      },
-      'fail': function (res) {
-        //付款失败
-        console.log('付款失败');
-        console.log(res);
-        that.setData({
-          checkMoneyFlag1: false,
-          checkMoneyFlag2: false,
-          checkMoneyFlag3: false,
-          checkMoneyFlag4: false
-        })
-      }
-    })
-
-  }, function (err) {
-    console.log('服务端返回失败');
-    console.log(err);
-  });
-};};function weChatPayTest(that) {
-  // console.log(openId);
-  // console.log(parseFloat(amount));
-  Bmob.Pay.wechatPay(parseFloat(amount), "帖子打赏", diaryTitle+"-"+diaryType, that.data.currentUser.openid).then(function (resp) {
-    //console.log(resp);
-
-    // that.setData({
-    //   loading: true,
-    //   dataInfo: resp
-    // })
-
-    //服务端返回成功
-    var timeStamp = resp.timestamp,
-      nonceStr = resp.noncestr,
-      packages = resp.package,
-      orderId = resp.out_trade_no,//订单号，如需保存请建表保存。
-      sign = resp.sign;
-
-    //打印订单号
-    console.log(orderId);
-
-    //发起支付
-    wx.requestPayment({
-      'timeStamp': timeStamp,
-      'nonceStr': nonceStr,
-      'package': packages,
-      'signType': 'MD5',
-      'paySign': sign,
-      'success': function (res) {
-        //付款成功,这里可以写你的业务代码
-        //console.log(res);
-        var OrderData = Bmob.Object.extend("order_data");
-        var orderData = new OrderData();
-        orderData.set("userOpenid", that.data.currentUser.openid);
-        orderData.set("userNickName", that.data.currentUser.nickName);
-        orderData.set("paymentGoods", "航帮帮赞助款");
-        orderData.set("paymentDescription", "用于航帮帮推广研发");
         orderData.set("paymentAmount", amount);
         orderData.set("orderNumber", orderId);
         //添加数据，第一个入口参数是null
