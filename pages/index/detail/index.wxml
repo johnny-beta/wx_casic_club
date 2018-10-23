@@ -38,6 +38,27 @@
         <text selectable='true'>{{rows.content}}</text>
       </view>
     </view>
+    <view class='weui-img_center' bindtap="rewardCheck">
+          <view class='weui-img_center'>
+            <image class="userPic_article"  src="/image/dashang.png"></image>
+          </view>
+    </view>
+    <view style="align-items: center; justify-content: center;display: flex; flex-direction:column" wx:if="{{rewardCheckFlag}}">
+      <view  class="supportMoney" > 
+          <view wx:if="{{checkMoneyFlag1}}" class ="supportMoneySub" data-id="1" data-value="1" bindtap="chooseMoney">¥1</view>
+          <view wx:elif="{{!checkMoneyFlag1}}" class ="supportMoneySubChecked" data-id="1" data-value="1" bindtap="chooseMoney">¥1</view>
+
+          <view wx:if="{{checkMoneyFlag2}}" class ="supportMoneySub" data-id="2" data-value="5" bindtap="chooseMoney">¥5</view>
+          <view wx:elif="{{!checkMoneyFlag2}}" class ="supportMoneySubChecked" data-id="2" data-value="5" bindtap="chooseMoney">¥5</view>
+
+          <view wx:if="{{checkMoneyFlag3}}" class ="supportMoneySub" data-id="3" data-value="10" bindtap="chooseMoney">¥10</view>
+          <view wx:elif="{{!checkMoneyFlag3}}" class ="supportMoneySubChecked" data-id="3" data-value="10" bindtap="chooseMoney">¥10</view>
+
+          <view wx:if="{{checkMoneyFlag4}}" class ="supportMoneySub" data-id="4" data-value="20" bindtap="chooseMoney">¥20</view>
+          <view wx:elif="{{!checkMoneyFlag4}}" class ="supportMoneySubChecked" data-id="4" data-value="20" bindtap="chooseMoney">¥20</view>
+      </view>
+      <view class="weui-article_update_time" style="margin-top:10px;">若此贴对您有所帮助，可通过航帮帮打赏</view>
+    </view>
     <view class="weui-panel__hd">留言区</view>
     <view class="weui-panel__bd">
       <block wx:if="{{leaveMessageArr.length>0}}">

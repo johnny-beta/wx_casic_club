@@ -185,4 +185,35 @@
   height: 150rpx;
   overflow: hidden;
   margin-right: 3px;
+}.supportMoney{
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: center;  
+
+
 }
+.supportMoneySub{
+  display: flex;
+  height: 50px;
+  width:50px;
+  margin-left: 10px;
+  align-items: center;
+  justify-content: center;  
+  border-radius: 10px;
+  border-color:  rgb(238, 58, 13);
+  border-style: solid; 
+  border-width: 1px;
+}
+.supportMoneySubChecked{
+  display: flex;
+  height: 50px;
+  width:50px;
+  margin-left: 10px;
+  align-items: center;
+  justify-content: center;  
+  border-radius: 10px;
+  border-color:  rgb(44, 100, 221);
+  border-style: solid; 
+  border-width: 1px;
+}}
