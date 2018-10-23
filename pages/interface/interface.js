@@ -66,7 +66,7 @@ Page({
     this.getBG();
      
     // wx.request({
-    //   url: "https://hbb.htxytech.cn:8000", //仅为示例，并非真实的接口地址
+    //   url: "https://hbb.htxytech.cn:8000/hello", //仅为示例，并非真实的接口地址
     //   data: {
     //     x: '',
     //     y: ''
@@ -75,7 +75,7 @@ Page({
     //     'content-type': 'application/json' // 默认值
     //   },
     //   success(res) {
-    //     console.log(res.data)
+    //     console.log('22'+res.data)
     //   }
     // })
     //initLeaveMessageDataSheet();

@@ -8,6 +8,7 @@ Bmob.initialize(
 )
 Bmob1.initialize(
   '8ba6ca0020b02ac927a510d62a7ff376',
+
   'a52372aed4d4257237272a4479fc93f3'
 )
 BmobSocketIo.initialize("8ba6ca0020b02ac927a510d62a7ff376");
@@ -121,7 +122,7 @@ App({
     }
   },
   globalData: {
-    version: '1.7.0',
+    version: '1.7.1',
     grids: {
       "10": "航天锦鲤",
       // "11": "国庆-意见征集",
