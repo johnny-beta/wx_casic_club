@@ -19,7 +19,7 @@
             <view class="weui-article_name">{{nickName}}</view>
             <image wx:if="{{collection}}" class="addPraise" src="/image/beenPraised.png"></image>
             <image wx:else class="addPraise" bindtap="toCollect" src="/image/praise.png"></image>
-            <text class="weui-articel_praise">{{pNum}}</text>
+            <text class="weui-articel_praise">{{pNum}} (每人每天可点一次)</text>
           </view>
 
           <view class='' style='display:flex;'>
@@ -89,7 +89,7 @@
         </view>
         <view class="weui-article_update_time" style="margin-top:10px;">若此贴对您有所帮助，可通过航帮帮打赏</view>
     </view>
-      <!-- <ad unit-id="adunit-7829e0832f70f7d7"></ad>  -->
+      <ad unit-id="adunit-7829e0832f70f7d7"></ad> 
       <view class="content-blank">
       </view>
        

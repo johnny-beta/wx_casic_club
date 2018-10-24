@@ -358,6 +358,10 @@ function getList(t, k) {
   mainQuery.equalTo("type", typeNumberTemp);
   mainQuery.descending('isStick');
   mainQuery.descending('isDisplay');
+  if (typeNumberTemp == 10) {
+    mainQuery.descending('isNew');
+    mainQuery.descending('praiseNum');
+  }
   mainQuery.descending('createdAt');
   
 

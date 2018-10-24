@@ -123,9 +123,11 @@ function getList(t, k) {
   //   //console.log(k)
   //   query.equalTo("title", k);
   // }
+  query.notEqualTo("type", 10);
   mainQuery.descending('isStick');
   mainQuery.descending('isDisplay');
   mainQuery.descending('createdAt');
+
   mainQuery.limit(that.data.limit);
 
   //var mainQuery = Bmob.Query.or(query, query1);

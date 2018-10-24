@@ -1,6 +1,5 @@
 
 <view class="page">
-  <view class="page__hd ">
     <view class=""  >
       <swiper indicator-dots="true" autoplay="false" circular="true" interval="5000" duration="300" previous-margin="0px" next-margin="0px" >
         <block wx:for="{{background}}" wx:key="item" >
@@ -11,7 +10,23 @@
       </swiper>
      </view>
   </view>
+  
+  <!-- <view class='jilu'>
+  ----------航天锦鲤目前参加人数{{jinLiPeopleNumber}}人----------
+  </view> -->
+  <view class="weui-img_center">
+      <view class="jili-sumPeople">{{sumPeople}}</view>
+      
+      <view wx:if="{{notJinliFlag}}" class="jili-userPraiseNumNot">-</view>
+      <view wx:elif="{{!notJinliFlag}}" class="jili-userPraiseNum">{{userPraiseNum}}</view>
 
+      <image src='/image/jilu.png' style='width:100%;overflow:show;' mode="widthFix"></image>
+      <view class="jili-sumPraiseNum">{{sumPraiseNum}}</view>
+
+      <view wx:if="{{notJinliFlag}}" class="jili-userJinliNot">-</view>
+      <view wx:elif="{{!notJinliFlag}}" class="jili-userJinli">{{userJinli}}%</view>
+      <!-- <view>{{num1}}</view> -->
+  </view> 
 
   <view class="page__bd">
     <view>
@@ -29,8 +44,7 @@
           <view class="weui-grid__label">{{item.name}}</view>
         </navigator>
       </block>
-
     </view>
-  </view>
-  <!-- <ad unit-id="adunit-1f3debf4bce237da"></ad> -->
+  
+  <ad unit-id="adunit-1f3debf4bce237da"></ad>
 </view>

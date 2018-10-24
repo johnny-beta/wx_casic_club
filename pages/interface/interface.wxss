@@ -12,3 +12,71 @@ swiper {
   height: 420rpx;
   
 }
+.weui-img_center {  
+  height: 138rpx;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+ .jili-sumPeople{
+  width: 0px;
+  position: relative;
+  right: -143rpx;
+  top: 57rpx;
+  color: red;
+  font-size:12px;
+  font-weight:bold;
+} 
+ .jili-sumPraiseNum{
+  width: 0px;
+  position: relative;
+  left: -94rpx;
+  top: 57rpx;
+  color: red;
+  font-size:12px;
+  font-weight:bold;
+} 
+ .jili-userPraiseNum{
+  width: 0px;
+  position: relative;
+  right: -245rpx;
+  top: 20rpx;
+  color: rgb(255, 255, 255);
+  font-size:20px;
+} 
+ .jili-userPraiseNumNot{
+  width: 0px;
+  position: relative;
+  right: -255rpx;
+  top: 20rpx;
+  color: rgb(255, 255, 255);
+  font-size:25px;
+} 
+ .jili-userJinli{
+  width: 0px;
+  position: relative;
+  left: -315rpx;
+  top: 21rpx;
+  color: rgb(255, 255, 255);
+  font-size:20px;
+} 
+ .jili-userJinliNot{
+  width: 0px;
+  position: relative;
+  left: -287rpx;
+  top: 21rpx;
+  color: rgb(255, 255, 255);
+  font-size:25px;
+} 
+/* .jilu{
+  height: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  background-color: rgba(236, 62, 62, 0.747);
+  color: white;
+  font-size: 15px;
+  
+} */

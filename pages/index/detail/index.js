@@ -546,7 +546,7 @@ function weChatPayTest(that) {
         orderData.set("paymentGoods", diaryTitle);
         orderData.set("paymentDescription", diaryType + "-" + diaryTitle);
         orderData.set("paymentAmount", amount);
-        orderData.set("orderNumber", orderId);
+        orderData.set("orderNumber", orderId);   
         //添加数据，第一个入口参数是null
         orderData.save(null, {
           success: function (result) {
