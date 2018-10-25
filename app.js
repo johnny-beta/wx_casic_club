@@ -18,11 +18,7 @@ App({
     wx.login({
       success: res => {
         if (res.code) {
-          Bmob1.User.auth().then(res => {
-            console.log('一键登陆成功')
-          }).catch(err => {
-            console.log(err)
-          });
+          loginCheck();
           Bmob1.User.requestOpenId(res.code, { 
             success: function (userData) {
               console.log(userData)
@@ -30,7 +26,6 @@ App({
                 success: function (result) {
                   var userInfo = result.userInfo
                   var nickName = userInfo.nickName
-
                   var user = new Bmob.User(); //开始注册用户
                   user.set("username", nickName);
                   user.set("password", userData.openid); //因为密码必须提供，但是微信直接登录小程序是没有密码的，所以用openId作为唯一密码
@@ -137,3 +132,11 @@ App({
     currentUser:Bmob1.User.current()
   }
 })
+function loginCheck(){
+  Bmob1.User.auth().then(res => {
+    console.log('一键登陆成功');
+  }).catch(err => {
+    console.log(err);
+    loginCheck();
+  });
+}

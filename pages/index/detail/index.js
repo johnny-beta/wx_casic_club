@@ -1,7 +1,7 @@
 // pages/index/detail/index.js
 var Bmob = require('../../../utils/bmob.js');
 var common = require('../../../utils/common.js');
-const Bmob1 = require('../../../utils/Bmob-1.6.4.min.js') 
+const Bmob1 = require('../../../utils/Bmob-1.6.4.min.js')
 var app = getApp();
 var date = new Date();
 var myDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
@@ -36,8 +36,8 @@ Page({
     checkMoneyFlag4: false,
     grids: app.globalData.grids
   },
-  onShareAppMessage: function() {},
-  onLoad: function(e) {
+  onShareAppMessage: function () { },
+  onLoad: function (e) {
     var that = this;
     if (!e.objectId) {
       common.showTip("请重新进入", "loading");
@@ -50,22 +50,24 @@ Page({
     //上面两个变量重复了。用户的有关信息，统一以下面的变量currentUser为准
     if (!app.globalData.currentUser) {
       app.globalData.currentUser = Bmob1.User.current()
-    } 
+    }
     that.data.currentUser = app.globalData.currentUser
-    
+
     //查询页面帖子内容
     getDiaryContent(that);
     //查询收藏状态
-    getCollectionStatus(that);
+    if (that.data.currentUser) {
+      getCollectionStatus(that);
+    }
     //查询点赞状态
     getPraiseStatus(that);
 
   },
-  onReady: function() {
+  onReady: function () {
     // 页面渲染完成
   },
 
-  onShow: function() {
+  onShow: function () {
     // 页面显示
     var that = this;
     //留言功能
@@ -79,13 +81,13 @@ Page({
       }
     })
   },
-  onHide: function() {
+  onHide: function () {
     // 页面隐藏
   },
-  onUnload: function() {
+  onUnload: function () {
     // 页面关闭
   },
-  preImg: function(o) {
+  preImg: function (o) {
     var that = this
     wx.previewImage({
       current: '',
@@ -93,7 +95,7 @@ Page({
     })
 
   },
-  sendMessage: function(e) {
+  sendMessage: function (e) {
     //console.log('form发生了submit事件，携带数据为：', e)
     var that = this;
     that.setData({
@@ -106,7 +108,7 @@ Page({
         var user = new Bmob.Query(User);
         user.equalTo("openid", that.data.currentUser.openid);
         user.find({
-          success: function(userResults) {
+          success: function (userResults) {
             var LeaveMessage = Bmob.Object.extend("leave_message");
             var leaveMessage = new LeaveMessage();
             var user1 = new User();
@@ -126,7 +128,7 @@ Page({
               "messageupdateAt": myDate
             });
             leaveMessage.save(null, {
-              success: function(result) {
+              success: function (result) {
                 //console.log('留言保存结果', result)
                 that.setData({
                   messageInput: "",
@@ -135,7 +137,7 @@ Page({
                   buttonDisable: false
                 });
                 //成功留言leaveMessageCount+1
-                (function() {
+                (function () {
                   var resultDiary = that.data.rows;
                   resultDiary.increment("leaveMessageCount");
                   resultDiary.save();
@@ -147,24 +149,24 @@ Page({
                     'diaryId': that.data.currentObjectId,
                     'leaveMsgId': result.id
                   }, {
-                    success: function(result) {
-                      console.log('result' + result);
-                    },
-                    error: function(error) {
-                      console.log('error' + error);
-                    }
-                  })
+                      success: function (result) {
+                        console.log('result' + result);
+                      },
+                      error: function (error) {
+                        console.log('error' + error);
+                      }
+                    })
                   common.showTip('评论成功！您是首位留言者，将会发通知给该作者', 'success')
                 } else {
                   common.showTip('评论成功！', 'success')
                 }
               },
-              error: function(result, error) {
+              error: function (result, error) {
 
               }
             });
           },
-          error: function(error) {
+          error: function (error) {
             console.log("查询失败: " + error.code + " " + error.message);
           }
         });
@@ -175,13 +177,13 @@ Page({
       common.showModal("获取昵称和头像之后才能评论哦，请去我的选项中获取~~", "提示");
     }
   },
-  userMessageInput: function(e) {
+  userMessageInput: function (e) {
     var that = this;
     that.setData({
       messageInput: e.detail.value
     })
   },
-  userMessageFocus: function(e) {
+  userMessageFocus: function (e) {
     var that = this;
     if (!that.data.messageInput) {
       that.setData({
@@ -190,7 +192,7 @@ Page({
       })
     }
   },
-  userMessageBlur: function(e) {
+  userMessageBlur: function (e) {
     var that = this;
 
     if (!that.data.messageInput) {
@@ -200,7 +202,7 @@ Page({
 
     }
   },
-  pullUpLoad: function(e) {
+  pullUpLoad: function (e) {
     var that = this;
     var limit = that.data.limit + 2;
     that.setData({
@@ -209,7 +211,7 @@ Page({
     that.onShow();
   },
 
-  toCollect: function(event) {
+  toCollect: function (event) {
     var that = this
     // 更新缓存
     var objectId = that.data.rows.id;
@@ -220,7 +222,7 @@ Page({
     //点赞数+1
     // 更新数据绑定,从而切换图片，数字加1
     //改为立即执行函数
-    (function() {
+    (function () {
       var resultDiary = that.data.rows;
       var num = resultDiary.get('praiseNum')
       if (!num) num = 0;
@@ -232,12 +234,12 @@ Page({
       resultDiary.save();
     })();
   },
-  returnHome: function() {
+  returnHome: function () {
     wx.switchTab({
       url: '/pages/interface/interface',
     })
   },
-  addCollection: function(e) {
+  addCollection: function (e) {
     var that = this;
     if (that.data.currentUser) {
       if (that.data.collectionStatus == true) {
@@ -248,15 +250,15 @@ Page({
         diary.id = that.data.currentObjectId;
         collectionQuery.equalTo("openID", that.data.currentUser.openid);
         collectionQuery.equalTo("diaryID", diary);
-        collectionQuery.find().then(function(todos) {
+        collectionQuery.find().then(function (todos) {
           return Bmob.Object.destroyAll(todos);
-        }).then(function(todos) {
+        }).then(function (todos) {
           that.setData({
             collectionStatus: false,
             collectionPic: "/image/collectOff.png"
           });
           common.showTip("已取消收藏", "success");
-        }, function(error) {
+        }, function (error) {
           // 异常处理
         });
       } else if (!that.data.collectionStatus) {
@@ -269,14 +271,14 @@ Page({
         collectionQuery.set("diaryID", diary);
         collectionQuery.set("openID", that.data.currentUser.openid);
         collectionQuery.save(null, {
-          success: function(result) {
+          success: function (result) {
             that.setData({
               collectionStatus: true,
               collectionPic: "/image/collect.png"
             });
             common.showTip("已成功收藏", "success");
           },
-          error: function(result, error) {
+          error: function (result, error) {
             console.log('创建留言失败');
           }
         });
@@ -288,21 +290,21 @@ Page({
   /**
    * 进行页面分享
    */
-  onShareAppMessage: function(options) {
+  onShareAppMessage: function (options) {
     return {
-      success: function(res) {
+      success: function (res) {
         util.showToast(1, '转发成功');
       },
 
-      fail: function() {
+      fail: function () {
         util.showToast(0, '转发失败');
       }
     }
   },
-  rewardCheck:function(){
+  rewardCheck: function () {
     var that = this;
     that.setData({
-      rewardCheckFlag :!that.data.rewardCheckFlag
+      rewardCheckFlag: !that.data.rewardCheckFlag
     });
   },
   chooseMoney: function (e) {
@@ -363,35 +365,37 @@ function getDiaryContent(that) {
   var nickName = that.data.defaultNickName;
   var userPic = that.data.defaultUserPic;
   query.get(that.data.currentObjectId, {
-    success: function(resultDiary) {
+    success: function (resultDiary) {
       diaryTitle = resultDiary.attributes.title;
       diaryType = that.data.grids[resultDiary.attributes.type];
       //console.log(that.data.currentUser.openid);
-      if (resultDiary.attributes.openid == that.data.currentUser.openid){
-        try {
-          // 同步接口立即写入
-          wx.setStorageSync(resultDiary.id, resultDiary.attributes.leaveMessageCount);
-          console.log("第四次写入成功");
+      if (that.data.currentUser) {
+        if (resultDiary.attributes.openid == that.data.currentUser.openid) {
           try {
-            // 同步接口立即返回值
-            var newMessageIDArr = wx.getStorageSync("newMessageIDArr");
-            //console.log(resultDiary.id);
-            newMessageIDArr.remove(resultDiary.id);
-            //console.log(newMessageIDArr);
-            console.log("第五次读取成功");
+            // 同步接口立即写入
+            wx.setStorageSync(resultDiary.id, resultDiary.attributes.leaveMessageCount);
+            console.log("第四次写入成功");
             try {
-              // 同步接口立即写入
-              wx.setStorageSync("newMessageIDArr", newMessageIDArr);
-              console.log("第六次写入成功");
+              // 同步接口立即返回值
+              var newMessageIDArr = wx.getStorageSync("newMessageIDArr");
+              //console.log(resultDiary.id);
+              newMessageIDArr.remove(resultDiary.id);
+              //console.log(newMessageIDArr);
+              console.log("第五次读取成功");
+              try {
+                // 同步接口立即写入
+                wx.setStorageSync("newMessageIDArr", newMessageIDArr);
+                console.log("第六次写入成功");
+              } catch (e) {
+                console.log("第六次写入失败");
+              }
+
             } catch (e) {
-              console.log("第六次写入失败");
+              console.log('第五次读取失败')
             }
-            
           } catch (e) {
-            console.log('第五次读取失败')
+            console.log("第四次写入失败");
           }
-        } catch (e) {
-          console.log("第四次写入失败");
         }
       }
       var pNum = resultDiary.get('praiseNum');
@@ -401,7 +405,7 @@ function getDiaryContent(that) {
       if (resultDiary.attributes.openid) {
         queryUser.equalTo("openid", resultDiary.attributes.openid);
         queryUser.find({
-          success: function(results) {
+          success: function (results) {
             nickName = results[0].attributes.nickName;
             userPic = results[0].attributes.userPic;
             that.setData({
@@ -411,7 +415,7 @@ function getDiaryContent(that) {
               userPic: userPic
             })
           },
-          error: function(error) {
+          error: function (error) {
             console.log("查询失败: " + error.code + " " + error.message);
           }
         });
@@ -426,7 +430,7 @@ function getDiaryContent(that) {
       resultDiary.increment("count");
       resultDiary.save();
     },
-    error: function(result, error) {
+    error: function (result, error) {
       console.log("查询失败");
     }
 
@@ -442,9 +446,9 @@ function getLeaveMessage(that) {
   leaveMessageQuery.limit(that.data.limit);
   leaveMessageQuery.include("userObjectId");
   leaveMessageQuery.find({
-    success: function(resultLeaveMessages) {
+    success: function (resultLeaveMessages) {
       //console.log(resultLeaveMessages)
-      resultLeaveMessages.forEach(function(detail) {
+      resultLeaveMessages.forEach(function (detail) {
         leaveMessageArr.push({
           "messageContent": detail.attributes.messageContent,
           "messageUser": detail.attributes.userObjectId.nickName || that.data.defaultNickName, //使用关联字段查询
@@ -456,7 +460,7 @@ function getLeaveMessage(that) {
         leaveMessageArr: leaveMessageArr
       });
     },
-    error: function(error) {
+    error: function (error) {
       console.log("查询失败: " + error.code + " " + error.message);
     }
   });
@@ -468,7 +472,7 @@ function getCollectionStatus(that) {
   collectionQuery.equalTo("openID", that.data.currentUser.openid);
   collectionQuery.equalTo("diaryID", that.data.currentObjectId);
   collectionQuery.find({
-    success: function(resultCollection) {
+    success: function (resultCollection) {
 
       var haveRes = (resultCollection.length > 0);
       that.setData({
@@ -476,7 +480,7 @@ function getCollectionStatus(that) {
         collectionPic: haveRes ? "/image/collect.png" : "/image/collectOff.png"
       });
     },
-    error: function(error) {
+    error: function (error) {
       console.log("查询失败: " + error.code + " " + error.message);
     }
   });
@@ -509,81 +513,81 @@ Array.prototype.remove = function (val) {
   }
 };
 function weChatPayTest(that) {
-  // console.log(openId);
-  // console.log(parseFloat(amount));
-  Bmob.Pay.wechatPay(parseFloat(amount), "帖子打赏", diaryType + "-" + diaryTitle, that.data.currentUser.openid).then(function (resp) {
-    //console.log(resp);
+ // console.log(Bmob1.User.current());
+  if (!app.globalData.currentUser) {
+    app.globalData.currentUser = Bmob1.User.current();
+    that.data.currentUser = app.globalData.currentUser;
+  }
+  if (app.globalData.currentUser) {
+    Bmob.Pay.wechatPay(parseFloat(amount), "帖子打赏", diaryType + "-" + diaryTitle, that.data.currentUser.openid).then(function (resp) {
 
-    // that.setData({
-    //   loading: true,
-    //   dataInfo: resp
-    // })
 
-    //服务端返回成功
-    var timeStamp = resp.timestamp,
-      nonceStr = resp.noncestr,
-      packages = resp.package,
-      orderId = resp.out_trade_no,//订单号，如需保存请建表保存。
-      sign = resp.sign;
+      //服务端返回成功
+      var timeStamp = resp.timestamp,
+        nonceStr = resp.noncestr,
+        packages = resp.package,
+        orderId = resp.out_trade_no,//订单号，如需保存请建表保存。
+        sign = resp.sign;
 
-    //打印订单号
-    console.log(orderId);
+      //打印订单号
+      console.log(orderId);
 
-    //发起支付
-    wx.requestPayment({
-      'timeStamp': timeStamp,
-      'nonceStr': nonceStr,
-      'package': packages,
-      'signType': 'MD5',
-      'paySign': sign,
-      'success': function (res) {
-        //付款成功,这里可以写你的业务代码
-        //console.log(res);
-        var OrderData = Bmob.Object.extend("order_data");
-        var orderData = new OrderData();
-        orderData.set("userOpenid", that.data.currentUser.openid);
-        orderData.set("userNickName", that.data.currentUser.nickName);
-        orderData.set("paymentGoods", diaryTitle);
-        orderData.set("paymentDescription", diaryType + "-" + diaryTitle);
-        orderData.set("paymentAmount", amount);
-        orderData.set("orderNumber", orderId);   
-        //添加数据，第一个入口参数是null
-        orderData.save(null, {
-          success: function (result) {
-            // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
-            console.log("订单成功保存");
-            that.setData({
-              thankPageFlag: true,
-              amount: amount
-            })
-          },
-          error: function (result, error) {
-            // 添加失败
-            console.log('订单保存失败');
-            that.setData({
-              checkMoneyFlag1: false,
-              checkMoneyFlag2: false,
-              checkMoneyFlag3: false,
-              checkMoneyFlag4: false
-            })
-          }
-        });
-      },
-      'fail': function (res) {
-        //付款失败
-        console.log('付款失败');
-        console.log(res);
-        that.setData({
-          checkMoneyFlag1: false,
-          checkMoneyFlag2: false,
-          checkMoneyFlag3: false,
-          checkMoneyFlag4: false
-        })
-      }
-    })
+      //发起支付
+      wx.requestPayment({
+        'timeStamp': timeStamp,
+        'nonceStr': nonceStr,
+        'package': packages,
+        'signType': 'MD5',
+        'paySign': sign,
+        'success': function (res) {
+          //付款成功,这里可以写你的业务代码
+          //console.log(res);
+          var OrderData = Bmob.Object.extend("order_data");
+          var orderData = new OrderData();
+          orderData.set("userOpenid", that.data.currentUser.openid);
+          orderData.set("userNickName", that.data.currentUser.nickName);
+          orderData.set("paymentGoods", diaryTitle);
+          orderData.set("paymentDescription", diaryType + "-" + diaryTitle);
+          orderData.set("paymentAmount", amount);
+          orderData.set("orderNumber", orderId);
+          //添加数据，第一个入口参数是null
+          orderData.save(null, {
+            success: function (result) {
+              // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
+              console.log("订单成功保存");
+              that.setData({
+                thankPageFlag: true,
+                amount: amount
+              })
+            },
+            error: function (result, error) {
+              // 添加失败
+              console.log('订单保存失败');
+              that.setData({
+                checkMoneyFlag1: false,
+                checkMoneyFlag2: false,
+                checkMoneyFlag3: false,
+                checkMoneyFlag4: false
+              })
+            }
+          });
+        },
+        'fail': function (res) {
+          //付款失败
+          console.log('付款失败');
+          console.log(res);
+          that.setData({
+            checkMoneyFlag1: false,
+            checkMoneyFlag2: false,
+            checkMoneyFlag3: false,
+            checkMoneyFlag4: false
+          })
+        }
+      })
 
-  }, function (err) {
-    console.log('服务端返回失败');
-    console.log(err);
-  });
+    }, function (err) {
+      console.log('服务端返回失败');
+      console.log(err);
+    });
+  }
 };

@@ -1,4 +1,5 @@
 var Bmob = require('../../utils/bmob.js');
+const Bmob1 = require('../../utils/Bmob-1.6.4.min.js') 
 var common = require('../../utils/common.js');
 import NumberAnimate from "../../utils/NumberAnimate"
 var app = getApp()
@@ -63,6 +64,7 @@ Page({
     jinLiPeopleNumber: 0
   },
   onLoad: function () {
+    var app = getApp()
     wx.setNavigationBarTitle({ title: '航帮帮V' + app.globalData.version + ' -航天人的信息沟通看板' })
     var that = this;
     this.getBG();
@@ -70,7 +72,7 @@ Page({
       app.globalData.currentUser = Bmob1.User.current()
     }
     var currentUser = app.globalData.currentUser;
-    var userOpenid = currentUser.openid;
+    //var userOpenid = currentUser.openid;
     
     // wx.request({
     //   url: "https://hbb.htxytech.cn:8000/hello", //仅为示例，并非真实的接口地址
@@ -98,9 +100,12 @@ Page({
     }
     var currentUser = app.globalData.currentUser;
     //微信留言提示功能
-    checkNewMessage(currentUser);
-    var userOpenid = currentUser.openid;
-    getJinliPeopleNumber(that, userOpenid);
+    //console.log(currentUser);
+    if (currentUser){
+      checkNewMessage(currentUser);
+      var userOpenid = currentUser.openid;
+      getJinliPeopleNumber(that, userOpenid);
+    }
     //console.log(currentUser.openid);
     //weChatPayTest(that,currentUser.openid)
   },
@@ -125,7 +130,7 @@ Page({
             backgrounds.push({ imgurl: object.get('imgurl'), activityID: 0 });
           }
         }
-        console.log(backgrounds);
+        //console.log(backgrounds);
         that.setData({ background: backgrounds, backgroundDisplay: backgroundDisplay })
       },
       error: function (error) {
@@ -148,10 +153,10 @@ Page({
     common.showModal("请详细阅读 我的-免责条款里的内容！")
   },
   preImg: function (o) {
-    console.log(o);
+    //console.log(o);
     var targetSrc = o.target.dataset.src.imgurl;
     var targetID = o.target.dataset.src.activityID;
-    console.log(targetID);
+    //console.log(targetID);
     if (targetID != 0) {
       wx.navigateTo({
         url: "/pages/interface/article/detail/index?objectId=" + targetID,
@@ -227,9 +232,9 @@ function checkNewMessage(currentUser) {
 };
 function weChatPayTest(that, openId) {
   var that = this;
-  console.log(openId);
+  //console.log(openId);
   Bmob.Pay.wechatPay(0.01, '哇哈哈1瓶', '哇哈哈饮料，杭州生产', openId).then(function (resp) {
-    console.log(resp);
+  //  console.log(resp);
 
     // that.setData({
     //   loading: true,
@@ -244,7 +249,7 @@ function weChatPayTest(that, openId) {
       sign = resp.sign;
 
     //打印订单号
-    console.log(orderId);
+    //console.log(orderId);
 
     //发起支付
     wx.requestPayment({
@@ -255,12 +260,12 @@ function weChatPayTest(that, openId) {
       'paySign': sign,
       'success': function (res) {
         //付款成功,这里可以写你的业务代码
-        console.log(res);
+        //console.log(res);
       },
       'fail': function (res) {
         //付款失败
         console.log('付款失败');
-        console.log(res);
+        //console.log(res);
       }
     })
 
@@ -295,7 +300,7 @@ function getJinliPeopleNumber(that, openId) {
           queryPraiseNumDiary.find({
             success: function (userPraiseNumResult) {
               // 查询成功，返回记录数量
-              console.log(userPraiseNumResult);
+              //console.log(userPraiseNumResult);
               if (userPraiseNumResult.length > 0) {
                 /*------------------------------------------*/
                 let n3 = new NumberAnimate({
@@ -338,7 +343,7 @@ function getJinliPeopleNumber(that, openId) {
               // 查询失败
             }
           });
-          console.log(sumPraiseNumResults[0].attributes._sumPraiseNum);
+          //console.log(sumPraiseNumResults[0].attributes._sumPraiseNum);
           /*------------------------------------------*/
           let n2 = new NumberAnimate({
             from: sumPraiseNumResults[0].attributes._sumPraiseNum,//开始时的数字

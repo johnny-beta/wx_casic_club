@@ -21,5 +21,4 @@
             <image class="userPic_article"src="/image/home1.png"></image>
     </view>
     <ad unit-id="adunit-7829e0832f70f7d7"></ad> 
-   <template is="foot"  />
 </view>

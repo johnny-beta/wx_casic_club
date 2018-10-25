@@ -22,10 +22,6 @@
           <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
         </view>
 
-
-
-
-
         <view class="weui-panel__hd">信息列表</view>
         <view class="weui-panel__bd">
           <block wx:if="{{diaryList.length>0}}">
