@@ -2,6 +2,7 @@
 //获取应用实例
 var Bmob = require('../../../utils/bmob.js');
 var common = require('../../../utils/common.js');
+const Bmob1 = require('../../../utils/Bmob-1.6.4.min.js') 
 var app = getApp();
 var that;
 var imageExistFlag = true;
@@ -39,8 +40,9 @@ Page({
     })
   },
   onShow: function () {
-    app = getApp();
-    //console.log(app.globalData.userInfo);
+    if (!app.globalData.currentUser) {
+      app.globalData.currentUser = Bmob1.User.current()
+    }
     if (app.globalData.userInfo) {
       var that = this;
       var objectId;
@@ -216,7 +218,7 @@ Page({
     var query = new Bmob.Query(Diary);
     var urlArr = new Array();
     nowContent = nowContent + " ";
-    console.log(nowContent.length);
+    //console.log(nowContent.length);
     query.get(nowId, {
       success: function (result) {
 

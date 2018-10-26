@@ -8,7 +8,7 @@ Page({
     },
     onLoad: function () {
       var that = this;
-      console.log(app.globalData.userInfo);
+      //console.log(app.globalData.userInfo);
       that.setData({
         userInfo: app.globalData.userInfo
       })

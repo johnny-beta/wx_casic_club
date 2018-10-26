@@ -21,7 +21,7 @@ App({
           loginCheck();
           Bmob1.User.requestOpenId(res.code, { 
             success: function (userData) {
-              console.log(userData)
+              //console.log(userData)
               wx.getUserInfo({
                 success: function (result) {
                   var userInfo = result.userInfo
@@ -117,7 +117,7 @@ App({
     }
   },
   globalData: {
-    version: '1.7.4',
+    version: '1.7.6',
     grids: {
       "10": "航天锦鲤",
       // "11": "国庆-意见征集",

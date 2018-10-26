@@ -87,27 +87,32 @@ Page({
  * 获取数据
  */
 function getList(t, k) {
-  that = t;
-  var DiaryCollect = Bmob.Object.extend("diary_collect");
-  var query = new Bmob.Query(DiaryCollect);
-  query.equalTo("openID", app.globalData.currentUser.openid);
-  query.descending('createdAt');
-  query.include("diaryID");
-  // 查询所有数据
-  query.limit(that.data.limit);
-  var mainQuery = query
-  mainQuery.find({
-    success: function (results) {
-      console.log(results[0]);
-      // 循环处理查询到的数据
-      that.setData({
-        diaryList: results
-      })
-    },
-    error: function (error) {
-      console.log("查询失败: " + error.code + " " + error.message);
+  if (app.globalData.userInfo) {
+    if (!app.globalData.currentUser) {
+      app.globalData.currentUser = Bmob1.User.current()
     }
-  });
+    that = t;
+    var DiaryCollect = Bmob.Object.extend("diary_collect");
+    var query = new Bmob.Query(DiaryCollect);
+    query.equalTo("openID", app.globalData.currentUser.openid);
+    query.descending('createdAt');
+    query.include("diaryID");
+    // 查询所有数据
+    query.limit(that.data.limit);
+    var mainQuery = query
+    mainQuery.find({
+      success: function (results) {
+        //console.log(results[0]);
+        // 循环处理查询到的数据
+        that.setData({
+          diaryList: results
+        })
+      },
+      error: function (error) {
+        console.log("查询失败: " + error.code + " " + error.message);
+      }
+    });
+  }
 }
 
 

@@ -74,21 +74,20 @@ Page({
     var currentUser = app.globalData.currentUser;
     //var userOpenid = currentUser.openid;
     
-    // wx.request({
-    //   url: "https://hbb.htxytech.cn:8000/hello", //仅为示例，并非真实的接口地址
-    //   data: {
-    //     x: '1',
-    //     y: '2',
-    //     asdd: '2'
-    //   },
-    //   method:"POST",
-    //   header: {
-    //     'content-type': 'application/json' // 默认值
-    //   },
-    //   success(res) {
-    //     console.log(res.data)
-    //   }
-    // })
+    wx.request({
+      url: "https://hbb.htxytech.cn/py/hello", //仅为示例，并非真实的接口地址
+      data: {
+        a: '1000',
+        b: '2',
+        asdd: '2'
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        console.log(res.data)
+      }
+    })
     //initLeaveMessageDataSheet();
     //initLeaveMessage();
   },
