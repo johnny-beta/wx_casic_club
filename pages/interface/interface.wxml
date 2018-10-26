@@ -10,11 +10,30 @@
       </swiper>
      </view>
   </view>
-  
+  <view class="jiliFour" >
+    <view class="jiliFourGrid" >
+      <view class='jiliFourGrid-font'>总点赞数</view>
+      <view class='jiliFourGrid-number'>{{sumPraiseNum}}</view>
+    </view>
+    <view class="jiliFourGrid">
+      <view class='jiliFourGrid-font'>总参与人数</view>
+      <view class='jiliFourGrid-number'>{{sumPeople}}</view>
+    </view>
+    <view class="jiliFourGrid" >
+      <view class='jiliFourGrid-font'>我的点赞数</view>
+      <view class='jiliFourGrid-number' wx:if="{{notJinliFlag}}">--</view>
+      <view class='jiliFourGrid-number' wx:elif="{{!notJinliFlag}}">{{userPraiseNum}}</view>
+    </view>
+    <view class="jiliFourGrid" style='border-right-style:none;'>
+      <view class='jiliFourGrid-font'>获奖率</view>
+      <view class='jiliFourGrid-number' wx:if="{{notJinliFlag}}">--</view>
+      <view class='jiliFourGrid-number' wx:elif="{{!notJinliFlag}}" style="color:red">{{userJinli}}%</view>
+    </view>
+  </view>
   <!-- <view class='jilu'>
   ----------航天锦鲤目前参加人数{{jinLiPeopleNumber}}人----------
   </view> -->
-  <view class="weui-img_center">
+  <!-- <view class="weui-img_center">
       <view class="jili-sumPeople">{{sumPeople}}</view>
       
       <view wx:if="{{notJinliFlag}}" class="jili-userPraiseNumNot">-</view>
@@ -25,8 +44,7 @@
 
       <view wx:if="{{notJinliFlag}}" class="jili-userJinliNot">-</view>
       <view wx:elif="{{!notJinliFlag}}" class="jili-userJinli">{{userJinli}}%</view>
-      <!-- <view>{{num1}}</view> -->
-  </view> 
+  </view>  -->
 
   <view class="page__bd">
     <view>

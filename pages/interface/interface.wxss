@@ -69,6 +69,33 @@ swiper {
   color: rgb(255, 255, 255);
   font-size:25px;
 } 
+.jiliFourGrid{
+  width:25%;
+  height:100rpx;
+  border-color:rgb(182, 176, 176);
+  border-width:1px;
+  border-right-style:solid;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.jiliFourGrid-font{
+  color:rgb(134, 133, 133);
+  font-size: 12px;
+}
+.jiliFourGrid-number{
+  color:rgb(0, 0, 0);
+  font-size: 18px;
+}
+
+.jiliFour{
+  width:100%;
+  height:100rpx;
+  display:flex;
+  flex-direction:row;
+  margin-top:10px;
+  margin-bottom:10px;
+}
 /* .jilu{
   height: 20px;
   width: 100%;

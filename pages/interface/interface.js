@@ -320,13 +320,13 @@ function getJinliPeopleNumber(that, openId) {
                 /*------------------------------------------*/
                 var awardRate = (userPraiseNumResult[0].attributes.praiseNum + 1) / (sumPraiseNumResults[0].attributes._sumPraiseNum + count) * 100;
                 let n4 = new NumberAnimate({
-                  from: awardRate.toFixed(1),//开始时的数字
+                  from: awardRate.toFixed(3),//开始时的数字
                   speed: 1500,// 总时间
                   refreshTime: 50,// 刷新一次的时间
-                  decimals: 4,//小数点后的位数
+                  decimals: 7,//小数点后的位数
                   onUpdate: () => {//更新回调函数
                     that.setData({
-                      userJinli: parseFloat(n4.tempValue).toFixed(1)
+                      userJinli: parseFloat(n4.tempValue).toFixed(3)
                     });
                   },
                   onComplete: () => {//完成回调函数
