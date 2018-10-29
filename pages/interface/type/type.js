@@ -107,13 +107,14 @@ Page({
       diary.set("praiseNum", 0); 
       diary.set("leaveMessageCount", 0); 
       diary.set("count", 0); 
-
-      var f = Bmob.File("a.jpg", [""]);
-      diary.set("f", f);
-      if (currentUser) {
-        UserModel.id = currentUser.id;
-        diary.set("own", UserModel);
-      }
+      console.log(app.globalData.currentUser);
+      // var f = Bmob.File("a.jpg", [""]);
+      // diary.set("f", f);
+      //console.log(f);
+      
+      UserModel.id = app.globalData.currentUser.objectId;
+      diary.set("userDetail", UserModel);
+      
       //添加数据，第一个入口参数是null
       diary.save(null, {
         success: function(result) {

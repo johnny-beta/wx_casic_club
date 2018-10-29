@@ -74,22 +74,26 @@ Page({
     var currentUser = app.globalData.currentUser;
     //var userOpenid = currentUser.openid;
     
-    wx.request({
-      url: "https://hbb.htxytech.cn/py/hello", //仅为示例，并非真实的接口地址
-      data: {
-        a: '1000',
-        b: '2',
-        asdd: '2'
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {
-        console.log(res.data)
-      }
-    })
+    // wx.request({
+    //   url: "https://hbb.htxytech.cn/py/hello", //仅为示例，并非真实的接口地址
+    //   data: {
+    //     a: '1000',
+    //     b: '2',
+    //     asdd: '2'
+    //   },
+    //   header: {
+    //     'content-type': 'application/json' // 默认值
+    //   },
+    //   success(res) {
+    //     console.log(res.data)
+    //   }
+    // })
+
+    //jinliTemp1();
     //initLeaveMessageDataSheet();
     //initLeaveMessage();
+    //initDairy();
+    //getDairy();
   },
   onShow: function () {
 
@@ -384,10 +388,4 @@ function getJinliPeopleNumber(that, openId) {
       // 查询失败
     }
   });
-
-  
-
-
-
-
 };
