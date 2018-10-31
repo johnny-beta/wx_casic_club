@@ -1,4 +1,3 @@
-
 /**
  * 大转盘抽奖
  */
@@ -7,18 +6,41 @@ var lotteryCount = 0;
 var hbbPrize = "没有奖品";
 var shareCount = 0;
 var choujiangCount = 0;
+
+
+var app = getApp();
+
 Page({
 
   //奖品配置
   awardsConfig: {
     chance: true,
     awards: [
-      { 'index': 0, 'name': '杯子+笔筒' },
-      { 'index': 1, 'name': '杯子' },
-      { 'index': 2, 'name': '小钱包' },
-      { 'index': 3, 'name': '小钱包+笔筒' },
-      { 'index': 4, 'name': '笔筒*2' },
-      { 'index': 5, 'name': '空手而归' }
+
+      {
+        'index': 0,
+        'name': '杯子+笔筒'
+      },
+      {
+        'index': 1,
+        'name': '杯子'
+      },
+      {
+        'index': 2,
+        'name': '小钱包'
+      },
+      {
+        'index': 3,
+        'name': '小钱包+笔筒'
+      },
+      {
+        'index': 4,
+        'name': '笔筒*2'
+      },
+      {
+        'index': 5,
+        'name': '空手而归'
+      }
     ]
   },
 
@@ -26,10 +48,10 @@ Page({
     awardsList: {},
     animationData: {},
     btnDisabled: '',
-    lotteryCount:1,
-    hbbPrize:"没有奖品"
+    lotteryCount: 1,
+    hbbPrize: "没有奖品"
   },
-  onShow: function(){
+  onShow: function() {
     var that = this;
     let lotteryCountFlag = false;
     try {
@@ -45,7 +67,7 @@ Page({
     } catch (e) {
       console.log("获取本地内存key出错");
     }
-    if (!lotteryCountFlag){
+    if (!lotteryCountFlag) {
       //console.log("6666666666666");
 
       wx.setStorage({
@@ -56,7 +78,7 @@ Page({
         key: "choujiangCount",
         data: 0
       });
-    } else if (lotteryCountFlag){
+    } else if (lotteryCountFlag) {
       console.log("33333333333333333");
       wx.getStorage({
         key: 'choujiangCount',
@@ -74,7 +96,7 @@ Page({
           that.setData({
             lotteryCount: lotteryCount
           });
-          
+
         }
       });
       wx.getStorage({
@@ -84,15 +106,20 @@ Page({
           hbbPrize = res.data;
           that.setData({
             hbbPrize: hbbPrize
-          });     
+          });
         }
       })
     }
   },
-  onReady: function (e) {
+  onReady: function(e) {
     var that = this;
     that.drawAwardRoundel();
-    //分享
+  },
+
+  onReady: function(e) {
+    var that = this;
+    this.drawAwardRoundel();
+
     wx.showShareMenu({
       withShareTicket: true
     });
@@ -101,18 +128,21 @@ Page({
         btnDisabled: 'disabled'
       });
     }
-    
   },
 
   //画抽奖圆盘
-  drawAwardRoundel: function () {
+  drawAwardRoundel: function() {
     var awards = this.awardsConfig.awards;
     var awardsList = [];
-    var turnNum = 1 / awards.length;  // 文字旋转 turn 值
+    var turnNum = 1 / awards.length; // 文字旋转 turn 值
 
     // 奖项列表
     for (var i = 0; i < awards.length; i++) {
-      awardsList.push({ turn: i * turnNum + 'turn', lineTurn: i * turnNum + turnNum / 2 + 'turn', award: awards[i].name });
+      awardsList.push({
+        turn: i * turnNum + 'turn',
+        lineTurn: i * turnNum + turnNum / 2 + 'turn',
+        award: awards[i].name
+      });
     }
 
     this.setData({
@@ -122,13 +152,13 @@ Page({
   },
 
   //发起抽奖
-  playReward: function () {
+  playReward: function() {
     var that = this;
-    if ((shareCount + 1 - choujiangCount) <= 0){
+    if ((shareCount + 1 - choujiangCount) <= 0) {
       wx.showModal({
         title: '提示',
         content: '您已没有抽奖次数',
-        success: function (res) {
+        success: function(res) {
           if (res.confirm) {
             console.log('用户点击确定')
           } else if (res.cancel) {
@@ -140,7 +170,7 @@ Page({
     }
     //减少抽奖次数
     choujiangCount++;
-    
+
     wx.setStorage({
       key: "choujiangCount",
       data: choujiangCount
@@ -152,23 +182,25 @@ Page({
     //--------计算概率-----------//
     let randomNum = Math.round(Math.random() * 100)
     console.log(randomNum);
-    if (randomNum >= 0 && randomNum < 10){
+    if (randomNum >= 0 && randomNum < 10) {
       awardIndex = 0;
-    } else if (randomNum >= 10 && randomNum <20 ){
+    } else if (randomNum >= 10 && randomNum < 20) {
       awardIndex = 1;
-    }else if (randomNum >= 20 && randomNum < 45) {
+    } else if (randomNum >= 20 && randomNum < 45) {
       awardIndex = 2;
-    }else if (randomNum >= 45 && randomNum <70 ) {
+    } else if (randomNum >= 45 && randomNum < 70) {
       awardIndex = 3;
-    }else if (randomNum >= 70 && randomNum <= 95) {
+    } else if (randomNum >= 70 && randomNum <= 95) {
       awardIndex = 4;
-    }else if (randomNum >= 95 && randomNum < 100 ) {
+    } else if (randomNum >= 95 && randomNum < 100) {
       awardIndex = 5;
     }
     console.log(awardIndex);
     var awardIndex = awardIndex;
-    var runNum = 8;//旋转8周
-    var duration = 4000;//时长
+    //中奖index
+    var awardIndex = 2;
+    var runNum = 8; //旋转8周
+    var duration = 4000; //时长
 
     // 旋转角度
     this.runDeg = this.runDeg || 0;
@@ -186,7 +218,7 @@ Page({
 
     // 中奖提示
     var awardsConfig = this.awardsConfig;
-    setTimeout(function () {
+    setTimeout(function() {
       wx.setStorage({
         key: "hbbPrize",
         data: awardsConfig.awards[awardIndex].name
@@ -203,7 +235,7 @@ Page({
         that.setData({
           btnDisabled: 'disabled'
         });
-      }else{
+      } else {
         that.setData({
           btnDisabled: ''
         });
@@ -212,23 +244,23 @@ Page({
 
   },
 
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     let that = this
     return {
       title: '航帮帮抽奖-送送送~~',
       path: 'pages/interface/canvas/zp',
-      success: function (res) {
+      success: function(res) {
         //getSystemInfo是为了获取当前设备信息，判断是android还是ios，如果是android
         //还需要调用wx.getShareInfo()，只有当成功回调才是转发群，ios就只需判断shareTickets
         //获取用户设备信息
         wx.getSystemInfo({
-          success: function (d) {
+          success: function(d) {
             console.log(d);
             //判断用户手机是IOS还是Android
             if (d.platform == 'android') {
-              wx.getShareInfo({//获取群详细信息
+              wx.getShareInfo({ //获取群详细信息
                 shareTicket: res.shareTickets,
-                success: function (res) {
+                success: function(res) {
                   //这里写你分享到群之后要做的事情，比如增加次数什么的
                   shareCount++;
                   if (shareCount >= 3)
@@ -237,18 +269,18 @@ Page({
                     key: "shareCount",
                     data: shareCount
                   })
-                  if ((shareCount + 1 - choujiangCount) > 0){
+                  if ((shareCount + 1 - choujiangCount) > 0) {
                     that.setData({
                       lotteryCount: (shareCount + 1 - choujiangCount),
                       btnDisabled: ''
                     });
                   }
                 },
-                fail: function (res) {//这个方法就是分享到的是好友，给一个提示
+                fail: function(res) { //这个方法就是分享到的是好友，给一个提示
                   wx.showModal({
                     title: '提示',
                     content: '分享好友无效，请分享群',
-                    success: function (res) {
+                    success: function(res) {
                       if (res.confirm) {
                         console.log('用户点击确定')
                       } else if (res.cancel) {
@@ -259,12 +291,12 @@ Page({
                 }
               })
             }
-            if (d.platform == 'ios') {//如果用户的设备是IOS
+            if (d.platform == 'ios') { //如果用户的设备是IOS
               if (res.shareTickets != undefined) {
                 console.log("分享的是群");
                 wx.getShareInfo({
                   shareTicket: res.shareTickets,
-                  success: function (res) {
+                  success: function(res) {
                     //分享到群之后你要做的事情
                     shareCount++;
                     if (shareCount >= 3)
@@ -282,12 +314,12 @@ Page({
                   }
                 })
 
-              } else {//分享到个人要做的事情，我给的是一个提示
+              } else { //分享到个人要做的事情，我给的是一个提示
                 console.log("分享的是个人");
                 wx.showModal({
                   title: '提示',
                   content: '分享好友无效，请分享群',
-                  success: function (res) {
+                  success: function(res) {
                     if (res.confirm) {
                       console.log('用户点击确定')
                     } else if (res.cancel) {
@@ -299,7 +331,7 @@ Page({
             }
 
           },
-          fail: function (res) {
+          fail: function(res) {
 
           }
         })
@@ -307,6 +339,5 @@ Page({
 
     }
   },
-
 
 })
