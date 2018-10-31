@@ -157,21 +157,36 @@ Page({
   },
   preImg: function (o) {
     //console.log(o);
+    var that = this;
     var targetSrc = o.target.dataset.src.imgurl;
     var targetID = o.target.dataset.src.activityID;
-    //console.log(targetID);
-    if (targetID != 0) {
+    //console.log(o);
+    if (targetSrc == "http://bmob-cdn-21677.b0.upaiyun.com/2018/10/31/d7e743764072f3c080287cb6aaaf31be.png"){
+      if (app.globalData.userInfo) {
+        that.setData({
+          writeDiary: true
+        })
+      } else {
+        common.showModal("获得用户昵称才可以发布信息哦！请去我的选项中点击获取头像昵称");
+        return ;
+      }
       wx.navigateTo({
-        url: "/pages/interface/article/detail/index?objectId=" + targetID,
-      });
-    } else {
-      wx.previewImage({
-        current: targetSrc,
-        urls: this.data.backgroundDisplay,
-        success: function (res) { },
-        fail: function (res) { },
-        complete: function (res) { },
+        url: "/pages/interface/canvas/zp",
       })
+    }else{
+      if (targetID != 0) {
+        wx.navigateTo({
+          url: "/pages/interface/article/detail/index?objectId=" + targetID,
+        });
+      } else {
+        wx.previewImage({
+          current: targetSrc,
+          urls: this.data.backgroundDisplay,
+          success: function (res) { },
+          fail: function (res) { },
+          complete: function (res) { },
+        })
+      }
     }
   },
   animate: function () {

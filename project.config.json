@@ -13,7 +13,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.2.4",
 	"appid": "wx43ee6e9490f4653a",
-	"projectname": "%E4%BA%8C%E9%99%A2%E6%B2%9F%E9%80%9A",
+	"projectname": "%E8%88%AA%E5%B8%AE%E5%B8%AE%E6%B5%8B%E8%AF%95",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
@@ -43,10 +43,23 @@
 				},
 				{
 					"id": 1,
-					"name": "index",
-					"pathName": "pages/index/detail/index",
-					"query": "objectId=1a172938a1",
-					"scene": "1047"
+					"name": "canvas",
+					"pathName": "pages/interface/canvas/canvas",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": 2,
+					"name": "zp",
+					"pathName": "pages/interface/canvas/zp",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": 3,
+					"name": "转盘",
+					"pathName": "pages/interface/canvas/zp",
+					"query": ""
 				}
 			]
 		}
