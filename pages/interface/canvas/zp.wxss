@@ -10,6 +10,10 @@ page {
 }
 .header-title{
 	display: block;
+}
+.header-title{
+	display: block;
+	padding: .4rem 0;
 	font-size: 2rem;
 }
 .header-subtitle{
@@ -158,4 +162,18 @@ page {
 .main-rule-item{
 	display: block;
 	padding: 2px 0;
+}
+.com-widget-goTop { 
+    position: fixed; 
+    bottom: 125px; 
+    right: 5px; 
+    overflow: hidden; 
+    z-index: 500; 
+} 
+.userPic_article {
+  width: 75rpx;
+  height: 75rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 3px;
 }

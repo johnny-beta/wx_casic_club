@@ -44,13 +44,14 @@ Page({
       app.globalData.currentUser = Bmob1.User.current()
     }
     if (app.globalData.userInfo) {
+      console.log("-------------------------")
       var that = this;
       var objectId;
       var openid = app.globalData.currentUser.openid;
       //objectId = currentUser.id;
       var Diary = Bmob.Object.extend("diary");
       var query = new Bmob.Query(Diary);
-      
+
       query.equalTo("openid", openid);
       query.descending('createdAt');
 

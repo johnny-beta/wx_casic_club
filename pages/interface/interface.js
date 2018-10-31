@@ -161,7 +161,7 @@ Page({
     var targetSrc = o.target.dataset.src.imgurl;
     var targetID = o.target.dataset.src.activityID;
     //console.log(o);
-    if (targetSrc == "http://bmob-cdn-21677.b0.upaiyun.com/2018/10/31/d7e743764072f3c080287cb6aaaf31be.png"){
+    if (targetSrc == "http://bmob-cdn-21677.b0.upaiyun.com/2018/11/01/c2524bac40e9635f80583453e9fbee9d.jpg"){
       if (app.globalData.userInfo) {
         that.setData({
           writeDiary: true
@@ -298,11 +298,19 @@ function getJinliPeopleNumber(that, openId) {
   var queryCount = new Bmob.Query(DiaryCount);
   var userPraiseNum = 0;
   var sumPraiseNum = 0;
+  let praiseArray = new Array();
   queryCount.equalTo("type", 10);
-  queryCount.count({
-    success: function (count) {
+  queryCount.limit(200);
+  queryCount.descending("praiseNum");
+  queryCount.find({
+    success: function (resultDairy) {
       // 查询成功，返回记录数量
-      //console.log(count);
+      //console.log(resultDairy);
+      var count = resultDairy.length;
+      for(let i=0; i<resultDairy.length ;i++ ){
+        praiseArray.push(resultDairy[i].attributes.praiseNum)
+      }
+      //console.log(praiseArray);
       var SumPraiseNumDiary = Bmob.Object.extend("diary");
       var querySumPraiseNumDiary = new Bmob.Query(SumPraiseNumDiary);
       querySumPraiseNumDiary.equalTo("type", 10);
@@ -334,23 +342,30 @@ function getJinliPeopleNumber(that, openId) {
                   onComplete: () => {//完成回调函数
                   }
                 });
+                let userRanking = 0;
+                for (let j = 0; j < praiseArray.length;j++){
+                  if (userPraiseNumResult[0].attributes.praiseNum >= praiseArray[j]){
+                    userRanking = j+1;
+                    break;
+                  }
+                }
+                that.setData({
+                  userRanking: userRanking
+                });
                 /*------------------------------------------*/
-                /*------------------------------------------*/
-                var awardRate = (userPraiseNumResult[0].attributes.praiseNum + 1) / (sumPraiseNumResults[0].attributes._sumPraiseNum + count) * 100;
                 let n4 = new NumberAnimate({
-                  from: awardRate.toFixed(3),//开始时的数字
+                  from: userRanking,//开始时的数字
                   speed: 1500,// 总时间
                   refreshTime: 50,// 刷新一次的时间
-                  decimals: 7,//小数点后的位数
+                  decimals: 0,//小数点后的位数
                   onUpdate: () => {//更新回调函数
                     that.setData({
-                      userJinli: parseFloat(n4.tempValue).toFixed(3)
+                      userRanking: n4.tempValue
                     });
                   },
                   onComplete: () => {//完成回调函数
                   }
                 });
-                /*------------------------------------------*/
               } else {
                 that.setData({
                   notJinliFlag: true

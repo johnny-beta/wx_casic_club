@@ -25,9 +25,9 @@
       <view class='jiliFourGrid-number' wx:elif="{{!notJinliFlag}}">{{userPraiseNum}}</view>
     </view>
     <view class="jiliFourGrid" style='border-right-style:none;'>
-      <view class='jiliFourGrid-font'>获奖率</view>
+      <view class='jiliFourGrid-font'>排名</view>
       <view class='jiliFourGrid-number' wx:if="{{notJinliFlag}}">--</view>
-      <view class='jiliFourGrid-number' wx:elif="{{!notJinliFlag}}" style="color:red">{{userJinli}}%</view>
+      <view class='jiliFourGrid-number' wx:elif="{{!notJinliFlag}}" style="color:red">{{userRanking}}/{{sumPeople}}</view>
     </view>
   </view>
   <!-- <view class='jilu'>

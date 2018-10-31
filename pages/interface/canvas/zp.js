@@ -7,12 +7,17 @@ var lotteryCount = 0;
 var hbbPrize = "没有奖品";
 var shareCount = 0;
 var choujiangCount = 0;
+
+
+var app = getApp();
+
 Page({
 
   //奖品配置
   awardsConfig: {
     chance: true,
     awards: [
+
       { 'index': 0, 'name': '杯子+笔筒' },
       { 'index': 1, 'name': '杯子' },
       { 'index': 2, 'name': '小钱包' },
@@ -57,7 +62,7 @@ Page({
         data: 0
       });
     } else if (lotteryCountFlag){
-      console.log("33333333333333333");
+      //console.log("33333333333333333");
       wx.getStorage({
         key: 'choujiangCount',
         success(res) {
@@ -92,7 +97,12 @@ Page({
   onReady: function (e) {
     var that = this;
     that.drawAwardRoundel();
-    //分享
+  },
+
+  onReady: function (e) {
+    var that = this;
+    this.drawAwardRoundel();
+
     wx.showShareMenu({
       withShareTicket: true
     });
@@ -101,7 +111,6 @@ Page({
         btnDisabled: 'disabled'
       });
     }
-    
   },
 
   //画抽奖圆盘
@@ -149,6 +158,7 @@ Page({
       lotteryCount: shareCount + 1 - choujiangCount
     });
     //中奖index
+    var awardIndex = 0;
     //--------计算概率-----------//
     let randomNum = Math.round(Math.random() * 100)
     console.log(randomNum);
@@ -166,6 +176,7 @@ Page({
       awardIndex = 5;
     }
     console.log(awardIndex);
+    //中奖index
     var awardIndex = awardIndex;
     var runNum = 8;//旋转8周
     var duration = 4000;//时长
@@ -211,7 +222,11 @@ Page({
     }.bind(that), duration);
 
   },
-
+  returnHome: function () {
+    wx.switchTab({
+      url: '/pages/interface/interface',
+    })
+  },
   onShareAppMessage: function (res) {
     let that = this
     return {
@@ -231,8 +246,8 @@ Page({
                 success: function (res) {
                   //这里写你分享到群之后要做的事情，比如增加次数什么的
                   shareCount++;
-                  if (shareCount >= 3)
-                    shareCount = 3;
+                  if (shareCount >= 2)
+                    shareCount = 2;
                   wx.setStorage({
                     key: "shareCount",
                     data: shareCount
@@ -267,8 +282,8 @@ Page({
                   success: function (res) {
                     //分享到群之后你要做的事情
                     shareCount++;
-                    if (shareCount >= 3)
-                      shareCount = 3;
+                    if (shareCount >= 2)
+                      shareCount = 2;
                     wx.setStorage({
                       key: "shareCount",
                       data: shareCount
@@ -307,6 +322,5 @@ Page({
 
     }
   },
-
 
 })

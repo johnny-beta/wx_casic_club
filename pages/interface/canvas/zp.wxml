@@ -1,45 +1,47 @@
 <view class="wrapper">
 
-	<view class="header">
-		<text class="header-title"> 航帮帮大转盘</text>
-		<text class="header-subtitle"> 锦鲤活动大抽奖，反馈广大航小帮忠实粉丝 </text> 
-    <text class="header-frequency"> 您还有{{lotteryCount}}次抽奖机会 </text> 
-	</view> 
+  <view class="header">
+    <text class="header-title"> 航帮帮大转盘</text>
+    <text class="header-subtitle"> 锦鲤活动大抽奖，反馈广大航小帮忠实粉丝 </text>
+
+    <text class="header-frequency"> 您还有{{lotteryCount}}次抽奖机会 </text>
+  </view>
+</view>
 
 
-	<view class="main">
-		<view class="canvas-container">
-			<view  animation="{{animationData}}" class="canvas-content" >
-				<view class="canvas-line">
-					<view class="canvas-litem" wx:for="{{awardsList}}" wx:key="unique" style="-webkit-transform: rotate({{item.lineTurn}});transform: rotate({{item.lineTurn}})"></view>
-				</view>
-        
-				<view class="canvas-list">
-					<view class="canvas-item" wx:for="{{awardsList}}" wx:key="unique">
-				  		<view class="canvas-item-text" style="-webkit-transform: rotate({{item.turn}});transform: rotate({{item.turn}})">{{item.award}}</view>
-					</view>
-				</view>
-			</view>
-      
-			<view bindtap="playReward" class="canvas-btn {{btnDisabled}}">抽奖</view>		
-		</view>
-	</view>
+
+<view class="main">
+  <view class="canvas-container">
+    <view animation="{{animationData}}" class="canvas-content">
+      <view class="canvas-line">
+        <view class="canvas-litem" wx:for="{{awardsList}}" wx:key="unique" style="-webkit-transform: rotate({{item.lineTurn}});transform: rotate({{item.lineTurn}})"></view>
+      </view>
+
+      <view class="canvas-list">
+        <view class="canvas-item" wx:for="{{awardsList}}" wx:key="unique">
+          <view class="canvas-item-text" style="-webkit-transform: rotate({{item.turn}});transform: rotate({{item.turn}})">{{item.award}}</view>
+        </view>
+      </view>
+    </view>
+    <view bindtap="playReward" class="canvas-btn {{btnDisabled}}">抽奖</view>
+  </view>
 </view>
 <view class="header">
-  <text class="header-frequency"> 您当前抽到的奖品为：{{hbbPrize}} </text> 
+  <text class="header-frequency"> 您当前抽到的奖品为：{{hbbPrize}} </text>
+</view>
+<view class="com-widget-goTop" bindtap="returnHome">
+            <image class="userPic_article"src="/image/home1.png"></image>
 </view>
 <view class="share-container">
-  <button open-type='share' style='width:60%;' type='warn'>分享群，获抽奖次数</button>
+  <!-- <button open-type='share' style='width:60%;' type='warn'>分享群，获抽奖次数</button> -->
   <!-- <view wx:if="{{showSource}}" class="share-text"><text selectable="true">{{downPath}}</text></view> -->
-  
-</view>
 
-	<view class="main-container">
-			<view class="main-container-rule">
-				<text class="main-rule-title">活动规则：</text>
-				<text class="main-rule-item">1. 每个人的初始抽奖次数为1； </text>
-				<text class="main-rule-item">2. 每向群分享增加一次抽奖机会，分享个人无效，最多再获得三次机会；</text>	
-				<text class="main-rule-item">3. 中奖后凭朋友圈和小程序中奖画面找工作人员领取奖品；</text>	
-				<text class="main-rule-item">4. 每人限领一份奖品，抽中自己想要的礼品后不要继续抽奖了哦。</text>	
-			</view>	
-		</view>
+  <view class="main-container">
+    <view class="main-container-rule">
+      <text class="main-rule-title">活动规则：</text>
+      <text class="main-rule-item">1. 每个人抽奖次数为1； </text>
+      <text class="main-rule-item">2. 中奖后凭朋友圈和小程序中奖画面找工作人员领取奖品；</text>
+      <text class="main-rule-item">3. 每人限领一份奖品，抽中自己想要的礼品后不要继续抽奖了哦。</text>
+    </view>
+  </view>
+</view>
