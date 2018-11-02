@@ -34,11 +34,11 @@ var grids = [
     "ico": "zushou.png",
     "url": "../interface/type/type?typeNumber=4&typeName=房屋出租"
   },
-  {
-    "name": "鹊桥征友",
-    "ico": "qianxian.png",
-    "url": "../interface/type/type?typeNumber=5&typeName=鹊桥征友"
-  },
+  // {
+  //   "name": "鹊桥征友",
+  //   "ico": "qianxian.png",
+  //   "url": "../interface/type/type?typeNumber=5&typeName=鹊桥征友"
+  // },
   {
     "name": "拼车出行",
     "ico": "car.png",
@@ -46,12 +46,12 @@ var grids = [
     "click": "autuLogin1"
   },
 
-  {
-    "name": "群聊",
-    "ico": "liao.png",
-    //"url": "../interface/chatroom/chatroom",
-    "click": "autuLogin"
-  }
+  // {
+  //   "name": "群聊",
+  //   "ico": "liao.png",
+  //   //"url": "../interface/chatroom/chatroom",
+  //   "click": "autuLogin"
+  // }
 
 ];
 Page({
