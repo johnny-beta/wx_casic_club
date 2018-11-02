@@ -35,9 +35,9 @@ var grids = [
     "url": "../interface/type/type?typeNumber=4&typeName=房屋出租"
   },
   {
-    "name": "鹊桥征友",
+    "name": "鹊桥板块",
     "ico": "qianxian.png",
-    "url": "../interface/type/type?typeNumber=5&typeName=鹊桥征友"
+    "url": "../interface/type/type?typeNumber=5&typeName=鹊桥板块"
   },
   {
     "name": "拼车出行",
