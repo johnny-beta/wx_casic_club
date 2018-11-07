@@ -1,0 +1,27 @@
+<view class="page">
+  <view>
+    <view class="weui-img_center">
+      <canvas class='share_canvas' canvas-id="share_canvas"></canvas>
+    </view>
+  </view>
+  <view class='circleBar'>
+    <view class="wrap">
+      <view class="top">
+        <canvas class="cir" style=' width:106px; height:106px;' canvas-id="canvasArc"></canvas>
+        <view class="centerWord">{{faceScore}}分</view>
+      </view>
+    </view>
+  </view>
+  <view class='weui-your-face'>你的颜值</view>
+  <view class='weui-scoreFM'>在男性看来,您的颜值已经超过{{faceMaleScore}}%的人</view>
+  <view class='weui-scoreFM'>在女性看来,您的颜值已经超过{{faceFemaleScore}}%的人</view>
+  <picker bindchange="bindPickerChange" value="{{singleIndex}}" range="{{singleArray}}">
+    <view class="picker weui-single">
+      状态：{{singleArray[singleIndex]}}
+    </view>
+  </picker>
+  <button class='btn1' bindtap="chooseImage">上传照片</button>
+</view>
+<view class="nav_container">
+    <navigator wx:for="{{navbar}}" data-idx="{{index}}" url="{{item.url}}" open-type="redirect" class="function-text {{currentTab==index ? 'present' : ''}}">{{item.name}}</navigator>
+</view>

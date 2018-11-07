@@ -1,0 +1,27 @@
+<!--pages/interface/facedetect/faceranking/faceranking.wxml-->
+<view class="nav_container">
+    <navigator wx:for="{{navbar}}" data-idx="{{index}}" url="{{item.url}}" open-type="redirect" class="function-text {{currentTab==index ? 'present' : ''}}">{{item.name}}</navigator>
+</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>
+<view>asfdhjklllllllllllllllllllllasfdhjklllllllllllllllllllll</view>

@@ -5,9 +5,9 @@ import NumberAnimate from "../../utils/NumberAnimate"
 var app = getApp()
 var grids = [
   {
-    "name": "航天锦鲤",
+    "name": "航天SHOW",
     "ico": "jinli.png",
-    "url": "../interface/type/type?typeNumber=10&typeName=航天锦鲤"
+    "url": "../interface/type/type?typeNumber=12&typeName=航天SHOW"
   },
   // {
   //   "name": "国庆-意见征集",
@@ -94,6 +94,7 @@ Page({
     //initLeaveMessage();
     //initDairy();
     //getDairy();
+    //face_API();
   },
   onShow: function () {
 
@@ -106,8 +107,6 @@ Page({
     //console.log(currentUser);
     if (currentUser){
       checkNewMessage(currentUser);
-      var userOpenid = currentUser.openid;
-      getJinliPeopleNumber(that, userOpenid);
     }
     //console.log(currentUser.openid);
     //weChatPayTest(that,currentUser.openid)
@@ -292,130 +291,23 @@ function weChatPayTest(that, openId) {
     console.log(err);
   });
 };
-function getJinliPeopleNumber(that, openId) {
-
-  var DiaryCount = Bmob.Object.extend("diary");
-  var queryCount = new Bmob.Query(DiaryCount);
-  var userPraiseNum = 0;
-  var sumPraiseNum = 0;
-  let praiseArray = new Array();
-  queryCount.equalTo("type", 10);
-  queryCount.limit(200);
-  queryCount.descending("praiseNum");
-  queryCount.find({
-    success: function (resultDairy) {
-      // 查询成功，返回记录数量
-      //console.log(resultDairy);
-      var count = resultDairy.length;
-      for(let i=0; i<resultDairy.length ;i++ ){
-        praiseArray.push(resultDairy[i].attributes.praiseNum)
-      }
-      //console.log(praiseArray);
-      var SumPraiseNumDiary = Bmob.Object.extend("diary");
-      var querySumPraiseNumDiary = new Bmob.Query(SumPraiseNumDiary);
-      querySumPraiseNumDiary.equalTo("type", 10);
-      querySumPraiseNumDiary._extraOptions = { "sum": "praiseNum" };
-      querySumPraiseNumDiary.descending('createdAt');
-      // 查询所有数据
-      querySumPraiseNumDiary.find({
-        success: function (sumPraiseNumResults) {
-          var PraiseNumDiary = Bmob.Object.extend("diary");
-          var queryPraiseNumDiary = new Bmob.Query(PraiseNumDiary);
-          queryPraiseNumDiary.equalTo("type", 10);
-          queryPraiseNumDiary.equalTo("openid", openId);
-          queryPraiseNumDiary.find({
-            success: function (userPraiseNumResult) {
-              // 查询成功，返回记录数量
-              //console.log(userPraiseNumResult);
-              if (userPraiseNumResult.length > 0) {
-                /*------------------------------------------*/
-                let n3 = new NumberAnimate({
-                  from: userPraiseNumResult[0].attributes.praiseNum,//开始时的数字
-                  speed: 1500,// 总时间
-                  refreshTime: 50,// 刷新一次的时间
-                  decimals: 2,//小数点后的位数
-                  onUpdate: () => {//更新回调函数
-                    that.setData({
-                      userPraiseNum: parseInt(n3.tempValue)
-                    });
-                  },
-                  onComplete: () => {//完成回调函数
-                  }
-                });
-                let userRanking = 0;
-                for (let j = 0; j < praiseArray.length;j++){
-                  if (userPraiseNumResult[0].attributes.praiseNum >= praiseArray[j]){
-                    userRanking = j+1;
-                    break;
-                  }
-                }
-                that.setData({
-                  userRanking: userRanking
-                });
-                /*------------------------------------------*/
-                let n4 = new NumberAnimate({
-                  from: userRanking,//开始时的数字
-                  speed: 1500,// 总时间
-                  refreshTime: 50,// 刷新一次的时间
-                  decimals: 0,//小数点后的位数
-                  onUpdate: () => {//更新回调函数
-                    that.setData({
-                      userRanking: n4.tempValue
-                    });
-                  },
-                  onComplete: () => {//完成回调函数
-                  }
-                });
-              } else {
-                that.setData({
-                  notJinliFlag: true
-                })
-              }
-            },
-            error: function (error) {
-              // 查询失败
-            }
-          });
-          //console.log(sumPraiseNumResults[0].attributes._sumPraiseNum);
-          /*------------------------------------------*/
-          let n2 = new NumberAnimate({
-            from: sumPraiseNumResults[0].attributes._sumPraiseNum,//开始时的数字
-            speed: 1500,// 总时间
-            refreshTime: 50,// 刷新一次的时间
-            decimals: 1,//小数点后的位数
-            onUpdate: () => {//更新回调函数
-              that.setData({
-                sumPraiseNum: parseInt(n2.tempValue)
-              });
-            },
-            onComplete: () => {//完成回调函数
-            }
-          });
-          /*------------------------------------------*/
-        },
-        error: function (error) {
-          console.log("查询失败: " + error.code + " " + error.message);
-        }
-      });
-
-      /*------------------------------------------*/
-      let n1 = new NumberAnimate({
-        from: count,//开始时的数字
-        speed: 1500,// 总时间
-        refreshTime: 50,// 刷新一次的时间
-        decimals: 2,//小数点后的位数
-        onUpdate: () => {//更新回调函数
-          that.setData({
-            sumPeople: parseInt(n1.tempValue)
-          });
-        },
-        onComplete: () => {//完成回调函数
-        }
-      });
-      /*------------------------------------------*/
+function face_API(){
+  wx.request({
+    url: "https://api-cn.faceplusplus.com/facepp/v3/detect", //仅为示例，并非真实的接口地址
+    data: {
+      api_key: 'AmSvOUqbsEnnPYfsVtuZi1YmTI9VVTdg',
+      api_secret: '03GxULLaakXKr-KClQs1wGwF5cBTcoyh',
+      image_url:'http://bmob-cdn-21677.b0.upaiyun.com/2018/11/07/82fbaa9940f63d4480d40975eaf17a07.jpg',
+      return_attributes: 'beauty,gender'
     },
-    error: function (error) {
-      // 查询失败
+    method: "POST",
+    header: {
+      'content-type': 'application/x-www-form-urlencoded' // 默认值
+    },
+    success(res) {
+      console.log(res.data)
     }
-  });
-};
+  })
+}
+
+

@@ -12,7 +12,9 @@
     "pages/account/release/release",
     "pages/account/collect/collect",
     "pages/interface/type/type",
-    "pages/interface/canvas/zp"
+    "pages/interface/canvas/zp",
+    "pages/interface/facedetect/facedetect",
+    "pages/interface/facedetect/faceranking/faceranking"
 
   ],
   "window": {
