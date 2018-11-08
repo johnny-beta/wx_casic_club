@@ -14,7 +14,9 @@
     "pages/interface/type/type",
     "pages/interface/canvas/zp",
     "pages/interface/facedetect/facedetect",
-    "pages/interface/facedetect/faceranking/faceranking"
+    "pages/interface/facedetect/faceranking/faceranking",
+    "pages/account/biddocument/biddocument",
+    "pages/account/biddocument/qrtest/qrtest"
 
   ],
   "window": {

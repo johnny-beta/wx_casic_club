@@ -127,6 +127,7 @@ Page({
               "messagePic": that.data.currentUser.userPic,
               "messageupdateAt": myDate
             });
+            let leaveMessageContentTemp = that.data.messageInput;
             leaveMessage.save(null, {
               success: function (result) {
                 //console.log('留言保存结果', result)
@@ -142,20 +143,42 @@ Page({
                   resultDiary.increment("leaveMessageCount");
                   resultDiary.save();
                 })();
-                //第一次留言，调用云函数，推送微信消息
+                
+                         
+                //第一次留言，调用云函数，推送微信消息      
                 if (leaveMessageArrTemp.length == 1) {
-                  //console.log('两个ID', that.data.currentObjectId, result.id )
-                  Bmob.Cloud.run('s', {
-                    'diaryId': that.data.currentObjectId,
-                    'leaveMsgId': result.id
-                  }, {
-                      success: function (result) {
-                        console.log('result' + result);
+                  var temp = {
+                    "touser": that.data.currentUser.openid,
+                    "template_id": "4ofydGg7R_VTfx4mMMDgCwixmx3Hk-aMOsVFptUCaPk",
+                    "page": "",
+                    "form_id": that.data.rows.attributes.formId,
+                    "data": {
+                      "keyword1": {
+                        "value": leaveMessageContentTemp
                       },
-                      error: function (error) {
-                        console.log('error' + error);
+                      "keyword2": {
+                        "value": myDate
+                      },
+                      "keyword3": {
+                        "value": that.data.currentUser.nickName
+                      },
+                      "keyword4": {
+                        "value": that.data.rows.attributes.title
+                      },
+                      "keyword5": {
+                        "value": "这是您信息的第一条留言"
                       }
-                    })
+                    },
+                    "emphasis_keyword": "keyword3.DATA"
+                  }
+                  console.log(temp);
+                  console.log(that.data.rows);
+                  console.log(that.data);
+                  Bmob.sendMessage(temp).then(function (obj) {
+                    console.log('发送成功')
+                  }, function (err) {
+                    console.log(err)
+                  });
                   common.showTip('评论成功！您是首位留言者，将会发通知给该作者', 'success')
                 } else {
                   common.showTip('评论成功！', 'success')

@@ -10,18 +10,19 @@ Page({
     faceScore: 77,
     faceFemaleScore: 78,
     faceMaleScore: 77,
+    gender:'Female',
     currentUser: {},
     singleArray: ['单身汪', '配对成功', '你猜', '保密'],
     singleIndex: 0,
-    currentTab: 0,//三个文件这里依次为0，1，2，其他地方一样,
+    currentTab: 2,//三个文件这里依次为0，1，2，其他地方一样,
     navbar: [
       {
         name: '男神榜',
-        url: "/pages/interface/facedetect/facedetect"
+        url: "/pages/interface/facedetect/faceranking/faceranking?currentTab=0"
       },
       {
         name: "女神榜",
-        url: "/pages/snatch/snatch"
+        url: "/pages/interface/facedetect/faceranking/faceranking?currentTab=1"
       },
       {
         name: "我的颜值",
@@ -105,6 +106,7 @@ Page({
   },
 });
 function saveBeautyData(that,imgUrl){
+  console.log(that.data);
   var BeautifulList = Bmob.Object.extend("beautiful_list");
   var beautifulList = new BeautifulList();
   beautifulList.set("unpraiseNum", 0);
@@ -115,6 +117,7 @@ function saveBeautyData(that,imgUrl){
   beautifulList.set("score", that.data.faceScore);
   beautifulList.set("maleScore", that.data.faceMaleScore);
   beautifulList.set("femaleScore", that.data.faceFemaleScore);
+  beautifulList.set("gender", that.data.gender);
 
   var User = Bmob.Object.extend("_User");
   var user = new User();
@@ -124,7 +127,7 @@ function saveBeautyData(that,imgUrl){
   beautifulList.save(null, {
     success: function (result) {
       // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
-      console.log("日记创建成功, objectId:" + result.id);
+      console.log('日记创建成功');
     },
     error: function (result, error) {
       // 添加失败
@@ -139,7 +142,6 @@ function saveBeautyData(that,imgUrl){
   // 查询所有数据
   beautyRankingList.find({
     success: function (beautyRankingListResults) {
-      // console.log("55555555555555");
       if (beautyRankingListResults.length > 0){
         //更新数据
         console.log(beautyRankingListResults[0].id);
@@ -156,6 +158,7 @@ function saveBeautyData(that,imgUrl){
             beautyRankingList1Result.set("score", that.data.faceScore);
             beautyRankingList1Result.set("maleScore", that.data.faceMaleScore);
             beautyRankingList1Result.set("femaleScore", that.data.faceFemaleScore);
+            beautyRankingList1Result.set("gender", that.data.gender);
             beautyRankingList1Result.save();
           },
           error: function (object, error) {
@@ -174,6 +177,7 @@ function saveBeautyData(that,imgUrl){
         beautyRankingList2.set("score", that.data.faceScore);
         beautyRankingList2.set("maleScore", that.data.faceMaleScore);
         beautyRankingList2.set("femaleScore", that.data.faceFemaleScore);
+        beautyRankingList2.set("gender", that.data.gender);
 
         var User = Bmob.Object.extend("_User");
         var user = new User();
@@ -212,10 +216,13 @@ function faceRecognition(that,imgUrl,localImageUrl){
     'content-type': 'application/x-www-form-urlencoded' // 默认值
   },
   success(res) {
-    //console.log(res.data);
+    console.log(res.data);
     if (res.data.faces.length > 0){
       //console.log(res.data.faces[0]);
       //设前台页面数据，框出人脸
+      that.setData({
+        gender: res.data.faces[0].attributes.gender.value
+      });
       if (res.data.faces[0].attributes.gender.value == "Male"){
         showScoreAnimation(that,res.data.faces[0].attributes.beauty.female_score, 100);
         that.setData({

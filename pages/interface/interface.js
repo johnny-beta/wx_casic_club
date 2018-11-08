@@ -7,7 +7,7 @@ var grids = [
   {
     "name": "航天SHOW",
     "ico": "jinli.png",
-    "url": "../interface/type/type?typeNumber=12&typeName=航天SHOW"
+    "url": "/pages/interface/facedetect/faceranking/faceranking?currentTab=0"
   },
   // {
   //   "name": "国庆-意见征集",
@@ -81,6 +81,7 @@ Page({
     //     b: '2',
     //     asdd: '2'
     //   },
+    //   method:'POST',
     //   header: {
     //     'content-type': 'application/json' // 默认值
     //   },

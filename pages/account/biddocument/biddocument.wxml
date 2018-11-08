@@ -1,0 +1,72 @@
+<!--pages/account/biddocument/biddocument.wxml-->
+
+<view class="add-page">
+  <view class="weui-img_center">投标登记</view>
+  <form bindsubmit="formSubmit">
+    <view class="mod-a">
+      <!-- 活动主题 -->
+      <view class="mod t-name">
+        <text class="key">标书类型</text>
+        <input name="leixing" class="input" maxlength="100" placeholder="请输入标书类型" />
+        <image class="arrow-r" src="/image/arrow-r-0.png"></image>
+      </view>
+    </view>
+    <view class="mod-a">
+      <!-- 活动主题 -->
+      <view class="mod t-name">
+        <text class="key">项目编码</text>
+        <input name="bianma" class="input" maxlength="100" placeholder="请输入项目编码" />
+        <image class="arrow-r" src="/image/arrow-r-0.png"></image>
+      </view>
+    </view>
+    <view class="mod-a">
+      <!-- 活动主题 -->
+      <view class="mod t-name">
+        <text class="key">项目名称</text>
+        <input name="mingcheng" class="input" maxlength="100" placeholder="请输入项目名称" />
+        <image class="arrow-r" src="/image/arrow-r-0.png"></image>
+      </view>
+    </view>
+    <view class="mod-a">
+      <!-- 活动主题 -->
+      <view class="mod t-name">
+        <text class="key">投标人</text>
+        <input name="toubiaoren" class="input" maxlength="100" placeholder="请输入投标人" />
+        <image class="arrow-r" src="/image/arrow-r-0.png"></image>
+      </view>
+    </view>
+    <view class="mod-a">
+      <!-- 活动主题 -->
+      <view class="mod t-name">
+        <text class="key">法定代表</text>
+        <input name="fadingdaibiaoren" class="input" maxlength="100" placeholder="请输入法定代表" />
+        <image class="arrow-r" src="/image/arrow-r-0.png"></image>
+      </view>
+    </view>
+    <view class="mod-a">
+      <view class="mod t-sign-time">
+        <text class="key">有效时间</text>
+        <picker mode="date" value="{{date}}" start="{{date}}" end="2117-12-31" bindchange="bindDateChange">
+          <view class="value" name="endtime">{{date}}
+            <image class="arrow-r" src="/image/arrow-r-0.png"></image>
+          </view>
+        </picker>
+      </view>
+      <view class="mod-a mt20">
+        <view class="add_pic" bindtap="uploadPic" wx-if="{{!isSrc}}">
+          <view>添加图片（选）</view>
+        </view>
+        <view wx:if="{{isSrc}}" class="image_box">
+          <view class="picPre">
+            <image src="{{src}}" mode="aspectFit"></image>
+            <view bindtap="clearPic"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="submit-btn">
+      <button class='button' loading="{{isLoading}}" hover-start-time="200" disabled="{{isdisabled}}" formType="submit">提交</button>
+    </view>
+
+  </form>
+</view>

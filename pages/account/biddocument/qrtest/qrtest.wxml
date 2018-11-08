@@ -1,0 +1,5 @@
+<!--pages/account/biddocument/qrtest/qrtest.wxml-->
+<!--pages/index/index.wxml-->
+
+<canvas class='canvas' canvas-id='canvas' bindlongtap='save'></canvas>
+<view class='tip'>长按保存</view>
