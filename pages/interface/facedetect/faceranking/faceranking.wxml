@@ -8,7 +8,7 @@
       <image class="weui-media-box__thumb" mode="aspectFill" src="{{item.beautifulPic}}" />
     </view>
     <view class="weui-media-box__bd weui-media-box__bd_in-appmsg weui-box-width">
-      <view class="weui-media-box__desc">{{item.openid}}</view>
+      <view class="weui-media-box__desc">{{item.score}}</view>
     </view>
   </view>
 </view>

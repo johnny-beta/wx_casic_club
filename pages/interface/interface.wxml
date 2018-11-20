@@ -27,6 +27,9 @@
       </navigator>
     </block>
   </view>
+  <view wx:if="{{bottomDisplay}}" bindtap="biddocument">
+      <image mode="widthFix" style='width:100%;overflow:show;' data-src="{{item}}" src="{{biddocument}}"></image>
+  </view>
 
-  <ad unit-id="adunit-1f3debf4bce237da"></ad>
+  <!-- <ad unit-id="adunit-1f3debf4bce237da"></ad> -->
 </view>

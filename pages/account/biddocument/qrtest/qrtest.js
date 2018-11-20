@@ -22,6 +22,7 @@ Page({
     bidDocument.set("fadingdaibiaoren", options.fadingdaibiaoren);
     bidDocument.set("bianma", options.bianma);
     bidDocument.set("choosedate", options.choosedate);
+    bidDocument.set("weituodailiren", options.weituodailiren);
 
     if (options.src) {
       var name = options.src //上传图片的别名

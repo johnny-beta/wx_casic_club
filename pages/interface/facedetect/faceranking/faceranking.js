@@ -44,8 +44,9 @@ Page({
       beautyRankingList.equalTo("gender", "Female");
     beautyRankingList.descending("score");
     beautyRankingList.find({
+      
       success: function (beautyRankingListResults) {
-
+        console.log(beautyRankingListResults);
         that.setData({
           beautyList: beautyRankingListResults
         });

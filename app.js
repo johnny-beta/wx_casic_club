@@ -117,7 +117,7 @@ App({
     }
   },
   globalData: {
-    version: '1.8.0',
+    version: '1.8.1',
     grids: {
       "12": "航天SHOW",
       // "11": "国庆-意见征集",

@@ -61,7 +61,9 @@ Page({
     background: [],
     backgroundDisplay: [],
     newMessageFlag: 0,
-    jinLiPeopleNumber: 0
+    jinLiPeopleNumber: 0,
+    biddocument:"",
+    bottomDisplay:false
   },
   onLoad: function () {
     var app = getApp()
@@ -109,8 +111,30 @@ Page({
     if (currentUser){
       checkNewMessage(currentUser);
     }
+
+    var Config = Bmob.Object.extend("config");
+    var config = new Bmob.Query(Config);
+    config.equalTo("name", "biddocumentSrc");
+    // 查询所有数据
+    config.find({
+      success: function (results) {
+        console.log(results);
+        that.setData({
+          biddocument: results[0].attributes.key,
+          bottomDisplay: results[0].attributes.isDIsplay
+        });
+      },
+      error: function (error) {
+        console.log("查询失败: " + error.code + " " + error.message);
+      }
+    });
     //console.log(currentUser.openid);
     //weChatPayTest(that,currentUser.openid)
+  },
+  biddocument:function(){
+    wx.redirectTo({
+      url: "/pages/account/biddocument/biddocument"
+    })
   },
   getBG: function () {
     var that = this

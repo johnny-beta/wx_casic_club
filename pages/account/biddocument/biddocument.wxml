@@ -4,15 +4,20 @@
   <view class="weui-img_center">投标登记</view>
   <form bindsubmit="formSubmit">
     <view class="mod-a">
-      <!-- 活动主题 -->
+      <!-- 标书类型 -->
       <view class="mod t-name">
         <text class="key">标书类型</text>
-        <input name="leixing" class="input" maxlength="100" placeholder="请输入标书类型" />
-        <image class="arrow-r" src="/image/arrow-r-0.png"></image>
+        <picker bindchange="bindTypeChange" value="{{typeIndex}}" range="{{types}}">
+          <view class="value" name="leixing">{{types[typeIndex]}}
+            <image class="arrow-r" src="/image/arrow-r-0.png"></image>
+          </view>
+        </picker>
+        <!-- <input name="leixing" class="input" maxlength="100" placeholder="请输入标书类型" />
+        <image class="arrow-r" src="/image/arrow-r-0.png"></image> -->
       </view>
     </view>
     <view class="mod-a">
-      <!-- 活动主题 -->
+      <!-- 项目编码 -->
       <view class="mod t-name">
         <text class="key">项目编码</text>
         <input name="bianma" class="input" maxlength="100" placeholder="请输入项目编码" />
@@ -20,7 +25,7 @@
       </view>
     </view>
     <view class="mod-a">
-      <!-- 活动主题 -->
+      <!-- 项目名称 -->
       <view class="mod t-name">
         <text class="key">项目名称</text>
         <input name="mingcheng" class="input" maxlength="100" placeholder="请输入项目名称" />
@@ -28,7 +33,7 @@
       </view>
     </view>
     <view class="mod-a">
-      <!-- 活动主题 -->
+      <!-- 投标人 -->
       <view class="mod t-name">
         <text class="key">投标人</text>
         <input name="toubiaoren" class="input" maxlength="100" placeholder="请输入投标人" />
@@ -36,7 +41,7 @@
       </view>
     </view>
     <view class="mod-a">
-      <!-- 活动主题 -->
+      <!-- 法定代表 -->
       <view class="mod t-name">
         <text class="key">法定代表</text>
         <input name="fadingdaibiaoren" class="input" maxlength="100" placeholder="请输入法定代表" />
@@ -44,8 +49,16 @@
       </view>
     </view>
     <view class="mod-a">
+      <!-- 委托代理人 -->
+      <view class="mod t-name">
+        <text class="key">委托代理</text>
+        <input name="weituodailiren" class="input" maxlength="100" placeholder="请输入委托代理人" />
+        <image class="arrow-r" src="/image/arrow-r-0.png"></image>
+      </view>
+    </view>
+    <view class="mod-a">
       <view class="mod t-sign-time">
-        <text class="key">有效时间</text>
+        <text class="key">投标时间</text>
         <picker mode="date" value="{{date}}" start="{{date}}" end="2117-12-31" bindchange="bindDateChange">
           <view class="value" name="endtime">{{date}}
             <image class="arrow-r" src="/image/arrow-r-0.png"></image>
@@ -64,9 +77,44 @@
         </view>
       </view>
     </view>
+    <view class="mod-a mt20">
+    <checkbox-group bindchange="bindAgreeChange">
+      <label class="weui-agree" for="weuiAgree">
+        <view class="weui-agree__text">
+          <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
+          <view class="weui-agree__checkbox-icon">
+            <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+          </view>
+          阅读并同意
+          <view bindtap="showNotice" class="weui-agree__link">
+            《招标须知》</view>
+        </view>
+      </label>
+    </checkbox-group>
     <view class="submit-btn">
       <button class='button' loading="{{isLoading}}" hover-start-time="200" disabled="{{isdisabled}}" formType="submit">提交</button>
     </view>
-
+  </view>
   </form>
+</view>
+<view class="notice" id="notice" wx:if="{{notice_status}}" bindtap="tapNotice">
+  <view class="box">
+    <view class="box-hd">
+      <text class="box-title">招标须知</text>
+      <image class="box-close" src="/image/close.png" bindtap="hideNotice"></image>
+    </view>
+    <view class="box-bd">
+      <view class="notice-q">1、XXXXXXXXXXXXXXXXXXXXXXX？</view>
+      <view class="notice-a">
+        <text>1、XXXXXXXXXXXXXXXXXXXXXXXXXXXX？</text>
+        <text>2、XXXXXXXXXXXXXXXXXXXXXXXXXXXX？</text>
+        <text>3、XXXXXXXXXXXXXXXXXXXXXXXXXXXX？</text>
+        <text>4、XXXXXXXXXXXXXXXXXXXXXXXXXXXX？</text>
+      </view>
+      <view class="notice-q">2、XXXXXXXXXXXXXXXXXXXXXXX？</view>
+      <view class="notice-a">
+        <text>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</text>
+      </view>
+    </view>
+  </view>
 </view>

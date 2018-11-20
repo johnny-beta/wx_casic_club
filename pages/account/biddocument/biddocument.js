@@ -13,15 +13,22 @@ function formate_data(myDate) {
 Page({
   data: {
     date: formate_data(myDate),
-    src:""
+    src:"",
+    types: ["军品", "民品"],
+    typeIndex: "0",
+    isAgree: false,
   },
   formSubmit: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value);
+    console.log('form发生了submit事件，携带数据为：', e);
     //let { phone, pwd, isPub, sex } = e.detail.value;
-    console.log(e.detail.value.bianma);
-    if (e.detail.value.bianma && e.detail.value.fadingdaibiaoren && e.detail.value.leixing && e.detail.value.mingcheng && e.detail.value.toubiaoren){
+    console.log(this.data.types[this.data.typeIndex]);
+    if(!this.data.isAgree){
+      common.showModal('请确认投标须知', "提示");
+      return;
+    }
+    if (e.detail.value.bianma && e.detail.value.fadingdaibiaoren && e.detail.value.mingcheng && e.detail.value.toubiaoren && e.detail.value.weituodailiren){
       wx.navigateTo({
-        url: "/pages/account/biddocument/qrtest/qrtest?bianma=" + e.detail.value.bianma + "&fadingdaibiaoren=" + e.detail.value.fadingdaibiaoren + "&leixing=" + e.detail.value.leixing + "&mingcheng=" + e.detail.value.mingcheng + "&toubiaoren=" + e.detail.value.toubiaoren + "&choosedate=" + this.data.date + "&src=" + this.data.src,
+        url: "/pages/account/biddocument/qrtest/qrtest?bianma=" + e.detail.value.bianma + "&fadingdaibiaoren=" + e.detail.value.fadingdaibiaoren + "&weituodailiren=" + e.detail.value.weituodailiren + "&leixing=" + this.data.types[this.data.typeIndex] + "&mingcheng=" + e.detail.value.mingcheng + "&toubiaoren=" + e.detail.value.toubiaoren + "&choosedate=" + this.data.date + "&src=" + this.data.src,
       });
       // wx.request({
       //   url: "https://hbb.htxytech.cn/py/bidDocument", //仅为示例，并非真实的接口地址
@@ -73,4 +80,30 @@ Page({
       src: ""
     })
   },
+  bindTypeChange: function (e) {
+    this.setData({
+      typeIndex: e.detail.value
+    })
+  },
+  bindAgreeChange: function (e) {
+    this.setData({
+      isAgree: !!e.detail.value.length,
+    });
+  },
+  tapNotice: function (e) {
+    if (e.target.id == 'notice') {
+      this.hideNotice();
+    }
+  },
+  showNotice: function (e) {
+    this.setData({
+      'notice_status': true
+    });
+  },
+  hideNotice: function (e) {
+    this.setData({
+      'notice_status': false
+    });
+  },
 })
+
