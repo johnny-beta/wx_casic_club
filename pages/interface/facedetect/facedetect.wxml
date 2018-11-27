@@ -17,11 +17,11 @@
   <view class='weui-scoreFM'>在女性看来,您的颜值已经超过{{faceFemaleScore}}%的人</view>
   <picker bindchange="bindPickerChange" value="{{singleIndex}}" range="{{singleArray}}">
     <view class="picker weui-single">
-      状态：{{singleArray[singleIndex]}}
+      个人状态：{{singleArray[singleIndex]}}
     </view>
   </picker>
   <button class='btn1' bindtap="chooseImage">上传照片</button>
 </view>
 <view class="nav_container">
-    <navigator wx:for="{{navbar}}" data-idx="{{index}}" url="{{item.url}}" open-type="redirect" class="function-text {{currentTab==index ? 'present' : ''}}">{{item.name}}</navigator>
+    <navigator wx:for="{{navbar}}" data-idx="{{index}}" wx:key="key" url="{{item.url}}" open-type="redirect" class="function-text {{currentTab==index ? 'present' : ''}}">{{item.name}}</navigator>
 </view>

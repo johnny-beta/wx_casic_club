@@ -118,7 +118,7 @@ Page({
     // 查询所有数据
     config.find({
       success: function (results) {
-        console.log(results);
+        //console.log(results);
         that.setData({
           biddocument: results[0].attributes.key,
           bottomDisplay: results[0].attributes.isDIsplay
@@ -132,7 +132,7 @@ Page({
     //weChatPayTest(that,currentUser.openid)
   },
   biddocument:function(){
-    wx.redirectTo({
+    wx.navigateTo({
       url: "/pages/account/biddocument/biddocument"
     })
   },

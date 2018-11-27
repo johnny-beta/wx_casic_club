@@ -38,6 +38,7 @@ Page({
     var BeautyRankingList = Bmob.Object.extend("beauty_ranking_list");
     var beautyRankingList = new Bmob.Query(BeautyRankingList);
     // 查询所有数据
+    beautyRankingList.include("userDetail");
     if (that.data.currentTab == 0)
       beautyRankingList.equalTo("gender", "Male");
     else if (that.data.currentTab == 1)
@@ -46,7 +47,7 @@ Page({
     beautyRankingList.find({
       
       success: function (beautyRankingListResults) {
-        console.log(beautyRankingListResults);
+        //console.log(beautyRankingListResults);
         that.setData({
           beautyList: beautyRankingListResults
         });

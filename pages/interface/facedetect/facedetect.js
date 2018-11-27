@@ -12,7 +12,7 @@ Page({
     faceMaleScore: 77,
     gender:'Female',
     currentUser: {},
-    singleArray: ['单身汪', '配对成功', '你猜', '保密'],
+    singleArray: ['请选择状态','单身汪', '配对成功', '你猜', '保密'],
     singleIndex: 0,
     currentTab: 2,//三个文件这里依次为0，1，2，其他地方一样,
     navbar: [
@@ -63,6 +63,10 @@ Page({
     if (!app.globalData.currentUser) {
       app.globalData.currentUser = Bmob1.User.current()
     };
+    if (that.data.singleIndex == 0){
+      common.showModal('请选择个人状态', "提示");
+      return;
+    }
     that.data.currentUser = app.globalData.currentUser;
     let openid = that.data.currentUser.openid;
     //console.log(that.data.currentUser);
@@ -90,7 +94,7 @@ Page({
             //console.log(res.url());
             faceRecognition(that,res.url(), tempFilePaths[0]);   
           }, function (error) {
-            console.log(error);
+            //console.log(error);
             common.showModal('上传图片失败', "提示");
           })
         }
@@ -106,7 +110,7 @@ Page({
   },
 });
 function saveBeautyData(that,imgUrl){
-  console.log(that.data);
+  //console.log(that.data);
   var BeautifulList = Bmob.Object.extend("beautiful_list");
   var beautifulList = new BeautifulList();
   beautifulList.set("unpraiseNum", 0);
@@ -144,7 +148,7 @@ function saveBeautyData(that,imgUrl){
     success: function (beautyRankingListResults) {
       if (beautyRankingListResults.length > 0){
         //更新数据
-        console.log(beautyRankingListResults[0].id);
+        //console.log(beautyRankingListResults[0].id);
         var BeautyRankingList1 = Bmob.Object.extend("beauty_ranking_list");
         var beautyRankingList1 = new Bmob.Query(BeautyRankingList1);
 
@@ -216,7 +220,7 @@ function faceRecognition(that,imgUrl,localImageUrl){
     'content-type': 'application/x-www-form-urlencoded' // 默认值
   },
   success(res) {
-    console.log(res.data);
+    //console.log(res.data);
     if (res.data.faces.length > 0){
       //console.log(res.data.faces[0]);
       //设前台页面数据，框出人脸
