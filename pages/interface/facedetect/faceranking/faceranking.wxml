@@ -4,11 +4,11 @@
 </view>
 <view class="weui-media-box weui-media-box_appmsg" wx:for="{{beautyList}}" wx:for-index="idx" wx:key="beautyListItem" >
   <view class="weui-media-box weui-media-box_appmsg weui-box-width">
-    <view class="">
+    <view class="previewimg">
       <view class="ranking_index" style="color:grey;">{{idx+1}}</view>
     </view>
-    <view class="ranking_pic">
-      <image class="weui-media-box__thumb userPic_article" mode="aspectFill" src="{{item.beautifulPic}}" />
+    <view class="ranking_pic" bindtap="previewImage">
+      <image class="weui-media-box__thumb userPic_article" data-src="{{item.beautifulPic}}" mode="aspectFill" src="{{item.beautifulPic}}" />
     </view>
     <view class="ranking_nickName">
       <view class="">{{item.userDetail.nickName}}</view>
