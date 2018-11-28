@@ -1,22 +1,54 @@
 <!--pages/interface/facedetect/faceranking/faceranking.wxml-->
-<view class="nav_container">
-  <navigator wx:for="{{navbar}}" wx:key="navbarItem" data-idx="{{index}}" url="{{item.url}}" open-type="redirect" class="function-text {{currentTab==index ? 'present' : ''}}">{{item.name}}</navigator>
-</view>
+
 <view class="weui-media-box weui-media-box_appmsg" wx:for="{{beautyList}}" wx:for-index="idx" wx:key="beautyListItem" >
   <view class="weui-media-box weui-media-box_appmsg weui-box-width">
     <view class="previewimg">
       <view class="ranking_index" style="color:grey;">{{idx+1}}</view>
     </view>
     <view class="ranking_pic" bindtap="previewImage">
-      <image class="weui-media-box__thumb userPic_article" data-src="{{item.beautifulPic}}" mode="aspectFill" src="{{item.beautifulPic}}" />
+      <image class="weui-media-box__thumb userPic_article" data-src="{{item}}" mode="aspectFill" src="{{item.beautifulPic}}" />
     </view>
     <view class="ranking_nickName">
       <view class="">{{item.userDetail.nickName}}</view>
       <view class="ranking_single">{{item.single}}</view>
     </view>
-    <view class="ranking_score">
+    <view class="ranking_score ">
       <view class="">{{item.score}}分</view>
     </view>
     
   </view>
+</view>
+<view class="bottomgap"></view>
+<view class="nav_container">
+  <navigator wx:for="{{navbar}}" wx:key="navbarItem" data-idx="{{index}}" url="{{item.url}}" open-type="redirect" class="function-text {{currentTab==index ? 'present' : ''}}">{{item.name}}</navigator>
+</view>
+
+<view class="js_dialog" id="androidDialog2" wx:if="{{paymentFlag}}" style="opacity:1;">
+  <view class="weui-mask"></view>
+  <view class="weui-dialog weui-skin_android">
+       <image class="userinfo-avatar" src="{{userInfo.userPic}}"></image>
+       <view style='display:flex;flex-direction:column'> 
+        <view class="weui-dialog__title" >尊敬的{{userInfo.nickName}}</view>
+        <view class="weui-dialog__title wx-content-etail" >航帮帮为公益项目，为了维持正常的运维开销，若您需看榜中大图，请支付一定费用，谢谢支持</view>
+        
+      </view>
+
+      <view class='wx-label'>
+        <radio-group class="radio-group" bindchange="radioChange" style="">
+            <label class="radio" wx:for="{{vipSelectItem}}" style="">
+                <view style='flex-direction:column;'>
+                  <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+                </view>
+                
+            </label>
+        </radio-group>
+      </view>
+
+      <view class="weui-dialog__ft">
+        <view class="weui-dialog__btn weui-dialog__btn_default thank-button" bindtap="continueSupport">支付</view>
+        <view class="weui-dialog__btn weui-dialog__btn_default thank-button" bindtap="returnHome">关闭</view>
+      </view>
+
+  </view>
+
 </view>

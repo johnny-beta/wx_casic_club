@@ -21,7 +21,7 @@ Page({
     }
     
     that.data.currentUser = app.globalData.currentUser
-    console.log(that.data.currentUser);
+    //console.log(that.data.currentUser);
     that.setData({
       userInfo: that.data.currentUser
     })

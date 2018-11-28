@@ -9,7 +9,26 @@
     </swiper>
   </view>
 </view>
-
+  <view class="jiliFour" >
+    <view class="jiliFourGrid" >
+      <view class='jiliFourGrid-font'>男神平均分</view>
+      <view class='jiliFourGrid-number'>{{maleAvgScore}}</view>
+    </view>
+    <view class="jiliFourGrid">
+      <view class='jiliFourGrid-font'>女神平均分</view>
+      <view class='jiliFourGrid-number'>{{femaleAvgScore}}</view>
+    </view>
+    <view class="jiliFourGrid" >
+      <view class='jiliFourGrid-font'>我的排名</view>
+      <view class='jiliFourGrid-number' wx:if="{{notJinliFlag}}">--</view>
+      <view class='jiliFourGrid-number' wx:elif="{{!notJinliFlag}}">{{rankingNum}}/{{rankingSum}}</view>
+    </view>
+    <view class="jiliFourGrid" style='border-right-style:none;'>
+      <view class='jiliFourGrid-font' wx:if="{{!rangkingGender}}">女神榜人数</view>
+      <view class='jiliFourGrid-font' wx:if="{{rangkingGender}}">男神榜人数</view>
+      <view class='jiliFourGrid-number'>{{rankingNumber}}</view>
+    </view>
+  </view>
 <view class="page__bd">
   <view>
     <official-account></official-account>
