@@ -1,7 +1,5 @@
 <!--pages/interface/facedetect/faceranking/faceranking.wxml-->
-<view class="nav_container">
-  <navigator wx:for="{{navbar}}" wx:key="navbarItem" data-idx="{{index}}" url="{{item.url}}" open-type="redirect" class="function-text {{currentTab==index ? 'present' : ''}}">{{item.name}}</navigator>
-</view>
+
 <view class="weui-media-box weui-media-box_appmsg" wx:for="{{beautyList}}" wx:for-index="idx" wx:key="beautyListItem" >
   <view class="weui-media-box weui-media-box_appmsg weui-box-width">
     <view class="previewimg">
@@ -14,9 +12,13 @@
       <view class="">{{item.userDetail.nickName}}</view>
       <view class="ranking_single">{{item.single}}</view>
     </view>
-    <view class="ranking_score">
+    <view class="ranking_score ">
       <view class="">{{item.score}}分</view>
     </view>
     
   </view>
+</view>
+<view class="bottomgap"></view>
+<view class="nav_container">
+  <navigator wx:for="{{navbar}}" wx:key="navbarItem" data-idx="{{index}}" url="{{item.url}}" open-type="redirect" class="function-text {{currentTab==index ? 'present' : ''}}">{{item.name}}</navigator>
 </view>

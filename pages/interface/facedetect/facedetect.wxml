@@ -25,3 +25,6 @@
 <view class="nav_container">
     <navigator wx:for="{{navbar}}" data-idx="{{index}}" wx:key="key" url="{{item.url}}" open-type="redirect" class="function-text {{currentTab==index ? 'present' : ''}}">{{item.name}}</navigator>
 </view>
+<view class="com-widget-goTop" bindtap="returnwx">
+  <image class="return_wx"src="/image/wechatHL copy.png"></image>
+</view>

@@ -117,3 +117,17 @@
 .present {
   border-bottom: 2px solid #fff;
 }
+.return_wx {
+  width: 75rpx;
+  height: 75rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 3px;
+}
+.com-widget-goTop { 
+    position: fixed; 
+    bottom: 125px; 
+    right: 5px; 
+    overflow: hidden; 
+    z-index: 500; 
+} 

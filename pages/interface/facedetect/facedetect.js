@@ -60,6 +60,15 @@ Page({
   },
   chooseImage: function (e) {
     var that = this;
+    //判断是否获取头像和昵称
+    if (app.globalData.userInfo) {
+      that.setData({
+        userInfo: app.globalData.userInfo
+      })
+    } else {
+      common.showModal('请点击微信logo获取头像才可以测颜值哦，颜值测试在首页航天SHOW模块', "提示");
+      return;
+    };
     if (!app.globalData.currentUser) {
       app.globalData.currentUser = Bmob1.User.current()
     };
@@ -106,6 +115,11 @@ Page({
     //console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       singleIndex: e.detail.value
+    })
+  },
+  returnwx: function () {
+    wx.switchTab({
+      url: '/pages/account/account',
     })
   },
 });

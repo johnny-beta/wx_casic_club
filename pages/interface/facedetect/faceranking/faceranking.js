@@ -76,9 +76,9 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-    this.getData()
-  },
+  // onReachBottom: function () {
+  //   this.getData()
+  // },
 
   /**
    * 用户点击右上角分享
@@ -92,9 +92,19 @@ Page({
       app.globalData.currentUser = Bmob1.User.current()
     }
     that.data.currentUser = app.globalData.currentUser
+    var current = e.target.dataset.src;
+    var photoUrls = [];
+    photoUrls.push(current);
+    //console.log(current);
+    wx.previewImage({
+      current: current, // 当前显示图片的http链接
+      urls: photoUrls, // 需要预览的图片http链接列表
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
     
-    
-    weChatPayTest(that,e.target.dataset.src);
+    //weChatPayTest(that,e.target.dataset.src);
     
   }
 })
@@ -128,7 +138,7 @@ function weChatPayTest(that,picSrc) {
         var current = picSrc;
         var photoUrls = [];
         photoUrls.push(current);
-        console.log(current);
+        //console.log(current);
         wx.previewImage({
           current: current, // 当前显示图片的http链接
           urls: photoUrls, // 需要预览的图片http链接列表
