@@ -6,7 +6,7 @@ var app = getApp()
 var grids = [
   {
     "name": "航天SHOW",
-    "ico": "jinli.png",
+    "ico": "liao.png",
     "url": "/pages/interface/facedetect/faceranking/faceranking?currentTab=0"
   },
   // {
