@@ -47,7 +47,11 @@ Page({
   },
 
   onShow: function () {
-
+    var that = this;
+    if (!app.globalData.currentUser) {
+      app.globalData.currentUser = Bmob1.User.current()
+    }
+    that.data.currentUser = app.globalData.currentUser;
   },
   onHide: function () {
     // 页面隐藏
@@ -61,9 +65,10 @@ Page({
   chooseImage: function (e) {
     var that = this;
     //判断是否获取头像和昵称
-    if (app.globalData.userInfo) {
+    console.log(that.data.currentUser);
+    if (that.data.currentUser.openid) {
       that.setData({
-        userInfo: app.globalData.userInfo
+
       })
     } else {
       common.showModal('请点击微信logo获取头像才可以测颜值哦，颜值测试在首页航天SHOW模块', "提示");

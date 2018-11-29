@@ -49,7 +49,12 @@ Page({
     common.showModal('航帮帮V'+app.globalData.version+'是五棵松航天地区沟通的看板，您有好的建议可以通过本页面的“反馈建议”功能或座机87811联系，感谢您的使用！');
   },
   getUserInfo: function(e) {
+    console.log(e);
     app.globalData.userInfo = e.detail.userInfo;
+    // app.globalData.currentUser['openid'] = ;
+    app.globalData.currentUser['nickName'] = e.detail.userInfo.nickName;
+    app.globalData.currentUser['userPic'] = e.detail.userInfo.avatarUrl;
+    app.globalData.currentUser['openid'] = app.globalData.currentUser.authData.weapp.openid;
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
