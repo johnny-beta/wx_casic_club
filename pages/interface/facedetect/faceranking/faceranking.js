@@ -179,6 +179,17 @@ Page({
       app.globalData.currentUser = Bmob1.User.current()
     }
     that.data.currentUser = app.globalData.currentUser;
+    var current = e.target.dataset.src;
+    var photoUrls = [];
+    photoUrls.push(current);
+    //console.log(current);
+    wx.previewImage({
+      current: current, // 当前显示图片的http链接
+      urls: photoUrls, // 需要预览的图片http链接列表
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
     
     if (superVipFlag) {
       showPhoto(that.data.selectedPic)
